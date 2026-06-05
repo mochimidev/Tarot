@@ -14,44 +14,111 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * Actividad que realiza una lectura de tarot para parejas.
+ * Obtiene dos cartas aleatorias que representan:
+ * - Primera carta: Energía de la primera persona
+ * - Segunda carta: Energía de la segunda persona / Pareja
+ * 
+ * Proporciona interpretación amorosa y análisis de compatibilidad.
+ */
 public class tarotPareja extends AppCompatActivity {
-    private TextView tvtitulotu;
-    private TextView tvtitulotupareja;
-    private  TextView tvdescriciontu;
-    private  TextView tvdescripciontupareja;
-    private  ImageView ivcartatupareja;
-    private ImageView ivcartatu;
+    private static final String TAG = "tarotPareja";
+    
+    private TextView tvTituloTu;
+    private TextView tvTituloTuPareja;
+    private TextView tvDescripcionTu;
+    private TextView tvDescripcionTuPareja;
+    private ImageView ivCartaTuPareja;
+    private ImageView ivCartaTu;
+    
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tarot_pareja);
-        tvdescriciontu = findViewById(R.id.tarotParejaTudescripcion);
-        tvdescripciontupareja = findViewById(R.id.tarotTuparejadesripccion);
-        tvtitulotu = findViewById(R.id.tarotParejaTutitulocarta);
-        tvtitulotupareja = findViewById(R.id.tarotTuParejatitulocarta);
-        ivcartatupareja = findViewById(R.id.tarotTuparejaImagen);
-        ivcartatu = findViewById(R.id.tarotParejaTuImagen);
+        
+        // Vincular elementos de la vista
+        tvDescripcionTu = findViewById(R.id.tarotParejaTudescripcion);
+        tvDescripcionTuPareja = findViewById(R.id.tarotTuparejadesripccion);
+        tvTituloTu = findViewById(R.id.tarotParejaTutitulocarta);
+        tvTituloTuPareja = findViewById(R.id.tarotTuParejatitulocarta);
+        ivCartaTuPareja = findViewById(R.id.tarotTuparejaImagen);
+        ivCartaTu = findViewById(R.id.tarotParejaTuImagen);
 
-        Bundle bundle = getIntent().getExtras();
-        int numero = bundle.getInt("numero");
-        int numerotupersona = bundle.getInt("numerotupersona");
-        tarotPareja(numero , numerotupersona);
-        Carta tu = (Carta)bundle.getSerializable("tu");
-        Carta pareja = (Carta)bundle.getSerializable("pareja");
-        tvtitulotupareja.setText(pareja.getTitulo());
-        tvtitulotu.setText(tu.getTitulo());
-        tvdescripciontupareja.setText(pareja.getDescripcionAmorosa());
-        tvdescriciontu.setText(tu.getDescripcionAmorosa());
-
+        // Obtener extras del intent
+        bundle = getIntent().getExtras();
+        
+        if (bundle != null) {
+            int numero = bundle.getInt("numero");
+            int numeroTuPersona = bundle.getInt("numerotupersona");
+            
+            // Obtener datos de Firebase
+            obtenerCartasYMostrar(numero, numeroTuPersona);
+        }
     }
-    private void tarotPareja(int numero, int numerotupersona) {
-        String nombreCarta = String.format("carta%d", numero);
-        String nombreCartatupersona = String.format("carta%d", numerotupersona);
-        int valorimagencarta = getResources().getIdentifier(nombreCarta, "drawable", getPackageName());
-        int valorimagencartatupersona = getResources().getIdentifier(nombreCartatupersona, "drawable", getPackageName());
-        ivcartatu.setImageResource(valorimagencarta);
-        ivcartatupareja.setImageResource(valorimagencartatupersona);
 
+    /**
+     * Obtiene las cartas del tarot de Firebase y las muestra
+     */
+    private void obtenerCartasYMostrar(int numero, int numeroTuPersona) {
+        DatabaseReference referencia = FirebaseDatabase.getInstance().getReference();
+        
+        // Obtener primera carta
+        referencia.child(String.valueOf(numero))
+            .addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Carta cartaTu = snapshot.getValue(Carta.class);
+                    if (cartaTu != null) {
+                        tvTituloTu.setText(cartaTu.getTitulo());
+                        tvDescripcionTu.setText(cartaTu.getDescripcionAmorosa());
+                        mostrarImagenCarta(numero, ivCartaTu);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    tvTituloTu.setText("Error al cargar");
+                }
+            });
+        
+        // Obtener segunda carta
+        referencia.child(String.valueOf(numeroTuPersona))
+            .addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Carta cartaPareja = snapshot.getValue(Carta.class);
+                    if (cartaPareja != null) {
+                        tvTituloTuPareja.setText(cartaPareja.getTitulo());
+                        tvDescripcionTuPareja.setText(cartaPareja.getDescripcionAmorosa());
+                        mostrarImagenCarta(numeroTuPersona, ivCartaTuPareja);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    tvTituloTuPareja.setText("Error al cargar");
+                }
+            });
+    }
+
+    /**
+     * Carga y muestra la imagen de la carta
+     */
+    private void mostrarImagenCarta(int numeroCarta, ImageView imageView) {
+        String nombreCarta = String.format("carta%d", numeroCarta);
+        int valorImagenCarta = getResources().getIdentifier(
+            nombreCarta,
+            "drawable",
+            getPackageName()
+        );
+        
+        if (valorImagenCarta != 0) {
+            imageView.setImageResource(valorImagenCarta);
+        } else {
+            imageView.setImageResource(R.drawable.ic_launcher_background);
+        }
     }
 }
