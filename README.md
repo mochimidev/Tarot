@@ -66,41 +66,275 @@ La aplicación Tarot fue creada con el propósito de brindar una experiencia int
 
 ---
 
-## 📱 Interfaz de Usuario - Pantallas Principales
+## 📱 Interfaz de Usuario - Capturas Profesionales
 
-### 🏠 Pantalla Principal (Home)
+### 🏠 Pantalla Principal (Home Screen)
 
 ```
-╔════════════════════════════════════════╗
-║                                        ║
-║             ✨ BIENVENIDO ✨           ║
-║    Explora los misterios del Tarot    ║
-║                                        ║
-║  ┌────────────────────────────────┐   ║
-║  │  ✨ Carta del Día              │   ║
-║  │  Descubre tu carta y destino   │   ║
-║  │         [IMAGEN CARTA]         │   ║
-║  │   ━━━━━━━━━━━━━━━━━━━━━━━━  │   ║
-║  │    LEER MI CARTA              │   ║
-║  └────────────────────────────────┘   ║
-║                                        ║
-║  ┌────────────────────────────────┐   ║
-║  │  ⚡ Sí o No                     │   ║
-║  │  Obtén respuesta clara         │   ║
-║  │         [IMAGEN CARTA]         │   ║
-║  │   ━━━━━━━━━━━━━━━━━━━━━━━━  │   ║
-║  │    REALIZAR CONSULTA           │   ║
-║  └────────────────────────────────┘   ║
-║                                        ║
-║  ┌────────────────────────────────┐   ║
-║  │  💕 Tarot de Parejas           │   ║
-║  │  Descubre la conexión          │   ║
-║  │         [IMAGEN CARTA]         │   ║
-║  │   ━━━━━━━━━━━━━━━━━━━━━━━━  │   ║
-║  │    EXPLORAR CONEXIÓN           │   ║
-║  └────────────────────────────────┘   ║
-║                                        ║
-║  © 2024 Charlotte & Gabriel            ║
+╭─────────────────────────────────────╮
+│  📱  S  :  99  🔋                   │
+├─────────────────────────────────────┤
+│                                     │
+│          ✨ BIENVENIDO ✨           │
+│     Explora los misterios del Tarot │
+│                                     │
+│  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  │
+│  ┃  ✨ CARTA DEL DÍA            ┃  │
+│  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫  │
+│  ┃                               ┃  │
+│  ┃  Descubre la carta que        ┃  │
+│  ┃  guiará tu camino y           ┃  │
+│  ┃  revelará tu destino          ┃  │
+│  ┃                               ┃  │
+│  ┃      ╔────────────╗           ┃  │
+│  ┃      ║ 🂡 IMAGEN  ║           ┃  │
+│  ┃      ║   CARTA    ║           ┃  │
+│  ┃      ║            ║           ┃  │
+│  ┃      ╚────────────╝           ┃  │
+│  ┃                               ┃  │
+│  ┃  ┏━━━━━━━━━━━━━━━━━━━━━━┓   ┃  │
+│  ┃  ┃ 📖 LEER MI CARTA     ┃   ┃  │
+│  ┃  ┗━━━━━━━━━━━━━━━━━━━━━━┛   ┃  │
+│  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  │
+│                                     │
+│  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  │
+│  ┃  ⚡ SÍ O NO                   ┃  │
+│  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫  │
+│  ┃                               ┃  │
+│  ┃  Formula tu pregunta y el     ┃  │
+│  ┃  tarot te dará respuesta      ┃  │
+│  ┃  clara y directa              ┃  │
+│  ┃                               ┃  │
+│  ┃      ╔────────────╗           ┃  │
+│  ┃      ║ 🂡 IMAGEN  ║           ┃  │
+│  ┃      ║   CARTA    ║           ┃  │
+│  ┃      ║            ║           ┃  │
+│  ┃      ╚────────────╝           ┃  │
+│  ┃                               ┃  │
+│  ┃  ┏━━━━━━━━━━━━━━━━━━━━━━┓   ┃  │
+│  ┃  ┃ ❓ REALIZAR CONSULTA ┃   ┃  │
+│  ┃  ┗━━━━━━━━━━━━━━━━━━━━━━┛   ┃  │
+│  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  │
+│                                     │
+│  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  │
+│  ┃  💕 TAROT DE PAREJAS         ┃  │
+│  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫  │
+│  ┃                               ┃  │
+│  ┃  Descubre la conexión         ┃  │
+│  ┃  entre dos almas              ┃  │
+│  ┃                               ┃  │
+│  ┃      ╔────────────╗           ┃  │
+│  ┃      ║ 🂡 IMAGEN  ║           ┃  │
+│  ┃      ║   CARTA    ║           ┃  │
+│  ┃      ║            ║           ┃  │
+│  ┃      ╚────────────╝           ┃  │
+│  ┃                               ┃  │
+│  ┃  ┏━━━━━━━━━━━━━━━━━━━━━━┓   ┃  │
+│  ┃  ┃ 💓 EXPLORAR CONEXIÓN ┃   ┃  │
+│  ┃  ┗━━━━━━━━━━━━━━━━━━━━━━┛   ┃  │
+│  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  │
+│                                     │
+│                                     │
+│  © 2024 Charlotte & Gabriel         │
+│                                     │
+╰─────────────────────────────────────╯
+
+🎨 DISEÑO:
+  Fondo: Gradiente #0a0e27 → #3c096c
+  Cards: Bordes púrpura con elevation
+  Botones: Gradiente púrpura-oro
+  Tipografía: Sans-serif light/medium
+```
+
+---
+
+### ⭐ Pantalla - Carta del Día
+
+```
+╭─────────────────────────────────────╮
+│  📱  S  :  99  🔋                   │
+├─────────────────────────────────────┤
+│  ← ATRÁS                             │
+│                                     │
+│         ✨ Tu Carta del Día ✨      │
+│                                     │
+│  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  │
+│  ┃  La Emperatriz              ┃  │
+│  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  │
+│                                     │
+│  ┌─────────────────────────────┐   │
+│  │                             │   │
+│  │                             │   │
+│  │     ╔──────────────────╗   │   │
+│  │     ║                  ║   │   │
+│  │     ║   IMAGEN CARTA   ║   │   │
+│  │     ║   TAROT #3       ║   │   │
+│  │     ║    300 x 420px   ║   │   │
+│  │     ║                  ║   │   │
+│  │     ║  (Con bordes      ║   │   │
+│  │     ║   decorativos)    ║   │   │
+│  │     ║                  ║   │   │
+│  │     ╚──────────────────╝   │   │
+│  │                             │   │
+│  │                             │   │
+│  └─────────────────────────────┘   │
+│                                     │
+│  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  │
+│  ┃  📖 SIGNIFICADO             ┃  │
+│  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫  │
+│  ┃                             ┃  │
+│  ┃  "La carta de hoy te trae   ┃  │
+│  ┃  un mensaje de fertilidad,  ┃  │
+│  ┃  amor y creatividad. Es     ┃  │
+│  ┃  momento de manifestar tus  ┃  │
+│  ┃  deseos más profundos y     ┃  │
+│  ┃  conectar con tu poder      ┃  │
+│  ┃  creativo. Confia en tu     ┃  │
+│  ┃  intuición y deja que la    ┃  │
+│  ┃  energía fluya naturalmente."    ┃  │
+│  ┃                             ┃  │
+│  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  │
+│                                     │
+╰─────────────────────────────────────╯
+
+🎨 DISEÑO:
+  Fondo: Gradiente oscuro
+  Card Título: Borde púrpura
+  Imagen: Frame decorativo misterioso
+  Descripción: Borde púrpura claro
+  Tipografía: Elegante y espaciada
+```
+
+---
+
+### ❓ Pantalla - Sí o No
+
+```
+╭─────────────────────────────────────╮
+│  📱  S  :  99  🔋                   │
+├─────────────────────────────────────┤
+│  ← ATRÁS                             │
+│                                     │
+│            ⚡ Sí o No ⚡            │
+│     Recibe una respuesta clara      │
+│                                     │
+│  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  │
+│  ┃  La Sacerdotisa              ┃  │
+│  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  │
+│                                     │
+│  ┌─────────────────────────────┐   │
+│  │  ╔──────────────────────╗   │   │
+│  │  ║                      ║   │   │
+│  │  ║   IMAGEN CARTA       ║   │   │
+│  │  ║   TAROT #2           ║   │   │
+│  │  ║    280 x 380px       ║   │   │
+│  │  ║                      ║   │   │
+│  │  ║   Secretos, intuición║   │   │
+│  │  ║   y sabiduría        ║   │   │
+│  │  ║                      ║   │   │
+│  │  ╚──────────────────────╝   │   │
+│  └─────────────────────────────┘   │
+│                                     │
+│  ╔═════════════════════════════╗   │
+│  ║                             ║   │
+│  ║      ✨ SÍ ✨               ║   │
+│  ║                             ║   │
+│  ║  (Borde dorado destacado)   ║   │
+│  ║                             ║   │
+│  ╚═════════════════════════════╝   │
+│                                     │
+│  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  │
+│  ┃  💡 INTERPRETACIÓN          ┃  │
+│  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫  │
+│  ┃                             ┃  │
+│  ┃  "La energía indica que tu  ┃  │
+│  ┃  pregunta tendrá una        ┃  │
+│  ┃  respuesta positiva. Los    ┃  │
+│  ┃  signos del universo están  ┃  │
+│  ┃  a tu favor. Procede con    ┃  │
+│  ┃  confianza y claridad."     ┃  │
+│  ┃                             ┃  │
+│  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  │
+│                                     │
+╰─────────────────────────────────────╯
+
+🎨 DISEÑO:
+  Respuesta: Box con borde DORADO (3dp)
+  Fondo: Gradiente índigo-púrpura
+  Tipografía: Clara y destacada
+  Colores: Oro para éxasis
+```
+
+---
+
+### 💕 Pantalla - Tarot de Parejas
+
+```
+╭─────────────────────────────────────╮
+│  📱  S  :  99  🔋                   │
+├─────────────────────────────────────┤
+│  ← ATRÁS                             │
+│                                     │
+│        💕 Tarot de Parejas 💕       │
+│    Descubre la conexión de dos      │
+│              almas                  │
+│                                     │
+│  ┌──────────────┬──────────────┐   │
+│  │     TÚ       │  TU PAREJA   │   │
+│  ├──────────────┼──────────────┤   │
+│  │              │              │   │
+│  │ ╔────────╗   │ ╔────────╗   │   │
+│  │ ║        ║   │ ║        ║   │   │
+│  │ ║ IMAGEN ║   │ ║ IMAGEN ║   │   │
+│  │ ║ CARTA  ║   │ ║ CARTA  ║   │   │
+│  │ ║ #22    ║   │ ║ #54    ║   │   │
+│  │ ║ 200x280║   │ ║ 200x280║   │   │
+│  │ ║        ║   │ ║        ║   │   │
+│  │ ╚────────╝   │ ╚────────╝   │   │
+│  │              │              │   │
+│  │ La Emperatriz│ El Amante    │   │
+│  │              │              │   │
+│  │ "Fertilidad, │ "Amor,       │   │
+│  │ amor y poder"│ unidad..."   │   │
+│  │              │              │   │
+│  └──────────────┴──────────────┘   │
+│                                     │
+│  ╔═════════════════════════════╗   │
+│  ║ ✨ CONEXIÓN REVELADA ✨    ║   │
+│  ╠═════════════════════════════╣   │
+│  ║                             ║   │
+│  ║  "Vuestra conexión es       ║   │
+│  ║  profunda y mágica. El      ║   │
+│  ║  universo ha alineado       ║   │
+│  ║  vuestros destinos para un  ║   │
+│  ║  propósito especial. Juntos ║   │
+│  ║  crearán belleza y          ║   │
+│  ║  transformación. La pasión  ║   │
+│  ║  y el amor fluyen           ║   │
+│  ║  naturalmente entre         ║   │
+│  ║  vosotros."                 ║   │
+│  ║                             ║   │
+│  ╚═════════════════════════════╝   │
+│                                     │
+╰─────────────────────────────────────╯
+
+🎨 DISEÑO:
+  Layout: 2 columnas balanceadas
+  Cards: Bordes púrpura claro
+  Conexión: Borde DORADO (3dp)
+  Tipografía: Elegante y centrada
+  Colores: Oro para secciones principales
+```
+
+---
+
+## 🎨 Especificaciones Visuales Completas
+
+### Elemento: Card Principal
+
+║ └────────────────────────────────┘ ║
+║ ║
+║ © 2024 Charlotte & Gabriel ║
 ╚════════════════════════════════════════╝
 
 🎨 ELEMENTOS VISUALES:
@@ -108,41 +342,43 @@ La aplicación Tarot fue creada con el propósito de brindar una experiencia int
 ✓ Cards con bordes decorativos
 ✓ Tipografía elegante y legible
 ✓ Botones con gradiente interactivo
+
 ```
 
 ### ⭐ Pantalla - Carta del Día
 
 ```
+
 ╔════════════════════════════════════════╗
-║  ← ATRÁS                               ║
-║                                        ║
-║        ✨ Tu Carta del Día ✨          ║
-║                                        ║
-║  ┌────────────────────────────────┐   ║
-║  │  La Emperatriz                 │   ║
-║  └────────────────────────────────┘   ║
-║                                        ║
-║  ┌────────────────────────────────┐   ║
-║  │                                │   ║
-║  │     ╔────────────────────╗    │   ║
-║  │     ║                    ║    │   ║
-║  │     ║  [IMAGEN GRANDE]   ║    │   ║
-║  │     ║   300 x 400px      ║    │   ║
-║  │     ║                    ║    │   ║
-║  │     ╚────────────────────╝    │   ║
-║  │                                │   ║
-║  └────────────────────────────────┘   ║
-║                                        ║
-║  ┌────────────────────────────────┐   ║
-║  │  📖 SIGNIFICADO                │   ║
-║  │                                │   ║
-║  │ "La carta de hoy te trae un    │   ║
-║  │ mensaje de fertilidad, amor y  │   ║
-║  │ creatividad. Es momento de     │   ║
-║  │ manifestar tus deseos..."      │   ║
-║  │                                │   ║
-║  └────────────────────────────────┘   ║
-║                                        ║
+║ ← ATRÁS ║
+║ ║
+║ ✨ Tu Carta del Día ✨ ║
+║ ║
+║ ┌────────────────────────────────┐ ║
+║ │ La Emperatriz │ ║
+║ └────────────────────────────────┘ ║
+║ ║
+║ ┌────────────────────────────────┐ ║
+║ │ │ ║
+║ │ ╔────────────────────╗ │ ║
+║ │ ║ ║ │ ║
+║ │ ║ [IMAGEN GRANDE] ║ │ ║
+║ │ ║ 300 x 400px ║ │ ║
+║ │ ║ ║ │ ║
+║ │ ╚────────────────────╝ │ ║
+║ │ │ ║
+║ └────────────────────────────────┘ ║
+║ ║
+║ ┌────────────────────────────────┐ ║
+║ │ 📖 SIGNIFICADO │ ║
+║ │ │ ║
+║ │ "La carta de hoy te trae un │ ║
+║ │ mensaje de fertilidad, amor y │ ║
+║ │ creatividad. Es momento de │ ║
+║ │ manifestar tus deseos..." │ ║
+║ │ │ ║
+║ └────────────────────────────────┘ ║
+║ ║
 ╚════════════════════════════════════════╝
 
 🎨 ESTILO:
@@ -150,43 +386,45 @@ La aplicación Tarot fue creada con el propósito de brindar una experiencia int
 ✓ Título en oro (#ffd60a)
 ✓ Imagen con frame místico
 ✓ Texto descriptivo en blanco 80%
+
 ```
 
 ### ❓ Pantalla - Sí o No
 
 ```
+
 ╔════════════════════════════════════════╗
-║  ← ATRÁS                               ║
-║                                        ║
-║         ⚡ Sí o No ⚡                  ║
-║   Recibe una respuesta clara          ║
-║                                        ║
-║  ┌────────────────────────────────┐   ║
-║  │  La Sacerdotisa                │   ║
-║  └────────────────────────────────┘   ║
-║                                        ║
-║  ┌────────────────────────────────┐   ║
-║  │  ╔────────────────────────╗    │   ║
-║  │  ║   [IMAGEN CARTA]       ║    │   ║
-║  │  ║   280 x 350px          ║    │   ║
-║  │  ╚────────────────────────╝    │   ║
-║  └────────────────────────────────┘   ║
-║                                        ║
-║  ╔════════════════════════════════╗   ║
-║  ║      ✨ SÍ ✨                  ║   ║
-║  ║  (Con borde dorado destacado)  ║   ║
-║  ╚════════════════════════════════╝   ║
-║                                        ║
-║  ┌────────────────────────────────┐   ║
-║  │  💡 INTERPRETACIÓN             │   ║
-║  │                                │   ║
-║  │ "La energía indica que tu      │   ║
-║  │ pregunta tendrá respuesta      │   ║
-║  │ positiva. Los signos del       │   ║
-║  │ universo están a tu favor..."  │   ║
-║  │                                │   ║
-║  └────────────────────────────────┘   ║
-║                                        ║
+║ ← ATRÁS ║
+║ ║
+║ ⚡ Sí o No ⚡ ║
+║ Recibe una respuesta clara ║
+║ ║
+║ ┌────────────────────────────────┐ ║
+║ │ La Sacerdotisa │ ║
+║ └────────────────────────────────┘ ║
+║ ║
+║ ┌────────────────────────────────┐ ║
+║ │ ╔────────────────────────╗ │ ║
+║ │ ║ [IMAGEN CARTA] ║ │ ║
+║ │ ║ 280 x 350px ║ │ ║
+║ │ ╚────────────────────────╝ │ ║
+║ └────────────────────────────────┘ ║
+║ ║
+║ ╔════════════════════════════════╗ ║
+║ ║ ✨ SÍ ✨ ║ ║
+║ ║ (Con borde dorado destacado) ║ ║
+║ ╚════════════════════════════════╝ ║
+║ ║
+║ ┌────────────────────────────────┐ ║
+║ │ 💡 INTERPRETACIÓN │ ║
+║ │ │ ║
+║ │ "La energía indica que tu │ ║
+║ │ pregunta tendrá respuesta │ ║
+║ │ positiva. Los signos del │ ║
+║ │ universo están a tu favor..." │ ║
+║ │ │ ║
+║ └────────────────────────────────┘ ║
+║ ║
 ╚════════════════════════════════════════╝
 
 🎨 ESTILO:
@@ -194,42 +432,44 @@ La aplicación Tarot fue creada con el propósito de brindar una experiencia int
 ✓ Respuesta en box dorado (3dp border)
 ✓ Interpretación en blanco 80%
 ✓ Tipografía responsiva
+
 ```
 
 ### 💕 Pantalla - Tarot de Parejas
 
 ```
+
 ╔════════════════════════════════════════╗
-║  ← ATRÁS                               ║
-║                                        ║
-║     💕 Tarot de Parejas 💕             ║
-║  Descubre la conexión entre dos almas ║
-║                                        ║
-║  ┌─────────────────┬─────────────────┐ ║
-║  │      TÚ         │   TU PAREJA     │ ║
-║  ├─────────────────┼─────────────────┤ ║
-║  │ ╔───────────╗   │  ╔───────────╗ │ ║
-║  │ ║  [CARTA]  ║   │  ║  [CARTA]  ║ │ ║
-║  │ ║ 200 x280  ║   │  ║ 200 x280  ║ │ ║
-║  │ ╚───────────╝   │  ╚───────────╝ │ ║
-║  │                 │                 │ ║
-║  │ La Emperatriz   │  El Amante      │ ║
-║  │                 │                 │ ║
-║  │ "Fertilidad,    │ "Amor, unidad,  │ ║
-║  │ amor y poder.." │ decisión..."    │ ║
-║  │                 │                 │ ║
-║  └─────────────────┴─────────────────┘ ║
-║                                        ║
-║  ┌────────────────────────────────┐   ║
-║  │  ✨ CONEXIÓN REVELADA ✨       │   ║
-║  │                                │   ║
-║  │ "Vuestra conexión es profunda  │   ║
-║  │ y mágica. El universo ha       │   ║
-║  │ alineado vuestros destinos     │   ║
-║  │ para un propósito especial..."  │   ║
-║  │                                │   ║
-║  └────────────────────────────────┘   ║
-║                                        ║
+║ ← ATRÁS ║
+║ ║
+║ 💕 Tarot de Parejas 💕 ║
+║ Descubre la conexión entre dos almas ║
+║ ║
+║ ┌─────────────────┬─────────────────┐ ║
+║ │ TÚ │ TU PAREJA │ ║
+║ ├─────────────────┼─────────────────┤ ║
+║ │ ╔───────────╗ │ ╔───────────╗ │ ║
+║ │ ║ [CARTA] ║ │ ║ [CARTA] ║ │ ║
+║ │ ║ 200 x280 ║ │ ║ 200 x280 ║ │ ║
+║ │ ╚───────────╝ │ ╚───────────╝ │ ║
+║ │ │ │ ║
+║ │ La Emperatriz │ El Amante │ ║
+║ │ │ │ ║
+║ │ "Fertilidad, │ "Amor, unidad, │ ║
+║ │ amor y poder.." │ decisión..." │ ║
+║ │ │ │ ║
+║ └─────────────────┴─────────────────┘ ║
+║ ║
+║ ┌────────────────────────────────┐ ║
+║ │ ✨ CONEXIÓN REVELADA ✨ │ ║
+║ │ │ ║
+║ │ "Vuestra conexión es profunda │ ║
+║ │ y mágica. El universo ha │ ║
+║ │ alineado vuestros destinos │ ║
+║ │ para un propósito especial..." │ ║
+║ │ │ ║
+║ └────────────────────────────────┘ ║
+║ ║
 ╚════════════════════════════════════════╝
 
 🎨 ESTILO:
@@ -237,6 +477,7 @@ La aplicación Tarot fue creada con el propósito de brindar una experiencia int
 ✓ Cards con bordes púrpura claro
 ✓ Sección conexión con borde dorado
 ✓ Espaciado profesional
+
 ```
 
 ---
@@ -306,35 +547,37 @@ La aplicación Tarot fue creada con el propósito de brindar una experiencia int
 ## 🛠️ Stack Tecnológico
 
 ```
+
 ┌─────────────────────────────────────────┐
-│           TAROT APP TECH STACK          │
+│ TAROT APP TECH STACK │
 ├─────────────────────────────────────────┤
-│                                         │
-│ 🔹 FRONTEND                             │
-│   • Android XML Layouts                 │
-│   • ConstraintLayout (Responsive)       │
-│   • Material Design Components          │
-│   • Gradientes personalizados           │
-│                                         │
-│ 🔹 BACKEND                              │
-│   • Java 11+ (Orientado a Objetos)     │
-│   • Firebase Realtime Database          │
-│   • ValueEventListener (Async)          │
-│   • DAO Pattern (Data Access)           │
-│                                         │
-│ 🔹 BUILD SYSTEM                         │
-│   • Gradle 7.4                          │
-│   • Android Gradle Plugin 7.3.1         │
-│   • Compilación a bytecode Android      │
-│                                         │
-│ 🔹 DEPENDENCIES                         │
-│   • AndroidX Core: 1.5.1                │
-│   • Material Design: 1.7.0              │
-│   • Firebase BOM: 31.1.1                │
-│   • ConstraintLayout: 2.1.4             │
-│                                         │
+│ │
+│ 🔹 FRONTEND │
+│ • Android XML Layouts │
+│ • ConstraintLayout (Responsive) │
+│ • Material Design Components │
+│ • Gradientes personalizados │
+│ │
+│ 🔹 BACKEND │
+│ • Java 11+ (Orientado a Objetos) │
+│ • Firebase Realtime Database │
+│ • ValueEventListener (Async) │
+│ • DAO Pattern (Data Access) │
+│ │
+│ 🔹 BUILD SYSTEM │
+│ • Gradle 7.4 │
+│ • Android Gradle Plugin 7.3.1 │
+│ • Compilación a bytecode Android │
+│ │
+│ 🔹 DEPENDENCIES │
+│ • AndroidX Core: 1.5.1 │
+│ • Material Design: 1.7.0 │
+│ • Firebase BOM: 31.1.1 │
+│ • ConstraintLayout: 2.1.4 │
+│ │
 └─────────────────────────────────────────┘
-```
+
+````
 
 ---
 
@@ -375,7 +618,7 @@ Android SDK: 32+ (API)
 
 Android Studio: 2022.1+
   └─ Con Gradle 7.4 integrado
-```
+````
 
 ---
 
