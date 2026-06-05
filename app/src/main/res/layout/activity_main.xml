@@ -4,156 +4,314 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/a"
+    android:background="@drawable/gradient_mystic_bg"
+    android:scrollbars="none"
     tools:context=".MainActivity">
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp"
+        android:paddingBottom="32dp">
 
+        <!-- 🔮 HEADER SECTION -->
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/headerTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Carta del dia"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="sans-serif-light"
+            android:text="Bienvenido"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#987B63"
-            android:textSize="34sp"
+            android:textColor="@color/mystic_gold"
+            android:textSize="42sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="264dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="sans-serif-black"
-            android:text="Escoje una carta y anticipate al dia de hoy con una lectura general"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="#916E4E"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="16dp"
-            android:onClick="inciarActividadCartaDelDia"
-            app:layout_constraintEnd_toEndOf="@+id/textView3"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            app:srcCompat="@drawable/uwu" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
+            android:id="@+id/headerSubtitle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Sí o No"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#987B63"
-            android:textSize="34sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="236dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="sans-serif-black"
-            android:text="Respira hondo y piensa una pregunta  de respuesta Si o No. Escoje la carta del tarot y esta te mostrara una respuesta directa."
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="Explora los misterios del Tarot"
             android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="#916E4E"
+            android:textColor="@color/mystic_purple_light"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/textView4"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headerTitle" />
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="16dp"
-            android:onClick="iniciarActividadSiyno"
-            app:layout_constraintEnd_toEndOf="@+id/textView5"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="@+id/textView5"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
-            app:srcCompat="@drawable/uwu" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+        <!-- 🔮 CARD 1: CARTA DEL DÍA -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardCartaDelDia"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Tarot de las parejas"
-            android:textColor="#987B63"
-            android:textSize="34sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/imageView3"
-            app:layout_constraintStart_toStartOf="@+id/imageView3"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="20dp"
+            app:cardBackgroundColor="@color/dark_bg"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="12dp"
+            app:strokeColor="@color/mystic_purple"
+            app:strokeWidth="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headerSubtitle">
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="253dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:text="Descripción de tu futuro junto a tu pareja, piensa sabiamente."
-            android:textAlignment="center"
-            android:textColor="#916E4E"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/textView2"
-            app:layout_constraintHorizontal_bias="0.63"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="24dp">
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="16dp"
-            android:onClick="iniciarActividadTarotPareja"
-            app:layout_constraintEnd_toEndOf="@+id/textView6"
-            app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
-            app:srcCompat="@drawable/uwu" />
+                <TextView
+                    android:id="@+id/titleCartaDelDia"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="✨ Carta del Día"
+                    android:textAlignment="left"
+                    android:textColor="@color/mystic_gold"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/descCartaDelDia"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Descubre la carta del día que guiará tu camino y revelará tu destino"
+                    android:textColor="@color/white_80"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/titleCartaDelDia" />
+
+                <ImageView
+                    android:id="@+id/imageCartaDelDia"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="16dp"
+                    android:onClick="inciarActividadCartaDelDia"
+                    android:scaleType="centerInside"
+                    android:contentDescription="Carta del Día"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/descCartaDelDia"
+                    app:srcCompat="@drawable/uwu" />
+
+                <Button
+                    android:id="@+id/btnCartaDelDia"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/button_mystic_primary"
+                    android:fontFamily="sans-serif-medium"
+                    android:onClick="inciarActividadCartaDelDia"
+                    android:text="Leer Mi Carta"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageCartaDelDia" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- 🔮 CARD 2: SÍ O NO -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSiyno"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            app:cardBackgroundColor="@color/dark_bg"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="12dp"
+            app:strokeColor="@color/mystic_indigo"
+            app:strokeWidth="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardCartaDelDia">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="24dp">
+
+                <TextView
+                    android:id="@+id/titleSiyno"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="⚡ Sí o No"
+                    android:textAlignment="left"
+                    android:textColor="@color/mystic_gold"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/descSiyno"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Formula tu pregunta y el tarot te dará una respuesta clara y directa"
+                    android:textColor="@color/white_80"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/titleSiyno" />
+
+                <ImageView
+                    android:id="@+id/imageSiyno"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="16dp"
+                    android:onClick="iniciarActividadSiyno"
+                    android:scaleType="centerInside"
+                    android:contentDescription="Sí o No"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/descSiyno"
+                    app:srcCompat="@drawable/uwu" />
+
+                <Button
+                    android:id="@+id/btnSiyno"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/button_mystic_primary"
+                    android:fontFamily="sans-serif-medium"
+                    android:onClick="iniciarActividadSiyno"
+                    android:text="Realizar Consulta"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageSiyno" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- 🔮 CARD 3: TAROT PAREJAS -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardTarotPareja"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            app:cardBackgroundColor="@color/dark_bg"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="12dp"
+            app:strokeColor="@color/mystic_purple_light"
+            app:strokeWidth="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardSiyno">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="24dp">
+
+                <TextView
+                    android:id="@+id/titleTarotPareja"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="💕 Tarot de Parejas"
+                    android:textAlignment="left"
+                    android:textColor="@color/mystic_gold"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/descTarotPareja"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Descubre la armonía y futuro de tu relación a través de dos cartas místicas"
+                    android:textColor="@color/white_80"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/titleTarotPareja" />
+
+                <ImageView
+                    android:id="@+id/imageTarotPareja"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="16dp"
+                    android:onClick="iniciarActividadTarotPareja"
+                    android:scaleType="centerInside"
+                    android:contentDescription="Tarot de Parejas"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/descTarotPareja"
+                    app:srcCompat="@drawable/uwu" />
+
+                <Button
+                    android:id="@+id/btnTarotPareja"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/button_mystic_primary"
+                    android:fontFamily="sans-serif-medium"
+                    android:onClick="iniciarActividadTarotPareja"
+                    android:text="Explorar Conexión"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageTarotPareja" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- 📝 FOOTER -->
+        <TextView
+            android:id="@+id/footerText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="16dp"
-            android:fontFamily="sans-serif-black"
-            android:text="Charlotte Rodriguez - Gabriel Barrientos\n2022 ©"
+            android:fontFamily="sans-serif-thin"
+            android:text="Charlotte Rodriguez • Gabriel Barrientos\n2024 © Todos los derechos reservados"
             android:textAlignment="center"
-            android:textColor="#916E4E"
-            android:textSize="14sp"
+            android:textColor="@color/white_60"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imageView6"
-            app:layout_constraintStart_toStartOf="@+id/imageView6"
-            app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardTarotPareja" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

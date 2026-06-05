@@ -1,16 +1,62 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- 🌙 MYSTIC APPLICATION THEME - Professional Dark Design -->
     <style name="Theme.Evaluacion4charlottegabriel" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <!-- Primary Colors - Mystical Purple -->
+        <item name="colorPrimary">@color/mystic_purple</item>
+        <item name="colorPrimaryVariant">@color/mystic_indigo</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        
+        <!-- Secondary Colors -->
+        <item name="colorSecondary">@color/mystic_gold</item>
+        <item name="colorSecondaryVariant">@color/mystic_purple_light</item>
+        <item name="colorOnSecondary">@color/mystic_dark</item>
+        
+        <!-- Background -->
+        <item name="android:colorBackground">@color/mystic_dark</item>
+        
+        <!-- Status Bar -->
+        <item name="android:statusBarColor">@color/mystic_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        
+        <!-- Text Colors -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/mystic_silver</item>
+    </style>
+
+    <!-- 🎯 TEXT STYLES -->
+    <style name="TextStyle.Title" parent="TextAppearance.AppCompat.Headline4">
+        <item name="android:textColor">@color/mystic_gold</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="TextStyle.Subtitle" parent="TextAppearance.AppCompat.Subtitle1">
+        <item name="android:textColor">@color/mystic_purple_light</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">sans-serif-thin</item>
+    </style>
+
+    <style name="TextStyle.Description" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/white_80</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+    </style>
+
+    <!-- 🔮 CARD STYLES -->
+    <style name="CardStyle.Mystic" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/dark_bg</item>
+        <item name="cardCornerRadius">24dp</item>
+        <item name="cardElevation">8dp</item>
+        <item name="strokeColor">@color/mystic_purple</item>
+        <item name="strokeWidth">2dp</item>
+    </style>
+
+    <!-- 🔘 BUTTON STYLES -->
+    <style name="ButtonStyle.Mystic" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/mystic_purple</item>
+        <item name="textColor">@color/mystic_gold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="cornerRadius">16dp</item>
     </style>
 </resources>
