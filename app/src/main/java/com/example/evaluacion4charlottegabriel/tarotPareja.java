@@ -109,6 +109,8 @@ public class tarotPareja extends AppCompatActivity {
             canvas.drawLine(w * .42f, h * .22f, w * .58f, h * .22f, paint);
             paint.setStyle(Paint.Style.FILL);
             drawHeart(canvas, w * .5f, h * .26f, DreamUi.dp(getContext(), 17));
+            paint.setColor(DreamColors.GOLD);
+            paint.setShadowLayer(DreamUi.dp(getContext(), 12), 0, 0, DreamColors.GOLD);
             for (int i = 0; i < 9; i++) {
                 float x = w * (.43f + i * .018f);
                 float y = h * (.18f + (i % 2) * .07f);
