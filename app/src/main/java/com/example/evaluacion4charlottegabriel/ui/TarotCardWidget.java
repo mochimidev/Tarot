@@ -1,6 +1,7 @@
 package com.example.evaluacion4charlottegabriel.ui;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -17,9 +18,14 @@ public class TarotCardWidget extends GlassPanel {
     public TarotCardWidget(Context context) {
         super(context);
         setGravity(Gravity.CENTER_HORIZONTAL);
+        setPadding(DreamUi.dp(context, 14), DreamUi.dp(context, 14), DreamUi.dp(context, 14), DreamUi.dp(context, 18));
 
         FrameLayout halo = new FrameLayout(context);
-        halo.setBackgroundColor(0x00ffffff);
+        GradientDrawable haloBg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
+                new int[]{0x77ffffff, 0x33fff0fa});
+        haloBg.setCornerRadius(DreamUi.dp(context, 26));
+        haloBg.setStroke(DreamUi.dp(context, 1), 0x99ffe7b8);
+        halo.setBackground(haloBg);
         image = new ImageView(context);
         image.setAdjustViewBounds(true);
         image.setScaleType(ImageView.ScaleType.FIT_CENTER);
@@ -30,9 +36,9 @@ public class TarotCardWidget extends GlassPanel {
                 ViewGroup.LayoutParams.MATCH_PARENT));
         addView(halo, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                DreamUi.dp(context, 320)));
+                DreamUi.dp(context, 350)));
 
-        title = DreamUi.text(context, "", 24, DreamColors.INK, Typeface.BOLD);
+        title = DreamUi.text(context, "", 23, DreamColors.INK, Typeface.BOLD);
         title.setGravity(Gravity.CENTER);
         LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -40,7 +46,7 @@ public class TarotCardWidget extends GlassPanel {
         titleParams.topMargin = DreamUi.dp(context, 14);
         addView(title, titleParams);
 
-        body = DreamUi.text(context, "", 15, DreamColors.INK, Typeface.NORMAL);
+        body = DreamUi.text(context, "", 14, DreamColors.DEEP, Typeface.NORMAL);
         body.setGravity(Gravity.CENTER);
         LinearLayout.LayoutParams bodyParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,

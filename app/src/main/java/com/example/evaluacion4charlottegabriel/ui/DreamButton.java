@@ -13,10 +13,10 @@ public class DreamButton extends AppCompatTextView {
         super(context);
         setText(label);
         setTextColor(0xffffffff);
-        setTextSize(16);
-        setTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD));
+        setTextSize(15);
+        setTypeface(Typeface.create("serif", Typeface.BOLD));
         setGravity(Gravity.CENTER);
-        setMinHeight(DreamUi.dp(context, 52));
+        setMinHeight(DreamUi.dp(context, 50));
         setPadding(DreamUi.dp(context, 20), DreamUi.dp(context, 12), DreamUi.dp(context, 20), DreamUi.dp(context, 12));
         setClickable(true);
         setFocusable(true);
@@ -28,8 +28,8 @@ public class DreamButton extends AppCompatTextView {
     private GradientDrawable makeBg() {
         GradientDrawable drawable = new GradientDrawable(
                 GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{DreamColors.LILAC, DreamColors.ROSE, DreamColors.GOLD});
-        drawable.setCornerRadius(DreamUi.dp(getContext(), 22));
+                new int[]{DreamColors.LILAC, DreamColors.ROSE, DreamColors.GOLD_SOFT});
+        drawable.setCornerRadius(DreamUi.dp(getContext(), 25));
         drawable.setStroke(DreamUi.dp(getContext(), 2), 0x99ffffff);
         return drawable;
     }

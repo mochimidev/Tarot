@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -41,7 +42,7 @@ public class tarotPareja extends AppCompatActivity {
         TextView header = DreamUi.text(this, "Tarot de Parejas", 29, DreamColors.INK, Typeface.BOLD);
         header.setGravity(Gravity.CENTER);
         root.addView(header);
-        TextView sub = DreamUi.text(this, "Dos cartas grandes, una corriente brillante entre ambas energias.", 15, DreamColors.DEEP, Typeface.NORMAL);
+        TextView sub = DreamUi.text(this, "Dos cartas grandes, una corriente brillante y un pequeno lazo de corazones.", 15, DreamColors.DEEP, Typeface.NORMAL);
         sub.setGravity(Gravity.CENTER);
         add(root, sub, 4, 18);
 
@@ -64,10 +65,10 @@ public class tarotPareja extends AppCompatActivity {
         add(root, connection, 0, 18);
 
         GlassPanel summary = new GlassPanel(this);
-        TextView title = DreamUi.text(this, "Conexion revelada", 22, DreamColors.INK, Typeface.BOLD);
+        TextView title = DreamUi.text(this, "Conexion revelada", 23, DreamColors.INK, Typeface.BOLD);
         title.setGravity(Gravity.CENTER);
         summary.addView(title);
-        TextView body = DreamUi.text(this, "Cuando las cartas se miran, muestran como cuidar el vinculo: escuchar, jugar, agradecer y dejar espacio para que cada persona florezca.", 15, DreamColors.DEEP, Typeface.NORMAL);
+        TextView body = DreamUi.text(this, "Cuando las cartas se miran, muestran como cuidar el vinculo: escuchar, jugar, agradecer y dejar espacio para que cada persona brille a su ritmo.", 15, DreamColors.DEEP, Typeface.NORMAL);
         body.setGravity(Gravity.CENTER);
         add(summary, body, 10, 0);
         add(root, summary, 0, 0);
@@ -107,12 +108,25 @@ public class tarotPareja extends AppCompatActivity {
             paint.setShadowLayer(DreamUi.dp(getContext(), 12), 0, 0, DreamColors.GOLD);
             canvas.drawLine(w * .42f, h * .22f, w * .58f, h * .22f, paint);
             paint.setStyle(Paint.Style.FILL);
+            drawHeart(canvas, w * .5f, h * .26f, DreamUi.dp(getContext(), 17));
             for (int i = 0; i < 9; i++) {
                 float x = w * (.43f + i * .018f);
                 float y = h * (.18f + (i % 2) * .07f);
                 canvas.drawCircle(x, y, DreamUi.dp(getContext(), i % 3 + 2), paint);
             }
             paint.setShadowLayer(0, 0, 0, 0);
+        }
+
+        private void drawHeart(Canvas canvas, float cx, float cy, float size) {
+            Path path = new Path();
+            path.moveTo(cx, cy + size * .65f);
+            path.cubicTo(cx - size * 1.15f, cy, cx - size * .65f, cy - size * .85f, cx, cy - size * .32f);
+            path.cubicTo(cx + size * .65f, cy - size * .85f, cx + size * 1.15f, cy, cx, cy + size * .65f);
+            paint.setColor(DreamColors.ROSE);
+            paint.setShadowLayer(DreamUi.dp(getContext(), 10), 0, 0, DreamColors.ROSE);
+            canvas.drawPath(path, paint);
+            paint.setColor(DreamColors.GOLD_SOFT);
+            canvas.drawCircle(cx, cy, size * .20f, paint);
         }
     }
 }

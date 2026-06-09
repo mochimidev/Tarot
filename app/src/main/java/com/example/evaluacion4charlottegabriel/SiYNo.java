@@ -6,13 +6,17 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.evaluacion4charlottegabriel.Dao.Carta;
+import com.example.evaluacion4charlottegabriel.ui.CardMeta;
+import com.example.evaluacion4charlottegabriel.ui.DreamButton;
 import com.example.evaluacion4charlottegabriel.ui.DreamColors;
 import com.example.evaluacion4charlottegabriel.ui.DreamUi;
 import com.example.evaluacion4charlottegabriel.ui.GlassPanel;
+import com.example.evaluacion4charlottegabriel.ui.KawaiiSymbolView;
 import com.example.evaluacion4charlottegabriel.ui.TarotCardWidget;
 import com.example.evaluacion4charlottegabriel.ui.TarotScaffold;
 
@@ -42,23 +46,38 @@ public class SiYNo extends AppCompatActivity {
     private void build(int numero, int rotacion, Carta carta) {
         TarotScaffold scaffold = new TarotScaffold(this);
         LinearLayout root = scaffold.content();
-        TextView header = DreamUi.text(this, "Consulta Si o No", 29, DreamColors.INK, Typeface.BOLD);
+        TextView header = DreamUi.text(this, "Si o No", 29, DreamColors.INK, Typeface.BOLD);
         header.setGravity(Gravity.CENTER);
         root.addView(header);
+        TextView prompt = DreamUi.text(this, "Piensa tu pregunta con el corazon tranquilo.", 15, DreamColors.DEEP, Typeface.NORMAL);
+        prompt.setGravity(Gravity.CENTER);
+        add(root, prompt, 4, 14);
 
         String title = carta == null ? "Carta no disponible" : rotacion == 0 ? carta.getTitulo() : carta.getTitulo() + " (Invertida)";
         String desc = carta == null ? "" : rotacion == 0 ? carta.getDescripcion() : carta.getDescripcionInvertida();
         TarotCardWidget card = new TarotCardWidget(this);
         card.bind(numero, title, desc, rotacion);
-        add(root, card, 18, 18);
+        add(root, card, 0, 18);
 
         GlassPanel result = new GlassPanel(this);
-        TextView label = DreamUi.text(this, obtenerResultado(numero), 28, DreamColors.INK, Typeface.BOLD);
+        result.setGravity(Gravity.CENTER_HORIZONTAL);
+        String answer = obtenerResultado(numero);
+        FrameLayout mascotFrame = new FrameLayout(this);
+        KawaiiSymbolView reaction = new KawaiiSymbolView(this, CardMeta.familySymbol(numero));
+        mascotFrame.addView(reaction, new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                DreamUi.dp(this, 116)));
+        result.addView(mascotFrame);
+
+        TextView label = DreamUi.text(this, answer, 34, answerColor(answer), Typeface.BOLD);
         label.setGravity(Gravity.CENTER);
         result.addView(label);
-        TextView sub = DreamUi.text(this, "Respira, mira tu carta y deja que la respuesta se sienta tranquila.", 15, DreamColors.DEEP, Typeface.NORMAL);
+        TextView sub = DreamUi.text(this, responseCopy(answer), 15, DreamColors.DEEP, Typeface.NORMAL);
         sub.setGravity(Gravity.CENTER);
-        add(result, sub, 8, 0);
+        add(result, sub, 8, 16);
+        DreamButton again = new DreamButton(this, "Hacer otra pregunta");
+        again.setOnClickListener(v -> finish());
+        add(result, again, 0, 0);
         add(root, result, 0, 0);
         setContentView(scaffold);
     }
@@ -70,6 +89,18 @@ public class SiYNo extends AppCompatActivity {
             return "NO";
         }
         return "TAL VEZ";
+    }
+
+    private int answerColor(String answer) {
+        if ("SI".equals(answer)) return DreamColors.SPROUT;
+        if ("NO".equals(answer)) return DreamColors.ROSE;
+        return DreamColors.GOLD;
+    }
+
+    private String responseCopy(String answer) {
+        if ("SI".equals(answer)) return "La energia favorece tu camino. Avanza con dulzura y confianza.";
+        if ("NO".equals(answer)) return "La carta sugiere esperar. Protege tu paz antes de moverte.";
+        return "Todavia hay nubes suaves en la respuesta. Observa un poco mas.";
     }
     private void add(LinearLayout parent, android.view.View child, int top, int bottom) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(

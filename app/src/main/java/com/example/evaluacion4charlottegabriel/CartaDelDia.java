@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.example.evaluacion4charlottegabriel.ui.DreamButton;
 import com.example.evaluacion4charlottegabriel.ui.DreamColors;
 import com.example.evaluacion4charlottegabriel.ui.DreamUi;
 import com.example.evaluacion4charlottegabriel.ui.GlassPanel;
+import com.example.evaluacion4charlottegabriel.ui.CardMeta;
 import com.example.evaluacion4charlottegabriel.ui.TarotScaffold;
 
 public class CartaDelDia extends AppCompatActivity {
@@ -42,21 +44,25 @@ public class CartaDelDia extends AppCompatActivity {
         TarotScaffold scaffold = new TarotScaffold(this);
         LinearLayout root = scaffold.content();
 
-        TextView header = DreamUi.text(this, "Carta del Dia", 30, DreamColors.INK, Typeface.BOLD);
+        TextView header = DreamUi.text(this, "Carta del Dia", 29, DreamColors.INK, Typeface.BOLD);
         header.setGravity(Gravity.CENTER);
         root.addView(header);
 
-        TextView hint = DreamUi.text(this, "Toca la carta para revelar la energia que brota hoy.", 15, DreamColors.DEEP, Typeface.NORMAL);
+        TextView hint = DreamUi.text(this, "Toca la carta flotante y deja que abra una pagina nueva de tu cuento.", 15, DreamColors.DEEP, Typeface.NORMAL);
         hint.setGravity(Gravity.CENTER);
         add(root, hint, 4, 18);
 
         AnimatedRevealCard reveal = new AnimatedRevealCard(this);
         reveal.setCardImage(numero, rotacion);
         FrameLayout frame = new FrameLayout(this);
-        frame.setPadding(DreamUi.dp(this, 18), 0, DreamUi.dp(this, 18), 0);
+        GradientDrawable aura = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
+                new int[]{0x55ffffff, 0x22fff0fa});
+        aura.setCornerRadius(DreamUi.dp(this, 34));
+        frame.setBackground(aura);
+        frame.setPadding(DreamUi.dp(this, 28), DreamUi.dp(this, 12), DreamUi.dp(this, 28), DreamUi.dp(this, 12));
         frame.addView(reveal, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                DreamUi.dp(this, 460)));
+                DreamUi.dp(this, 500)));
         add(root, frame, 2, 18);
 
         GlassPanel info = new GlassPanel(this);
@@ -72,13 +78,18 @@ public class CartaDelDia extends AppCompatActivity {
         TextView name = DreamUi.text(this, titulo, 25, DreamColors.INK, Typeface.BOLD);
         name.setGravity(Gravity.CENTER);
         info.addView(name);
-        TextView meaningLabel = DreamUi.text(this, "SIGNIFICADO", 12, DreamColors.GOLD, Typeface.BOLD);
+
+        TextView family = DreamUi.text(this, CardMeta.familyName(numero) + " · " + CardMeta.rarity(numero), 13, CardMeta.familyColor(numero), Typeface.BOLD);
+        family.setGravity(Gravity.CENTER);
+        add(info, family, 3, 10);
+
+        TextView meaningLabel = DreamUi.label(this, "Mensaje de hoy", DreamColors.GOLD);
         meaningLabel.setGravity(Gravity.CENTER);
         add(info, meaningLabel, 12, 4);
-        TextView meaning = DreamUi.text(this, descripcion, 15, DreamColors.INK, Typeface.NORMAL);
+        TextView meaning = DreamUi.text(this, descripcion, 15, DreamColors.DEEP, Typeface.NORMAL);
         meaning.setGravity(Gravity.CENTER);
         add(info, meaning, 8, 14);
-        DreamButton save = new DreamButton(this, "Guardar en coleccion");
+        DreamButton save = new DreamButton(this, "Guardar en mi album");
         save.setOnClickListener(v -> saveCard());
         add(info, save, 18, 0);
         add(root, info, 0, 12);

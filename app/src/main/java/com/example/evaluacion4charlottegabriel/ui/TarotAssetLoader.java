@@ -13,7 +13,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class TarotAssetLoader {
-    private static final String ASSET_DIR = "tarot_cards/arcanos_mayores";
+    private static final String ASSET_ROOT = "tarot_cards";
+    private static final String[] ASSET_DIRS = {
+            "arcanos_mayores",
+            "chispas",
+            "gotitas",
+            "estrellas",
+            "brotes"
+    };
     private static final Pattern CARD_PATTERN = Pattern.compile("^(\\d{2})_.*\\.png$");
     private static Map<Integer, String> assetMap;
 
@@ -36,7 +43,7 @@ public final class TarotAssetLoader {
             if (assetName == null) {
                 return null;
             }
-            try (InputStream stream = context.getAssets().open(ASSET_DIR + "/" + assetName)) {
+            try (InputStream stream = context.getAssets().open(assetName)) {
                 return Drawable.createFromStream(stream, assetName);
             }
         } catch (Exception ignored) {
@@ -47,12 +54,15 @@ public final class TarotAssetLoader {
     private static String getAssetName(Context context, int firebaseId) throws Exception {
         if (assetMap == null) {
             assetMap = new HashMap<>();
-            String[] files = context.getAssets().list(ASSET_DIR);
-            if (files != null) {
-                for (String file : files) {
-                    Matcher matcher = CARD_PATTERN.matcher(file);
-                    if (matcher.matches()) {
-                        assetMap.put(Integer.parseInt(matcher.group(1)), file);
+            for (String dir : ASSET_DIRS) {
+                String assetDir = ASSET_ROOT + "/" + dir;
+                String[] files = context.getAssets().list(assetDir);
+                if (files != null) {
+                    for (String file : files) {
+                        Matcher matcher = CARD_PATTERN.matcher(file);
+                        if (matcher.matches()) {
+                            assetMap.put(Integer.parseInt(matcher.group(1)), assetDir + "/" + file);
+                        }
                     }
                 }
             }

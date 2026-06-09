@@ -31,7 +31,7 @@ public class AnimatedRevealCard extends FrameLayout {
         addView(front, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         back = new TextView(context);
-        back.setText("Dream\nSprouts\nTarot");
+        back.setText("Tarot\nKawaii\nDreams");
         back.setGravity(Gravity.CENTER);
         back.setTextSize(27);
         back.setTextColor(0xffffffff);
