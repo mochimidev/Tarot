@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Evaluacion4charlottegabriel"
         tools:targetApi="31">
         <activity
+            android:name=".CardDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".SettingsActivity"
             android:exported="false" />
         <activity
