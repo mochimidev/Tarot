@@ -130,6 +130,13 @@ public class MainActivity extends AppCompatActivity {
         parent.addView(child, params);
     }
 
+    private void add(LinearLayout parent, View child, int top, int bottom) {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, DreamUi.dp(this, top), 0, DreamUi.dp(this, bottom));
+        parent.addView(child, params);
+    }
+
     public void iniciarActividadSiyno(View view) {
         int numero = (int) (Math.random() * 78);
         int rotacion = generarRotacionAleatoria();
