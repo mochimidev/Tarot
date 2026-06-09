@@ -5,10 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.GridLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.evaluacion4charlottegabriel.Dao.Carta;
+import com.example.evaluacion4charlottegabriel.ui.DreamButton;
+import com.example.evaluacion4charlottegabriel.ui.DreamColors;
+import com.example.evaluacion4charlottegabriel.ui.DreamUi;
+import com.example.evaluacion4charlottegabriel.ui.GlassPanel;
+import com.example.evaluacion4charlottegabriel.ui.SpiritPetWidget;
+import com.example.evaluacion4charlottegabriel.ui.TarotScaffold;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,134 +28,148 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDateTime;
 
-/**
- * Pantalla principal de la aplicación Tarot.
- * Proporciona acceso a tres módulos principales:
- * 1. Carta del Día - Predicción diaria
- * 2. Sí y No - Respuestas a preguntas específicas
- * 3. Tarot de Parejas - Lectura de compatibilidad
- */
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
-    
     private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        
-        // Inicializar referencia a Firebase
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        buildHome();
     }
 
-    /**
-     * Inicia la actividad de "Sí y No"
-     * Genera un número aleatorio (0-77) para seleccionar una carta
-     */
+    private void buildHome() {
+        TarotScaffold scaffold = new TarotScaffold(this);
+        LinearLayout root = scaffold.content();
+
+        GlassPanel hero = new GlassPanel(this);
+        hero.setGravity(Gravity.CENTER_HORIZONTAL);
+        SpiritPetWidget pet = new SpiritPetWidget(this);
+        pet.setLevel(getSharedPreferences("collection", MODE_PRIVATE).getAll().size() / 4 + 1);
+        hero.addView(pet, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 210)));
+
+        TextView title = DreamUi.text(this, "Dream Sprouts Tarot", 31, DreamColors.INK, android.graphics.Typeface.BOLD);
+        title.setGravity(Gravity.CENTER);
+        hero.addView(title);
+        TextView greeting = DreamUi.text(this, "Hola, exploradora de suenos. El Loco unicornio ya preparo una lectura brillante para ti.", 15, DreamColors.DEEP, android.graphics.Typeface.NORMAL);
+        greeting.setGravity(Gravity.CENTER);
+        hero.addView(greeting);
+        add(root, hero, 0, 0, 18);
+
+        GridLayout menu = new GridLayout(this);
+        menu.setColumnCount(2);
+        add(root, menu, 0, 0, 0);
+
+        addMenu(menu, "Carta del Dia", "Descubre tu guia de hoy", "Dorada", v -> inciarActividadCartaDelDia(v));
+        addMenu(menu, "Si o No", "Una respuesta suave y clara", "Celeste", v -> iniciarActividadSiyno(v));
+        addMenu(menu, "Tarot de Parejas", "Dos cartas, una conexion", "Rosa", v -> iniciarActividadTarotPareja(v));
+        addMenu(menu, "Coleccion", "Album, rarezas y progreso", "Verde", v -> startActivity(new Intent(this, CollectionActivity.class)));
+        addMenu(menu, "Mi Mascota", "Cuida tu unicornio guia", "Lila", v -> startActivity(new Intent(this, SpiritPetActivity.class)));
+        addMenu(menu, "Ajustes", "Sonido y magia visual", "Nube", v -> startActivity(new Intent(this, SettingsActivity.class)));
+
+        setContentView(scaffold);
+    }
+
+    private void addMenu(GridLayout grid, String title, String subtitle, String rarity, View.OnClickListener click) {
+        GlassPanel panel = new GlassPanel(this);
+        panel.setClickable(true);
+        panel.setOnClickListener(click);
+        panel.setMinimumHeight(DreamUi.dp(this, 156));
+        TextView rarityView = DreamUi.text(this, rarity, 12, DreamColors.GOLD, android.graphics.Typeface.BOLD);
+        rarityView.setGravity(Gravity.CENTER);
+        panel.addView(rarityView);
+        TextView titleView = DreamUi.text(this, title, 19, DreamColors.INK, android.graphics.Typeface.BOLD);
+        titleView.setGravity(Gravity.CENTER);
+        panel.addView(titleView);
+        TextView sub = DreamUi.text(this, subtitle, 13, DreamColors.DEEP, android.graphics.Typeface.NORMAL);
+        sub.setGravity(Gravity.CENTER);
+        panel.addView(sub);
+        DreamButton button = new DreamButton(this, "Abrir");
+        button.setTextSize(13);
+        button.setOnClickListener(click);
+        add(panel, button, 0, 12, 0);
+
+        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+        params.width = 0;
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+        params.setMargins(DreamUi.dp(this, 5), DreamUi.dp(this, 6), DreamUi.dp(this, 5), DreamUi.dp(this, 6));
+        grid.addView(panel, params);
+    }
+
+    private void add(LinearLayout parent, View child, int left, int top, int bottom) {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(left, top, left, DreamUi.dp(this, bottom));
+        parent.addView(child, params);
+    }
+
     public void iniciarActividadSiyno(View view) {
-        // Generar número aleatorio y rotación
         int numero = (int) (Math.random() * 78);
         int rotacion = generarRotacionAleatoria();
-
-        // Crear intent hacia SiYNo
         Intent intent = new Intent(this, SiYNo.class);
-
-        // Obtener carta de Firebase
-        databaseReference.child(String.valueOf(numero))
-            .addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Carta carta = snapshot.getValue(Carta.class);
-                    
-                    if (carta != null) {
-                        // Crear y pasar bundle con la información
-                        Bundle bundle = crearBundleSiyno(numero, rotacion, carta);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                    } else {
-                        mostrarError("No se pudo cargar la carta");
-                    }
+        databaseReference.child(String.valueOf(numero)).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Carta carta = snapshot.getValue(Carta.class);
+                if (carta != null) {
+                    Bundle bundle = crearBundleSiyno(numero, rotacion, carta);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } else {
+                    mostrarError("No se pudo cargar la carta");
                 }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    mostrarError("Error de conexión: " + error.getMessage());
-                }
-            });
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                mostrarError("Error de conexion: " + error.getMessage());
+            }
+        });
     }
 
-    /**
-     * Inicia la actividad de "Carta del Día"
-     * Calcula la carta basada en la fecha actual: (día + mes + año) % 78
-     */
     public void inciarActividadCartaDelDia(View view) {
-        // Calcular número de carta basado en fecha actual
         int numero = calcularCartaDelDia();
-        int rotacion = (numero % 2) * 180; // Alternación de rotación
-        
-        // Crear intent hacia CartaDelDia
+        int rotacion = (numero % 2) * 180;
         Intent intent = new Intent(this, CartaDelDia.class);
-
-        // Obtener carta de Firebase
-        databaseReference.child(String.valueOf(numero))
-            .addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Carta carta = snapshot.getValue(Carta.class);
-                    
-                    if (carta != null) {
-                        // Crear y pasar bundle con la información
-                        Bundle bundle = crearBundleCartaDelDia(numero, rotacion, carta);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                    } else {
-                        mostrarError("No se pudo cargar la carta del día");
-                    }
+        databaseReference.child(String.valueOf(numero)).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Carta carta = snapshot.getValue(Carta.class);
+                if (carta != null) {
+                    Bundle bundle = crearBundleCartaDelDia(numero, rotacion, carta);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } else {
+                    mostrarError("No se pudo cargar la carta del dia");
                 }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    mostrarError("Error de conexión: " + error.getMessage());
-                }
-            });
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                mostrarError("Error de conexion: " + error.getMessage());
+            }
+        });
     }
 
-    /**
-     * Inicia la actividad de "Tarot de Parejas"
-     * Genera dos números aleatorios para seleccionar dos cartas
-     */
     public void iniciarActividadTarotPareja(View view) {
-        // Generar dos números aleatorios
         int numeroPrimera = (int) (Math.random() * 78);
         int numeroSegunda = (int) (Math.random() * 78);
-        
-        // Crear intent hacia tarotPareja
         Intent intent = new Intent(this, tarotPareja.class);
-        
-        // Obtener ambas cartas de Firebase
         obtenerCartasPareja(intent, numeroPrimera, numeroSegunda);
     }
 
-    /**
-     * Obtiene las dos cartas necesarias para la lectura de parejas
-     */
     private void obtenerCartasPareja(Intent intent, int numeroPrimera, int numeroSegunda) {
         final Carta[] cartas = new Carta[2];
         final int[] cartasObtenidas = {0};
-
-        // Listener para la primera carta
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Carta carta = snapshot.getValue(Carta.class);
                 cartas[cartasObtenidas[0]] = carta;
                 cartasObtenidas[0]++;
-
-                // Cuando tengamos las dos cartas, iniciar la actividad
                 if (cartasObtenidas[0] == 2 && cartas[0] != null && cartas[1] != null) {
-                    Bundle bundle = crearBundleTarotPareja(numeroPrimera, numeroSegunda, 
-                                                           cartas[0], cartas[1]);
+                    Bundle bundle = crearBundleTarotPareja(numeroPrimera, numeroSegunda, cartas[0], cartas[1]);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } else if (cartasObtenidas[0] == 2) {
@@ -157,38 +182,19 @@ public class MainActivity extends AppCompatActivity {
                 mostrarError("Error al obtener cartas: " + error.getMessage());
             }
         };
-
-        // Obtener ambas cartas
-        databaseReference.child(String.valueOf(numeroPrimera))
-            .addListenerForSingleValueEvent(listener);
-        databaseReference.child(String.valueOf(numeroSegunda))
-            .addListenerForSingleValueEvent(listener);
+        databaseReference.child(String.valueOf(numeroPrimera)).addListenerForSingleValueEvent(listener);
+        databaseReference.child(String.valueOf(numeroSegunda)).addListenerForSingleValueEvent(listener);
     }
 
-    /**
-     * Calcula el número de carta del día basado en la fecha actual
-     * Fórmula: (día + mes + año) % 78
-     */
     private int calcularCartaDelDia() {
         LocalDateTime fecha = LocalDateTime.now();
-        int mes = fecha.getMonthValue();
-        int dia = fecha.getDayOfMonth();
-        int año = fecha.getYear();
-        
-        int numero = (dia + mes + año) % 78;
-        return numero;
+        return (fecha.getDayOfMonth() + fecha.getMonthValue() + fecha.getYear()) % 78;
     }
 
-    /**
-     * Genera un valor de rotación aleatorio (0 o 180 grados)
-     */
     private int generarRotacionAleatoria() {
         return ((int) (Math.random() * 2)) * 180;
     }
 
-    /**
-     * Crea el bundle para la actividad SiYNo
-     */
     private Bundle crearBundleSiyno(int numero, int rotacion, Carta carta) {
         Bundle bundle = new Bundle();
         bundle.putInt("numero", numero);
@@ -197,22 +203,11 @@ public class MainActivity extends AppCompatActivity {
         return bundle;
     }
 
-    /**
-     * Crea el bundle para la actividad CartaDelDia
-     */
     private Bundle crearBundleCartaDelDia(int numero, int rotacion, Carta carta) {
-        Bundle bundle = new Bundle();
-        bundle.putInt("numero", numero);
-        bundle.putInt("rotacion", rotacion);
-        bundle.putSerializable("carta", carta);
-        return bundle;
+        return crearBundleSiyno(numero, rotacion, carta);
     }
 
-    /**
-     * Crea el bundle para la actividad tarotPareja
-     */
-    private Bundle crearBundleTarotPareja(int numero1, int numero2, 
-                                          Carta carta1, Carta carta2) {
+    private Bundle crearBundleTarotPareja(int numero1, int numero2, Carta carta1, Carta carta2) {
         Bundle bundle = new Bundle();
         bundle.putInt("numero", numero1);
         bundle.putInt("numerotupersona", numero2);
@@ -221,9 +216,6 @@ public class MainActivity extends AppCompatActivity {
         return bundle;
     }
 
-    /**
-     * Muestra un mensaje de error al usuario
-     */
     private void mostrarError(String mensaje) {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
     }

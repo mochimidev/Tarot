@@ -1,38 +1,39 @@
-# Tarot
+# Dream Sprouts Tarot
 
-Aplicacion movil Android para realizar lecturas de tarot con tres modos principales: carta del dia, respuesta de si o no y lectura para parejas.
+Dream Sprouts Tarot es una aplicacion Android nativa de tarot con una estetica premium, magica y kawaii. La experiencia actual esta inspirada en colecciones de cartas digitales, con una interfaz pastel, ilustrada y pensada para lectura emocional.
 
-El proyecto esta desarrollado en Java, usa layouts XML con una estetica oscura/mistica y obtiene la informacion de las cartas desde Firebase Realtime Database.
+El proyecto esta hecho en Java con layouts y vistas custom, y toma la informacion de las cartas desde Firebase Realtime Database.
 
-## Capturas reales de la app
+## Capturas actuales
 
-Las siguientes capturas muestran la interfaz visual actual usando los recursos incluidos en `app/src/main/res`.
+Estas son las capturas reales del estado actual de la app:
 
 | Inicio | Carta del dia |
 | --- | --- |
-| ![Pantalla de inicio](docs/screenshots/home.png) | ![Carta del dia](docs/screenshots/carta-del-dia.png) |
+| ![Inicio](docs/screenshots/home.png) | ![Carta del dia](docs/screenshots/carta-del-dia.png) |
 
 | Si o No | Tarot de parejas |
 | --- | --- |
-| ![Pantalla Si o No](docs/screenshots/si-o-no.png) | ![Tarot de parejas](docs/screenshots/tarot-parejas.png) |
+| ![Si o No](docs/screenshots/si-o-no.png) | ![Tarot de parejas](docs/screenshots/tarot-parejas.png) |
 
-## Funcionalidades
+## Que incluye esta version
 
-- Lectura de carta del dia.
-- Consulta rapida de Si o No.
-- Lectura de tarot para parejas con dos cartas.
-- Interpretacion de cartas derechas e invertidas.
-- Imagenes de cartas almacenadas como recursos Android.
-- Integracion con Firebase Realtime Database para cargar informacion de las cartas.
+- Home con hero animado, estrellas, nubes y accesos ilustrados.
+- Carta del dia con revelacion visual y boton para guardar en coleccion.
+- Consulta Si o No con carta grande y resultado claro.
+- Tarot de parejas con dos cartas y conexion visual entre ambas.
+- Coleccion con album de cartas, rarezas y progreso.
+- Mi Mascota con un espiritu evolutivo que sube de nivel.
+- Ajustes con controles simples para sonido y animaciones.
 
 ## Tecnologias
 
 - Android nativo
 - Java
-- XML layouts
+- XML y vistas custom
 - Gradle
 - Firebase Realtime Database
-- AndroidX AppCompat, CardView y ConstraintLayout
+- AndroidX AppCompat, ConstraintLayout y Material Components
 
 ## Estructura principal
 
@@ -43,9 +44,20 @@ app/
     CartaDelDia.java
     SiYNo.java
     tarotPareja.java
+    CollectionActivity.java
+    SpiritPetActivity.java
+    SettingsActivity.java
     Dao/
       Carta.java
       DaoCarta.java
+    ui/
+      DreamBackground.java
+      DreamButton.java
+      TarotScaffold.java
+      AnimatedRevealCard.java
+      TarotCardWidget.java
+      CollectionCard.java
+      SpiritPetWidget.java
   src/main/res/
     layout/
     drawable/
@@ -58,11 +70,11 @@ docs/
 
 ### Inicio
 
-La pantalla principal presenta las tres lecturas disponibles y sirve como punto de navegacion hacia cada experiencia.
+La pantalla principal presenta las experiencias disponibles en formato de carta ilustrada, con acceso directo a cada modo.
 
 ### Carta del dia
 
-Muestra una carta seleccionada para el dia, su imagen y la interpretacion correspondiente. La actividad recibe la carta mediante `Intent` y renderiza titulo, descripcion e imagen.
+Muestra una carta gigante, su revelacion y el significado correspondiente. La carta se puede guardar en la coleccion.
 
 ### Si o No
 
@@ -70,14 +82,15 @@ Interpreta una carta como respuesta afirmativa, negativa o intermedia segun list
 
 ### Tarot de parejas
 
-Muestra dos cartas: una para la persona consultante y otra para su pareja. Cada carta incluye imagen, titulo e interpretacion amorosa.
+Muestra dos cartas grandes para analizar la energia entre dos personas.
 
-## Requisitos
+### Coleccion
 
-- Android Studio
-- SDK Android instalado
-- JDK compatible con Gradle 7.4 / Android Gradle Plugin 7.4.2
-- Archivo `app/google-services.json` configurado para Firebase
+Permite ver el album completo, el progreso y el estado de cada carta.
+
+### Mi Mascota
+
+Presenta la mascota guia de la app y su nivel, ligado a la coleccion del usuario.
 
 ## Compilacion
 
@@ -90,15 +103,12 @@ Desde la raiz del proyecto:
 La APK debug se genera en:
 
 ```text
-app/build/outputs/apk/debug/
+app/build/outputs/apk/debug/app-debug.apk
 ```
 
-## Notas de desarrollo
+## Nota tecnica
 
-- El paquete principal es `com.example.evaluacion4charlottegabriel`.
-- Las cartas se cargan desde recursos `drawable` con nombres como `carta0`, `carta1`, `carta2`, etc.
-- Los colores principales estan definidos en `app/src/main/res/values/colors.xml`.
-- Los fondos y botones usan drawables XML en `app/src/main/res/drawable`.
+El proyecto fue actualizado a Gradle 8.7 y Android Gradle Plugin 8.2 para poder compilar con el entorno local actual.
 
 ## Autores
 

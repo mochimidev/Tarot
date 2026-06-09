@@ -1,124 +1,124 @@
 package com.example.evaluacion4charlottegabriel;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.evaluacion4charlottegabriel.Dao.Carta;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.evaluacion4charlottegabriel.ui.DreamColors;
+import com.example.evaluacion4charlottegabriel.ui.DreamUi;
+import com.example.evaluacion4charlottegabriel.ui.GlassPanel;
+import com.example.evaluacion4charlottegabriel.ui.TarotCardWidget;
+import com.example.evaluacion4charlottegabriel.ui.TarotScaffold;
 
-/**
- * Actividad que realiza una lectura de tarot para parejas.
- * Obtiene dos cartas aleatorias que representan:
- * - Primera carta: Energía de la primera persona
- * - Segunda carta: Energía de la segunda persona / Pareja
- * 
- * Proporciona interpretación amorosa y análisis de compatibilidad.
- */
 public class tarotPareja extends AppCompatActivity {
-    private static final String TAG = "tarotPareja";
-    
-    private TextView tvTituloTu;
-    private TextView tvTituloTuPareja;
-    private TextView tvDescripcionTu;
-    private TextView tvDescripcionTuPareja;
-    private ImageView ivCartaTuPareja;
-    private ImageView ivCartaTu;
-    
-    private Bundle bundle;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tarot_pareja);
-        
-        // Vincular elementos de la vista
-        tvDescripcionTu = findViewById(R.id.tarotParejaTudescripcion);
-        tvDescripcionTuPareja = findViewById(R.id.tarotTuparejadesripccion);
-        tvTituloTu = findViewById(R.id.tarotParejaTutitulocarta);
-        tvTituloTuPareja = findViewById(R.id.tarotTuParejatitulocarta);
-        ivCartaTuPareja = findViewById(R.id.tarotTuparejaImagen);
-        ivCartaTu = findViewById(R.id.tarotParejaTuImagen);
-
-        // Obtener extras del intent
-        bundle = getIntent().getExtras();
-        
-        if (bundle != null) {
-            int numero = bundle.getInt("numero");
-            int numeroTuPersona = bundle.getInt("numerotupersona");
-            
-            // Obtener datos de Firebase
-            obtenerCartasYMostrar(numero, numeroTuPersona);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null) {
+            return;
         }
+        build(bundle.getInt("numero"), bundle.getInt("numerotupersona"),
+                (Carta) bundle.getSerializable("tu"),
+                (Carta) bundle.getSerializable("pareja"));
     }
 
-    /**
-     * Obtiene las cartas del tarot de Firebase y las muestra
-     */
-    private void obtenerCartasYMostrar(int numero, int numeroTuPersona) {
-        DatabaseReference referencia = FirebaseDatabase.getInstance().getReference();
-        
-        // Obtener primera carta
-        referencia.child(String.valueOf(numero))
-            .addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Carta cartaTu = snapshot.getValue(Carta.class);
-                    if (cartaTu != null) {
-                        tvTituloTu.setText(cartaTu.getTitulo());
-                        tvDescripcionTu.setText(cartaTu.getDescripcionAmorosa());
-                        mostrarImagenCarta(numero, ivCartaTu);
-                    }
-                }
+    private void build(int numeroTu, int numeroPareja, Carta tu, Carta pareja) {
+        TarotScaffold scaffold = new TarotScaffold(this);
+        LinearLayout root = scaffold.content();
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    tvTituloTu.setText("Error al cargar");
-                }
-            });
-        
-        // Obtener segunda carta
-        referencia.child(String.valueOf(numeroTuPersona))
-            .addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Carta cartaPareja = snapshot.getValue(Carta.class);
-                    if (cartaPareja != null) {
-                        tvTituloTuPareja.setText(cartaPareja.getTitulo());
-                        tvDescripcionTuPareja.setText(cartaPareja.getDescripcionAmorosa());
-                        mostrarImagenCarta(numeroTuPersona, ivCartaTuPareja);
-                    }
-                }
+        TextView header = DreamUi.text(this, "Tarot de Parejas", 29, DreamColors.INK, Typeface.BOLD);
+        header.setGravity(Gravity.CENTER);
+        root.addView(header);
+        TextView sub = DreamUi.text(this, "Dos cartas grandes, una corriente brillante entre ambas energias.", 15, DreamColors.DEEP, Typeface.NORMAL);
+        sub.setGravity(Gravity.CENTER);
+        add(root, sub, 4, 18);
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    tvTituloTuPareja.setText("Error al cargar");
-                }
-            });
+        FrameLayout connection = new FrameLayout(this);
+        connection.addView(new ConnectionView(this), new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+        GridLayout grid = new GridLayout(this);
+        grid.setColumnCount(2);
+        connection.addView(grid);
+
+        TarotCardWidget first = new TarotCardWidget(this);
+        first.bind(getCardImage(numeroTu), tu == null ? "Tu carta" : tu.getTitulo(),
+                tu == null ? "" : tu.getDescripcionAmorosa(), 0);
+        TarotCardWidget second = new TarotCardWidget(this);
+        second.bind(getCardImage(numeroPareja), pareja == null ? "Carta pareja" : pareja.getTitulo(),
+                pareja == null ? "" : pareja.getDescripcionAmorosa(), 0);
+        addGrid(grid, first);
+        addGrid(grid, second);
+        add(root, connection, 0, 18);
+
+        GlassPanel summary = new GlassPanel(this);
+        TextView title = DreamUi.text(this, "Conexion revelada", 22, DreamColors.INK, Typeface.BOLD);
+        title.setGravity(Gravity.CENTER);
+        summary.addView(title);
+        TextView body = DreamUi.text(this, "Cuando las cartas se miran, muestran como cuidar el vinculo: escuchar, jugar, agradecer y dejar espacio para que cada persona florezca.", 15, DreamColors.DEEP, Typeface.NORMAL);
+        body.setGravity(Gravity.CENTER);
+        add(summary, body, 10, 0);
+        add(root, summary, 0, 0);
+        setContentView(scaffold);
     }
 
-    /**
-     * Carga y muestra la imagen de la carta
-     */
-    private void mostrarImagenCarta(int numeroCarta, ImageView imageView) {
-        String nombreCarta = String.format("carta%d", numeroCarta);
-        int valorImagenCarta = getResources().getIdentifier(
-            nombreCarta,
-            "drawable",
-            getPackageName()
-        );
-        
-        if (valorImagenCarta != 0) {
-            imageView.setImageResource(valorImagenCarta);
-        } else {
-            imageView.setImageResource(R.drawable.ic_launcher_background);
+    private void addGrid(GridLayout grid, View child) {
+        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+        params.width = 0;
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+        params.setMargins(DreamUi.dp(this, 4), 0, DreamUi.dp(this, 4), 0);
+        grid.addView(child, params);
+    }
+
+    private int getCardImage(int number) {
+        int image = getResources().getIdentifier("carta" + number, "drawable", getPackageName());
+        return image == 0 ? R.drawable.ic_launcher_background : image;
+    }
+
+    private void add(LinearLayout parent, View child, int top, int bottom) {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, DreamUi.dp(this, top), 0, DreamUi.dp(this, bottom));
+        parent.addView(child, params);
+    }
+
+    private static class ConnectionView extends View {
+        private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        ConnectionView(android.content.Context context) {
+            super(context);
+            DreamUi.softLayer(this);
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+            float w = getWidth();
+            float h = getHeight();
+            paint.setColor(DreamColors.GOLD);
+            paint.setStrokeWidth(DreamUi.dp(getContext(), 3));
+            paint.setShadowLayer(DreamUi.dp(getContext(), 12), 0, 0, DreamColors.GOLD);
+            canvas.drawLine(w * .42f, h * .22f, w * .58f, h * .22f, paint);
+            paint.setStyle(Paint.Style.FILL);
+            for (int i = 0; i < 9; i++) {
+                float x = w * (.43f + i * .018f);
+                float y = h * (.18f + (i % 2) * .07f);
+                canvas.drawCircle(x, y, DreamUi.dp(getContext(), i % 3 + 2), paint);
+            }
+            paint.setShadowLayer(0, 0, 0, 0);
         }
     }
 }
