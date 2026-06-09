@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.evaluacion4charlottegabriel.Dao.Carta;
+import com.example.evaluacion4charlottegabriel.Dao.FirebaseTarotDatabase;
 import com.example.evaluacion4charlottegabriel.ui.DreamButton;
 import com.example.evaluacion4charlottegabriel.ui.DreamColors;
 import com.example.evaluacion4charlottegabriel.ui.DreamUi;
@@ -23,7 +24,6 @@ import com.example.evaluacion4charlottegabriel.ui.TarotScaffold;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDateTime;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference = FirebaseTarotDatabase.root();
         buildHome();
     }
 

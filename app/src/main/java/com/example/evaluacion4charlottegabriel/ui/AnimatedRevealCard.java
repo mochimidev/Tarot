@@ -47,9 +47,8 @@ public class AnimatedRevealCard extends FrameLayout {
         setOnClickListener(v -> reveal());
     }
 
-    public void setCardImage(int resId, int rotation) {
-        front.setImageResource(resId);
-        front.setRotation(rotation);
+    public void setCardImage(int firebaseId, int rotation) {
+        TarotAssetLoader.loadCard(front, firebaseId, rotation);
     }
 
     public ImageView frontImage() {

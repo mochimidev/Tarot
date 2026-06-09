@@ -51,8 +51,7 @@ public class CartaDelDia extends AppCompatActivity {
         add(root, hint, 4, 18);
 
         AnimatedRevealCard reveal = new AnimatedRevealCard(this);
-        int image = getCardImage(numero);
-        reveal.setCardImage(image, rotacion);
+        reveal.setCardImage(numero, rotacion);
         FrameLayout frame = new FrameLayout(this);
         frame.setPadding(DreamUi.dp(this, 18), 0, DreamUi.dp(this, 18), 0);
         frame.addView(reveal, new FrameLayout.LayoutParams(
@@ -93,12 +92,6 @@ public class CartaDelDia extends AppCompatActivity {
         prefs.edit().putBoolean("card_" + numero, true).apply();
         Toast.makeText(this, "Carta guardada en tu album", Toast.LENGTH_SHORT).show();
     }
-
-    private int getCardImage(int number) {
-        int image = getResources().getIdentifier("carta" + number, "drawable", getPackageName());
-        return image == 0 ? R.drawable.ic_launcher_background : image;
-    }
-
     private void add(LinearLayout parent, android.view.View child, int top, int bottom) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

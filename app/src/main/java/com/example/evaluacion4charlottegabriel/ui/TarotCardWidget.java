@@ -49,9 +49,8 @@ public class TarotCardWidget extends GlassPanel {
         addView(body, bodyParams);
     }
 
-    public void bind(int imageRes, String titleText, String bodyText, int rotation) {
-        image.setImageResource(imageRes);
-        image.setRotation(rotation);
+    public void bind(int firebaseId, String titleText, String bodyText, int rotation) {
+        TarotAssetLoader.loadCard(image, firebaseId, rotation);
         title.setText(titleText);
         body.setText(bodyText);
     }

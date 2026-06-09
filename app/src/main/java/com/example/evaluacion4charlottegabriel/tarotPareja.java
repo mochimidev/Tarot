@@ -54,10 +54,10 @@ public class tarotPareja extends AppCompatActivity {
         connection.addView(grid);
 
         TarotCardWidget first = new TarotCardWidget(this);
-        first.bind(getCardImage(numeroTu), tu == null ? "Tu carta" : tu.getTitulo(),
+        first.bind(numeroTu, tu == null ? "Tu carta" : tu.getTitulo(),
                 tu == null ? "" : tu.getDescripcionAmorosa(), 0);
         TarotCardWidget second = new TarotCardWidget(this);
-        second.bind(getCardImage(numeroPareja), pareja == null ? "Carta pareja" : pareja.getTitulo(),
+        second.bind(numeroPareja, pareja == null ? "Carta pareja" : pareja.getTitulo(),
                 pareja == null ? "" : pareja.getDescripcionAmorosa(), 0);
         addGrid(grid, first);
         addGrid(grid, second);
@@ -82,12 +82,6 @@ public class tarotPareja extends AppCompatActivity {
         params.setMargins(DreamUi.dp(this, 4), 0, DreamUi.dp(this, 4), 0);
         grid.addView(child, params);
     }
-
-    private int getCardImage(int number) {
-        int image = getResources().getIdentifier("carta" + number, "drawable", getPackageName());
-        return image == 0 ? R.drawable.ic_launcher_background : image;
-    }
-
     private void add(LinearLayout parent, View child, int top, int bottom) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

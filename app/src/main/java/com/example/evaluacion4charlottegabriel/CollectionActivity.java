@@ -47,9 +47,8 @@ public class CollectionActivity extends AppCompatActivity {
         GridLayout grid = new GridLayout(this);
         grid.setColumnCount(3);
         for (int i = 0; i < 78; i++) {
-            int image = getResources().getIdentifier("carta" + i, "drawable", getPackageName());
             boolean open = prefs.getBoolean("card_" + i, false);
-            addCard(grid, new CollectionCard(this, image == 0 ? R.drawable.ic_launcher_background : image, "Carta " + (i + 1), open, rarity(i)));
+            addCard(grid, new CollectionCard(this, i, "Carta " + (i + 1), open, rarity(i)));
         }
         root.addView(grid, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,

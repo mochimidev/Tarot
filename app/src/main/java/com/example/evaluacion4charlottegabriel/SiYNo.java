@@ -49,7 +49,7 @@ public class SiYNo extends AppCompatActivity {
         String title = carta == null ? "Carta no disponible" : rotacion == 0 ? carta.getTitulo() : carta.getTitulo() + " (Invertida)";
         String desc = carta == null ? "" : rotacion == 0 ? carta.getDescripcion() : carta.getDescripcionInvertida();
         TarotCardWidget card = new TarotCardWidget(this);
-        card.bind(getCardImage(numero), title, desc, rotacion);
+        card.bind(numero, title, desc, rotacion);
         add(root, card, 18, 18);
 
         GlassPanel result = new GlassPanel(this);
@@ -71,12 +71,6 @@ public class SiYNo extends AppCompatActivity {
         }
         return "TAL VEZ";
     }
-
-    private int getCardImage(int number) {
-        int image = getResources().getIdentifier("carta" + number, "drawable", getPackageName());
-        return image == 0 ? R.drawable.ic_launcher_background : image;
-    }
-
     private void add(LinearLayout parent, android.view.View child, int top, int bottom) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

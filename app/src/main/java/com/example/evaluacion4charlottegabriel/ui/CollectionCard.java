@@ -2,20 +2,32 @@ package com.example.evaluacion4charlottegabriel.ui;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.evaluacion4charlottegabriel.R;
+
 public class CollectionCard extends GlassPanel {
-    public CollectionCard(Context context, int imageRes, String label, boolean unlocked, String rarity) {
+    public CollectionCard(Context context, int firebaseId, String label, boolean unlocked, String rarity) {
         super(context);
         setGravity(Gravity.CENTER);
         setPadding(DreamUi.dp(context, 8), DreamUi.dp(context, 8), DreamUi.dp(context, 8), DreamUi.dp(context, 8));
         ImageView image = new ImageView(context);
         image.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        image.setImageResource(unlocked ? imageRes : android.R.drawable.ic_lock_lock);
+        if (unlocked) {
+            Drawable drawable = TarotAssetLoader.getCardDrawable(context, firebaseId);
+            if (drawable != null) {
+                image.setImageDrawable(drawable);
+            } else {
+                image.setImageResource(R.drawable.ic_launcher_background);
+            }
+        } else {
+            image.setImageResource(android.R.drawable.ic_lock_lock);
+        }
         image.setAlpha(unlocked ? 1f : .42f);
         addView(image, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
