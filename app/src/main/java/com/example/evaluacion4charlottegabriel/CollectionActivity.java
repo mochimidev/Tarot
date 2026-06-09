@@ -73,8 +73,8 @@ public class CollectionActivity extends AppCompatActivity {
         copy.setOrientation(LinearLayout.VERTICAL);
         TextView name = DreamUi.text(this, title, 21, DreamColors.INK, Typeface.BOLD);
         copy.addView(name);
-        int open = countUnlocked(start, end);
-        TextView progress = DreamUi.text(this, subtitle + " · " + open + "/" + (end - start + 1), 13, DreamColors.DEEP, Typeface.NORMAL);
+        int openedCount = countUnlocked(start, end);
+        TextView progress = DreamUi.text(this, subtitle + " · " + openedCount + "/" + (end - start + 1), 13, DreamColors.DEEP, Typeface.NORMAL);
         copy.addView(progress);
         head.addView(copy, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         family.addView(head);
