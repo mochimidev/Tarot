@@ -18,9 +18,10 @@ public class DreamPanelDrawable extends Drawable {
     public DreamPanelDrawable(Context context) {
         this.context = context;
         int variant = nextVariant++ % 3;
-        frameRes = variant == 0 ? R.drawable.tkd_panel_frame_01
-                : variant == 1 ? R.drawable.tkd_panel_frame_02
-                : R.drawable.tkd_panel_frame_03;
+        // TODO: replace placeholder PNGs with final premium watercolor panel frame assets.
+        frameRes = variant == 0 ? R.drawable.panel_frame_01
+                : variant == 1 ? R.drawable.panel_frame_02
+                : R.drawable.panel_frame_03;
     }
 
     @Override

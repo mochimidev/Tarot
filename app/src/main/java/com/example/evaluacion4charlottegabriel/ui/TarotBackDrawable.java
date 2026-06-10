@@ -20,7 +20,7 @@ public class TarotBackDrawable extends Drawable {
     public void draw(Canvas canvas) {
         RectF b = new RectF(getBounds());
         float pad = DreamUi.dp(context, 2);
-        DreamAssets.drawFitCenter(canvas, context, R.drawable.tkd_card_back_official,
+        DreamAssets.drawFitCenter(canvas, context, R.drawable.card_back_official,
                 new RectF(b.left + pad, b.top + pad, b.right - pad, b.bottom - pad), paint);
     }
 
@@ -41,11 +41,11 @@ public class TarotBackDrawable extends Drawable {
 
     @Override
     public int getIntrinsicWidth() {
-        return DreamAssets.bitmap(context, R.drawable.tkd_card_back_official).getWidth();
+        return DreamAssets.bitmap(context, R.drawable.card_back_official).getWidth();
     }
 
     @Override
     public int getIntrinsicHeight() {
-        return DreamAssets.bitmap(context, R.drawable.tkd_card_back_official).getHeight();
+        return DreamAssets.bitmap(context, R.drawable.card_back_official).getHeight();
     }
 }

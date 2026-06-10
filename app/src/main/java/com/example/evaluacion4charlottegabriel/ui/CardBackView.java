@@ -20,7 +20,7 @@ public class CardBackView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         float pad = DreamUi.dp(getContext(), 4);
-        DreamAssets.drawFitCenter(canvas, getContext(), R.drawable.tkd_card_back_official,
+        DreamAssets.drawFitCenter(canvas, getContext(), R.drawable.card_back_official,
                 new RectF(pad, pad, getWidth() - pad, getHeight() - pad), paint);
     }
 }

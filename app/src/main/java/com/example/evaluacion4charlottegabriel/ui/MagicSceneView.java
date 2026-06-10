@@ -27,15 +27,15 @@ public class MagicSceneView extends View {
         super.onDraw(canvas);
         float w = getWidth();
         float h = getHeight();
-        drawAsset(canvas, R.drawable.tkd_cloud_05, w * .10f, h * .52f, w * .36f);
-        drawAsset(canvas, R.drawable.tkd_cloud_06, w * .46f, h * .57f, w * .44f);
+        drawAsset(canvas, R.drawable.cloud_05, w * .10f, h * .52f, w * .36f);
+        drawAsset(canvas, R.drawable.cloud_06, w * .46f, h * .57f, w * .44f);
         drawSparkles(canvas, w, h);
         if (mode == HEART_LINK) {
             float size = Math.min(w, h) * .34f;
-            DreamAssets.drawFitCenter(canvas, getContext(), R.drawable.tkd_heart_06,
+            DreamAssets.drawFitCenter(canvas, getContext(), R.drawable.icon_favoritos,
                     new RectF(w * .5f - size, h * .42f - size, w * .5f + size, h * .42f + size), paint);
         } else if (mode == CLOUDS) {
-            drawAsset(canvas, R.drawable.tkd_cloud_02, w * .28f, h * .30f, w * .45f);
+            drawAsset(canvas, R.drawable.cloud_02, w * .28f, h * .30f, w * .45f);
         } else {
             drawFloatingCard(canvas, w, h);
         }
@@ -46,7 +46,7 @@ public class MagicSceneView extends View {
         canvas.rotate(-8, w * .5f, h * .45f);
         float cw = w * .42f;
         float ch = h * .58f;
-        DreamAssets.drawFitCenter(canvas, getContext(), R.drawable.tkd_card_back_official,
+        DreamAssets.drawFitCenter(canvas, getContext(), R.drawable.card_back_official,
                 new RectF(w * .5f - cw / 2, h * .16f, w * .5f + cw / 2, h * .16f + ch), paint);
         canvas.restore();
     }
@@ -58,10 +58,10 @@ public class MagicSceneView extends View {
 
     private void drawSparkles(Canvas canvas, float w, float h) {
         int[] sparkles = {
-                R.drawable.tkd_sparkle_01,
-                R.drawable.tkd_sparkle_02,
-                R.drawable.tkd_sparkle_04,
-                R.drawable.tkd_sparkle_08
+                R.drawable.sparkle_01,
+                R.drawable.sparkle_02,
+                R.drawable.sparkle_04,
+                R.drawable.sparkle_08
         };
         for (int i = 0; i < 16; i++) {
             float x = ((i * 67) % 100) / 100f * w;

@@ -62,9 +62,9 @@ public class CollectionCard extends GlassPanel {
             RectF b = new RectF(getBounds());
             float pad = DreamUi.dp(context, 5);
             RectF card = new RectF(b.left + pad, b.top + pad, b.right - pad, b.bottom - pad);
-            DreamAssets.drawFitCenter(canvas, context, R.drawable.tkd_card_back_official, card, paint);
+            DreamAssets.drawFitCenter(canvas, context, R.drawable.card_back_official, card, paint);
             float iconSize = Math.min(card.width(), card.height()) * .42f;
-            DreamAssets.drawFitCenter(canvas, context, R.drawable.tkd_icon_bloqueado,
+            DreamAssets.drawFitCenter(canvas, context, R.drawable.icon_bloqueado,
                     new RectF(card.centerX() - iconSize / 2f, card.centerY() - iconSize / 2f,
                             card.centerX() + iconSize / 2f, card.centerY() + iconSize / 2f), paint);
         }

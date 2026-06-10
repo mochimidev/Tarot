@@ -12,25 +12,26 @@ import android.view.animation.LinearInterpolator;
 import com.example.evaluacion4charlottegabriel.R;
 
 public class DreamBackground extends View {
+    // TODO: replace placeholder PNGs with final premium watercolor illustration assets.
     private static final int[] CLOUDS = {
-            R.drawable.tkd_cloud_01,
-            R.drawable.tkd_cloud_02,
-            R.drawable.tkd_cloud_03,
-            R.drawable.tkd_cloud_04,
-            R.drawable.tkd_cloud_05,
-            R.drawable.tkd_cloud_06
+            R.drawable.cloud_01,
+            R.drawable.cloud_02,
+            R.drawable.cloud_03,
+            R.drawable.cloud_04,
+            R.drawable.cloud_05,
+            R.drawable.cloud_06
     };
     private static final int[] SPARKLES = {
-            R.drawable.tkd_sparkle_01,
-            R.drawable.tkd_sparkle_02,
-            R.drawable.tkd_sparkle_03,
-            R.drawable.tkd_sparkle_04,
-            R.drawable.tkd_sparkle_05,
-            R.drawable.tkd_sparkle_06,
-            R.drawable.tkd_sparkle_07,
-            R.drawable.tkd_sparkle_08,
-            R.drawable.tkd_sparkle_09,
-            R.drawable.tkd_sparkle_10
+            R.drawable.sparkle_01,
+            R.drawable.sparkle_02,
+            R.drawable.sparkle_03,
+            R.drawable.sparkle_04,
+            R.drawable.sparkle_05,
+            R.drawable.sparkle_06,
+            R.drawable.sparkle_07,
+            R.drawable.sparkle_08,
+            R.drawable.sparkle_09,
+            R.drawable.sparkle_10
     };
     private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
     private float phase;
@@ -63,7 +64,7 @@ public class DreamBackground extends View {
         super.onDraw(canvas);
         int w = getWidth();
         int h = getHeight();
-        DreamAssets.drawFill(canvas, getContext(), R.drawable.tkd_watercolor_bg, new RectF(0, 0, w, h), paint);
+        DreamAssets.drawFill(canvas, getContext(), R.drawable.bg_watercolor, new RectF(0, 0, w, h), paint);
         drawCloud(canvas, CLOUDS[0], w * (.05f + phase * .04f), h * .11f, w * .52f);
         drawCloud(canvas, CLOUDS[1], w * (.54f - phase * .035f), h * .23f, w * .40f);
         drawCloud(canvas, CLOUDS[2], w * .10f, h * .76f, w * .62f);

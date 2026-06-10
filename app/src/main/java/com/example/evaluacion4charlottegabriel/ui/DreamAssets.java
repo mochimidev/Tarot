@@ -57,10 +57,10 @@ public final class DreamAssets {
     }
 
     public static int symbolIcon(int type) {
-        if (type == KawaiiSymbolView.DROP) return R.drawable.tkd_icon_si_o_no;
-        if (type == KawaiiSymbolView.FLAME) return R.drawable.tkd_icon_carta_dia;
-        if (type == KawaiiSymbolView.SPROUT) return R.drawable.tkd_icon_coleccion;
-        if (type == KawaiiSymbolView.HEART) return R.drawable.tkd_icon_tarot_parejas;
-        return R.drawable.tkd_icon_carta_dia;
+        if (type == KawaiiSymbolView.DROP) return R.drawable.icon_si_o_no;
+        if (type == KawaiiSymbolView.FLAME) return R.drawable.icon_carta_dia;
+        if (type == KawaiiSymbolView.SPROUT) return R.drawable.icon_coleccion;
+        if (type == KawaiiSymbolView.HEART) return R.drawable.icon_tarot_parejas;
+        return R.drawable.icon_carta_dia;
     }
 }
