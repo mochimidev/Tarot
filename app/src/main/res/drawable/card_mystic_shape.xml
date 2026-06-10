@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#1a1f3a" />
-    <corners android:radius="24dp" />
-    <stroke
-        android:width="2dp"
-        android:color="#9d4edd" />
-</shape>
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="fill"
+    android:src="@drawable/tkd_panel_frame_01" />

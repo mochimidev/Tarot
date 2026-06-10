@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.evaluacion4charlottegabriel.R;
+
 public class CollectionCard extends GlassPanel {
     public CollectionCard(Context context, int firebaseId, String label, boolean unlocked, String rarity) {
         super(context);
@@ -29,7 +31,7 @@ public class CollectionCard extends GlassPanel {
         } else {
             image.setImageDrawable(new LockedCardDrawable(context));
         }
-        image.setAlpha(unlocked ? 1f : .42f);
+        image.setAlpha(unlocked ? 1f : .78f);
         addView(image, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 DreamUi.dp(context, 148)));
@@ -49,7 +51,7 @@ public class CollectionCard extends GlassPanel {
 
     private static class LockedCardDrawable extends android.graphics.drawable.Drawable {
         private final Context context;
-        private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
 
         LockedCardDrawable(Context context) {
             this.context = context;
@@ -60,27 +62,11 @@ public class CollectionCard extends GlassPanel {
             RectF b = new RectF(getBounds());
             float pad = DreamUi.dp(context, 5);
             RectF card = new RectF(b.left + pad, b.top + pad, b.right - pad, b.bottom - pad);
-            paint.setStyle(Paint.Style.FILL);
-            paint.setColor(0xb6b8adc4);
-            canvas.drawRoundRect(card, DreamUi.dp(context, 12), DreamUi.dp(context, 12), paint);
-            paint.setStyle(Paint.Style.STROKE);
-            paint.setStrokeWidth(DreamUi.dp(context, 2));
-            paint.setColor(0x99ffe7b8);
-            canvas.drawRoundRect(card, DreamUi.dp(context, 12), DreamUi.dp(context, 12), paint);
-
-            paint.setStyle(Paint.Style.FILL);
-            paint.setColor(0xeefff7ee);
-            float cx = card.centerX();
-            float cy = card.centerY();
-            RectF body = new RectF(cx - DreamUi.dp(context, 15), cy, cx + DreamUi.dp(context, 15), cy + DreamUi.dp(context, 24));
-            canvas.drawRoundRect(body, DreamUi.dp(context, 6), DreamUi.dp(context, 6), paint);
-            paint.setStyle(Paint.Style.STROKE);
-            paint.setStrokeWidth(DreamUi.dp(context, 4));
-            canvas.drawArc(new RectF(cx - DreamUi.dp(context, 13), cy - DreamUi.dp(context, 18),
-                    cx + DreamUi.dp(context, 13), cy + DreamUi.dp(context, 10)), 205, 130, false, paint);
-            paint.setStyle(Paint.Style.FILL);
-            paint.setColor(DreamColors.ROSE);
-            canvas.drawCircle(cx, cy + DreamUi.dp(context, 11), DreamUi.dp(context, 3), paint);
+            DreamAssets.drawFitCenter(canvas, context, R.drawable.tkd_card_back_official, card, paint);
+            float iconSize = Math.min(card.width(), card.height()) * .42f;
+            DreamAssets.drawFitCenter(canvas, context, R.drawable.tkd_icon_bloqueado,
+                    new RectF(card.centerX() - iconSize / 2f, card.centerY() - iconSize / 2f,
+                            card.centerX() + iconSize / 2f, card.centerY() + iconSize / 2f), paint);
         }
 
         @Override

@@ -5,9 +5,11 @@ import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.evaluacion4charlottegabriel.R;
 import com.example.evaluacion4charlottegabriel.TarotNavigator;
 
 public class DreamBottomNav extends GlassPanel {
@@ -22,24 +24,24 @@ public class DreamBottomNav extends GlassPanel {
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER);
         setPadding(DreamUi.dp(context, 8), DreamUi.dp(context, 7), DreamUi.dp(context, 8), DreamUi.dp(context, 7));
-        addItem(context, "Inicio", KawaiiSymbolView.STAR, active == HOME, v -> {
+        addItem(context, "Inicio", R.drawable.tkd_icon_inicio, active == HOME, v -> {
             if (active != HOME) TarotNavigator.openHome(context);
         });
-        addItem(context, "Coleccion", KawaiiSymbolView.SPROUT, active == COLLECTION, v -> {
+        addItem(context, "Coleccion", R.drawable.tkd_icon_coleccion, active == COLLECTION, v -> {
             if (active != COLLECTION) TarotNavigator.openCollection(context);
         });
-        addItem(context, "Lecturas", KawaiiSymbolView.HEART, active == READINGS, v -> {
+        addItem(context, "Lecturas", R.drawable.tkd_icon_carta_dia, active == READINGS, v -> {
             if (active != READINGS) TarotNavigator.openDailyCard(context);
         });
-        addItem(context, "Parejas", KawaiiSymbolView.FLAME, active == COUPLES, v -> {
+        addItem(context, "Parejas", R.drawable.tkd_icon_tarot_parejas, active == COUPLES, v -> {
             if (active != COUPLES) TarotNavigator.openCouples(context);
         });
-        addItem(context, "Ajustes", KawaiiSymbolView.STAR, active == SETTINGS, v -> {
+        addItem(context, "Ajustes", R.drawable.tkd_icon_ajustes, active == SETTINGS, v -> {
             if (active != SETTINGS) TarotNavigator.openSettings(context);
         });
     }
 
-    private void addItem(Context context, String label, int symbol, boolean active, OnClickListener listener) {
+    private void addItem(Context context, String label, int iconRes, boolean active, OnClickListener listener) {
         LinearLayout item = new LinearLayout(context);
         item.setOrientation(VERTICAL);
         item.setGravity(Gravity.CENTER);
@@ -47,7 +49,9 @@ public class DreamBottomNav extends GlassPanel {
         item.setClickable(listener != null);
         if (listener != null) item.setOnClickListener(listener);
 
-        KawaiiSymbolView icon = new KawaiiSymbolView(context, symbol);
+        ImageView icon = new ImageView(context);
+        icon.setImageResource(iconRes);
+        icon.setScaleType(ImageView.ScaleType.FIT_CENTER);
         icon.setAlpha(active ? 1f : .70f);
         item.addView(icon, new LinearLayout.LayoutParams(DreamUi.dp(context, 26), DreamUi.dp(context, 26)));
 
