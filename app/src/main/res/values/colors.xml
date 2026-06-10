@@ -1,34 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 🌙 MYSTIC PALETTE - Dark & Enchanting -->
-    
-    <!-- Primary Colors - Mystical Purple -->
-    <color name="mystic_dark">#0a0e27</color>
-    <color name="mystic_purple">#9d4edd</color>
-    <color name="mystic_purple_light">#c77dff</color>
-    <color name="mystic_gold">#ffd60a</color>
-    
-    <!-- Secondary Colors -->
-    <color name="mystic_indigo">#5a189a</color>
-    <color name="mystic_deep_purple">#3c096c</color>
-    <color name="mystic_silver">#e0aaff</color>
-    
-    <!-- Neutrals -->
-    <color name="white">#ffffffff</color>
-    <color name="white_80">#ccffffff</color>
-    <color name="white_60">#99ffffff</color>
-    <color name="black">#ff000000</color>
-    <color name="dark_bg">#0f1419</color>
-    
-    <!-- Status Colors -->
-    <color name="success_green">#52b788</color>
-    <color name="warning_amber">#ffb703</color>
-    <color name="error_red">#d62828</color>
-    
-    <!-- Legacy (for compatibility) -->
-    <color name="purple_200">#FFc77dff</color>
-    <color name="purple_500">#FF9d4edd</color>
-    <color name="purple_700">#FF5a189a</color>
-    <color name="teal_200">#FFe0aaff</color>
-    <color name="teal_700">#FF3c096c</color>
+    <color name="mystic_dark">#0B0D27</color>
+    <color name="mystic_purple">#9E6BE5</color>
+    <color name="mystic_purple_light">#D8C3FF</color>
+    <color name="mystic_gold">#EFB23D</color>
+
+    <color name="mystic_indigo">#5F3A92</color>
+    <color name="mystic_deep_purple">#3F286A</color>
+    <color name="mystic_silver">#F3E8FF</color>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="white_80">#CCFFFFFF</color>
+    <color name="white_60">#99FFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="dark_bg">#FFF7F0</color>
+
+    <color name="success_green">#84CD8F</color>
+    <color name="warning_amber">#EFB23D</color>
+    <color name="error_red">#D85B7B</color>
+
+    <color name="purple_200">#FFD8C3FF</color>
+    <color name="purple_500">#FF9E6BE5</color>
+    <color name="purple_700">#FF5F3A92</color>
+    <color name="teal_200">#FFF3E8FF</color>
+    <color name="teal_700">#FF3F286A</color>
 </resources>

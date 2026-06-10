@@ -1,16 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.Evaluacion4charlottegabriel" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+    <style name="Theme.Evaluacion4charlottegabriel" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/mystic_purple</item>
+        <item name="colorPrimaryVariant">@color/mystic_indigo</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/mystic_gold</item>
+        <item name="colorSecondaryVariant">@color/mystic_purple_light</item>
+        <item name="colorOnSecondary">@color/mystic_dark</item>
+        <item name="android:colorBackground">#FFF7F0</item>
+        <item name="android:statusBarColor">@color/mystic_dark</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:textColorPrimary">@color/mystic_deep_purple</item>
+        <item name="android:textColorSecondary">@color/mystic_indigo</item>
     </style>
 </resources>

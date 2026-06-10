@@ -1,6 +1,8 @@
 package com.example.evaluacion4charlottegabriel.ui;
 
 import android.content.Context;
+import android.app.Activity;
+import android.graphics.Color;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -13,6 +15,10 @@ public class TarotScaffold extends FrameLayout {
 
     public TarotScaffold(Context context) {
         super(context);
+        if (context instanceof Activity) {
+            ((Activity) context).getWindow().setStatusBarColor(Color.rgb(11, 13, 39));
+            ((Activity) context).getWindow().setNavigationBarColor(Color.BLACK);
+        }
         addView(new DreamBackground(context), new LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
@@ -43,7 +49,7 @@ public class TarotScaffold extends FrameLayout {
         bottomNav = new DreamBottomNav(getContext(), active);
         ViewGroup.LayoutParams scrollParams = scrollView.getLayoutParams();
         if (scrollParams instanceof MarginLayoutParams) {
-            ((MarginLayoutParams) scrollParams).bottomMargin = DreamUi.dp(getContext(), 92);
+            ((MarginLayoutParams) scrollParams).bottomMargin = DreamUi.dp(getContext(), 118);
             scrollView.setLayoutParams(scrollParams);
         }
         LayoutParams params = new LayoutParams(

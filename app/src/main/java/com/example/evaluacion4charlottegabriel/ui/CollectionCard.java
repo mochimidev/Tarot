@@ -18,7 +18,7 @@ public class CollectionCard extends GlassPanel {
     public CollectionCard(Context context, int firebaseId, String label, boolean unlocked, String rarity) {
         super(context);
         setGravity(Gravity.CENTER);
-        setPadding(DreamUi.dp(context, 7), DreamUi.dp(context, 7), DreamUi.dp(context, 7), DreamUi.dp(context, 9));
+        setPadding(DreamUi.dp(context, 8), DreamUi.dp(context, 8), DreamUi.dp(context, 8), DreamUi.dp(context, 10));
         ImageView image = new ImageView(context);
         image.setScaleType(ImageView.ScaleType.FIT_CENTER);
         if (unlocked) {
@@ -34,7 +34,7 @@ public class CollectionCard extends GlassPanel {
         image.setAlpha(unlocked ? 1f : .78f);
         addView(image, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                DreamUi.dp(context, 148)));
+                DreamUi.dp(context, 154)));
 
         TextView title = DreamUi.text(context, unlocked ? label : "Carta dormida", 11, DreamColors.INK, Typeface.BOLD);
         title.setGravity(Gravity.CENTER);

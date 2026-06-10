@@ -22,9 +22,9 @@ public class TarotCardWidget extends GlassPanel {
 
         FrameLayout halo = new FrameLayout(context);
         GradientDrawable haloBg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                new int[]{0x77ffffff, 0x33fff0fa});
-        haloBg.setCornerRadius(DreamUi.dp(context, 26));
-        haloBg.setStroke(DreamUi.dp(context, 1), 0x99ffe7b8);
+                new int[]{0xaaffffff, 0x66fff0fa, 0x55fff7de});
+        haloBg.setCornerRadius(DreamUi.dp(context, 30));
+        haloBg.setStroke(DreamUi.dp(context, 1.5f), 0xbbe8b35b);
         halo.setBackground(haloBg);
         image = new ImageView(context);
         image.setAdjustViewBounds(true);

@@ -23,7 +23,7 @@ public class DreamBottomNav extends GlassPanel {
         super(context);
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER);
-        setPadding(DreamUi.dp(context, 8), DreamUi.dp(context, 7), DreamUi.dp(context, 8), DreamUi.dp(context, 7));
+        setPadding(DreamUi.dp(context, 9), DreamUi.dp(context, 10), DreamUi.dp(context, 9), DreamUi.dp(context, 9));
         addItem(context, "Inicio", R.drawable.icon_inicio, active == HOME, v -> {
             if (active != HOME) TarotNavigator.openHome(context);
         });
@@ -52,11 +52,13 @@ public class DreamBottomNav extends GlassPanel {
         ImageView icon = new ImageView(context);
         icon.setImageResource(iconRes);
         icon.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        icon.setAlpha(active ? 1f : .70f);
-        item.addView(icon, new LinearLayout.LayoutParams(DreamUi.dp(context, 26), DreamUi.dp(context, 26)));
+        icon.setAlpha(active ? 1f : .88f);
+        int iconSize = DreamUi.dp(context, active ? 48 : 43);
+        item.addView(icon, new LinearLayout.LayoutParams(iconSize, iconSize));
 
         TextView text = DreamUi.text(context, label, 9, active ? DreamColors.LILAC_DARK : DreamColors.MUTED, active ? Typeface.BOLD : Typeface.NORMAL);
         text.setGravity(Gravity.CENTER);
+        text.setShadowLayer(DreamUi.dp(context, 3), 0, DreamUi.dp(context, 1), 0x66ffffff);
         item.addView(text);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);

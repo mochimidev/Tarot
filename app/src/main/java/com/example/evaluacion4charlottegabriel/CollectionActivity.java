@@ -99,7 +99,7 @@ public class CollectionActivity extends AppCompatActivity {
                 DreamUi.dp(this, 8), DreamUi.dp(this, 1));
         android.graphics.drawable.GradientDrawable fill = new android.graphics.drawable.GradientDrawable(
                 android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{DreamColors.LILAC, DreamColors.ROSE, DreamColors.GOLD_SOFT});
+                new int[]{0xffb98cff, 0xffff98c9, 0xffffd472});
         fill.setCornerRadius(DreamUi.dp(this, 8));
         android.graphics.drawable.ClipDrawable clip = new android.graphics.drawable.ClipDrawable(fill,
                 Gravity.LEFT, android.graphics.drawable.ClipDrawable.HORIZONTAL);

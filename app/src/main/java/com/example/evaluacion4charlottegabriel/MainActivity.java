@@ -76,13 +76,13 @@ public class MainActivity extends AppCompatActivity {
         panel.setOnClickListener(v -> TarotNavigator.openDailyCard(this));
         panel.setPadding(DreamUi.dp(this, 12), DreamUi.dp(this, 10), DreamUi.dp(this, 12), DreamUi.dp(this, 10));
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xeefff8ef, 0xfafff3fb, 0xeefff7df});
-        bg.setCornerRadius(DreamUi.dp(this, 18));
+                new int[]{0xf8fff8ef, 0xf8fff2fb, 0xf8fff7df});
+        bg.setCornerRadius(DreamUi.dp(this, 24));
         bg.setStroke(DreamUi.dp(this, 2), 0xaee4a641);
         panel.setBackground(bg);
 
         KawaiiSymbolView star = new KawaiiSymbolView(this, KawaiiSymbolView.STAR);
-        panel.addView(star, new LinearLayout.LayoutParams(DreamUi.dp(this, 64), DreamUi.dp(this, 64)));
+        panel.addView(star, new LinearLayout.LayoutParams(DreamUi.dp(this, 72), DreamUi.dp(this, 72)));
 
         LinearLayout copy = new LinearLayout(this);
         copy.setOrientation(LinearLayout.VERTICAL);
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         panel.addView(copy, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
 
         KawaiiSymbolView flame = new KawaiiSymbolView(this, KawaiiSymbolView.FLAME);
-        panel.addView(flame, new LinearLayout.LayoutParams(DreamUi.dp(this, 58), DreamUi.dp(this, 58)));
+        panel.addView(flame, new LinearLayout.LayoutParams(DreamUi.dp(this, 66), DreamUi.dp(this, 66)));
         add(root, panel, 4, 12);
     }
 
@@ -103,17 +103,17 @@ public class MainActivity extends AppCompatActivity {
         GlassPanel panel = new GlassPanel(this);
         panel.setClickable(true);
         panel.setOnClickListener(click);
-        panel.setMinimumHeight(DreamUi.dp(this, 134));
-        panel.setPadding(DreamUi.dp(this, 12), DreamUi.dp(this, 12), DreamUi.dp(this, 12), DreamUi.dp(this, 14));
+        panel.setMinimumHeight(DreamUi.dp(this, 146));
+        panel.setPadding(DreamUi.dp(this, 12), DreamUi.dp(this, 13), DreamUi.dp(this, 12), DreamUi.dp(this, 15));
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                new int[]{DreamUi.blend(tint, 0xffffffff, .24f), 0xfafffbf4});
-        bg.setCornerRadius(DreamUi.dp(this, 18));
-        bg.setStroke(DreamUi.dp(this, 1), 0x99e4a641);
+                new int[]{DreamUi.blend(tint, 0xffffffff, .18f), 0xfafffbf6});
+        bg.setCornerRadius(DreamUi.dp(this, 24));
+        bg.setStroke(DreamUi.dp(this, 1.5f), 0xb7e4a641);
         panel.setBackground(bg);
 
         KawaiiSymbolView icon = new KawaiiSymbolView(this, symbol);
         panel.addView(icon, new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 52)));
+                ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 66)));
 
         TextView titleView = DreamUi.text(this, title, 16, DreamColors.INK, Typeface.BOLD);
         titleView.setGravity(Gravity.CENTER);

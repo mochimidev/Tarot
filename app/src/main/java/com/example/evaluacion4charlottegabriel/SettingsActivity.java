@@ -52,8 +52,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         TextView toggle = DreamUi.text(this, "", 12, 0xffffffff, Typeface.BOLD);
         toggle.setGravity(Gravity.CENTER);
-        toggle.setMinWidth(DreamUi.dp(this, 70));
-        toggle.setMinHeight(DreamUi.dp(this, 38));
+        toggle.setMinWidth(DreamUi.dp(this, 78));
+        toggle.setMinHeight(DreamUi.dp(this, 40));
         updateToggle(toggle, prefs.getBoolean(key, fallback));
         toggle.setOnClickListener(v -> {
             boolean next = !prefs.getBoolean(key, fallback);
@@ -61,14 +61,15 @@ public class SettingsActivity extends AppCompatActivity {
             updateToggle(toggle, next);
         });
         row.addView(copy, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
-        row.addView(toggle, new LinearLayout.LayoutParams(DreamUi.dp(this, 78), DreamUi.dp(this, 40)));
+        row.addView(toggle, new LinearLayout.LayoutParams(DreamUi.dp(this, 86), DreamUi.dp(this, 42)));
         return row;
     }
 
     private void updateToggle(TextView toggle, boolean enabled) {
-        toggle.setText(enabled ? "ON" : "OFF");
-        int fill = enabled ? DreamColors.LILAC : DreamColors.MUTED;
-        toggle.setBackground(DreamUi.stroked(fill, 0x99ffffff, DreamUi.dp(this, 20), DreamUi.dp(this, 1)));
+        toggle.setText(enabled ? "Activo" : "Calma");
+        int fill = enabled ? 0xffc99cff : 0xffc9b8df;
+        int stroke = enabled ? 0xdffff0b8 : 0xbfffffff;
+        toggle.setBackground(DreamUi.stroked(fill, stroke, DreamUi.dp(this, 22), DreamUi.dp(this, 1.5f)));
     }
 
     private void add(LinearLayout parent, android.view.View child, int top, int bottom) {
