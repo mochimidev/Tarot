@@ -34,6 +34,50 @@ android {
     }
 }
 
+def finalIllustrationAssets = [
+        'icon_carta_dia.png',
+        'icon_si_o_no.png',
+        'icon_tarot_parejas.png',
+        'icon_coleccion.png',
+        'icon_inicio.png',
+        'icon_ajustes.png',
+        'icon_favoritos.png',
+        'icon_escuchar.png',
+        'icon_bloqueado.png',
+        'bg_watercolor.png',
+        'cloud_01.png',
+        'cloud_02.png',
+        'cloud_03.png',
+        'cloud_04.png',
+        'cloud_05.png',
+        'cloud_06.png',
+        'sparkle_01.png',
+        'sparkle_02.png',
+        'sparkle_03.png',
+        'sparkle_04.png',
+        'sparkle_05.png',
+        'sparkle_06.png',
+        'sparkle_07.png',
+        'sparkle_08.png',
+        'sparkle_09.png',
+        'sparkle_10.png',
+        'panel_frame_01.png',
+        'panel_frame_02.png',
+        'panel_frame_03.png',
+        'card_back_official.png'
+]
+
+tasks.register('syncFinalIllustrationAssets', Copy) {
+    from('../assets/Icons_menu') {
+        include finalIllustrationAssets
+    }
+    into('src/main/res/drawable-nodpi')
+}
+
+tasks.named('preBuild').configure {
+    dependsOn('syncFinalIllustrationAssets')
+}
+
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
