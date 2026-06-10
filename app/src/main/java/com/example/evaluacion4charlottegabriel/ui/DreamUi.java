@@ -1,4 +1,4 @@
- package com.example.evaluacion4charlottegabriel.ui;
+package com.example.evaluacion4charlottegabriel.ui;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -20,7 +20,7 @@ public final class DreamUi {
         view.setText(value);
         view.setTextSize(sp);
         view.setTextColor(color);
-        view.setTypeface(Typeface.create("serif", style));
+        view.setTypeface(Typeface.create("sans-serif", style));
         view.setIncludeFontPadding(true);
         view.setLineSpacing(dp(context, 3), 1f);
         return view;

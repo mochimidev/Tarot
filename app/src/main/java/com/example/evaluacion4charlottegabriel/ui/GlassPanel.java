@@ -8,14 +8,14 @@ public class GlassPanel extends LinearLayout {
     public GlassPanel(Context context) {
         super(context);
         setOrientation(VERTICAL);
-        int pad = DreamUi.dp(context, 20);
+        int pad = DreamUi.dp(context, 18);
         setPadding(pad, pad, pad, pad);
         DreamUi.softLayer(this);
-        setElevation(DreamUi.dp(context, 4));
+        setElevation(DreamUi.dp(context, 8));
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                new int[]{DreamColors.GLASS, 0xf7fffaf4});
-        bg.setCornerRadius(DreamUi.dp(context, 30));
-        bg.setStroke(DreamUi.dp(context, 1.5f), DreamColors.GLASS_STROKE);
+                new int[]{DreamColors.GLASS, 0x88ffffff});
+        bg.setCornerRadius(DreamUi.dp(context, 28));
+        bg.setStroke(DreamUi.dp(context, 2), DreamColors.GLASS_STROKE);
         setBackground(bg);
     }
 }
