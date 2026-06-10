@@ -16,9 +16,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.evaluacion4charlottegabriel.Dao.Carta;
+import com.example.evaluacion4charlottegabriel.ui.CardMeta;
+import com.example.evaluacion4charlottegabriel.ui.DreamBottomNav;
 import com.example.evaluacion4charlottegabriel.ui.DreamColors;
+import com.example.evaluacion4charlottegabriel.ui.DreamDividerView;
+import com.example.evaluacion4charlottegabriel.ui.DreamTopBar;
 import com.example.evaluacion4charlottegabriel.ui.DreamUi;
 import com.example.evaluacion4charlottegabriel.ui.GlassPanel;
+import com.example.evaluacion4charlottegabriel.ui.KawaiiSymbolView;
 import com.example.evaluacion4charlottegabriel.ui.TarotCardWidget;
 import com.example.evaluacion4charlottegabriel.ui.TarotScaffold;
 
@@ -27,24 +32,30 @@ public class tarotPareja extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getIntent().getExtras();
-        if (bundle == null) {
-            return;
+        int numeroTu = 36;
+        int numeroPareja = 50;
+        Carta tu = TarotNavigator.fallbackCard(numeroTu);
+        Carta pareja = TarotNavigator.fallbackCard(numeroPareja);
+        if (bundle != null) {
+            numeroTu = bundle.getInt("numero");
+            numeroPareja = bundle.getInt("numerotupersona");
+            tu = (Carta) bundle.getSerializable("tu");
+            pareja = (Carta) bundle.getSerializable("pareja");
+            if (tu == null) tu = TarotNavigator.fallbackCard(numeroTu);
+            if (pareja == null) pareja = TarotNavigator.fallbackCard(numeroPareja);
         }
-        build(bundle.getInt("numero"), bundle.getInt("numerotupersona"),
-                (Carta) bundle.getSerializable("tu"),
-                (Carta) bundle.getSerializable("pareja"));
+        build(numeroTu, numeroPareja, tu, pareja);
     }
 
     private void build(int numeroTu, int numeroPareja, Carta tu, Carta pareja) {
         TarotScaffold scaffold = new TarotScaffold(this);
+        scaffold.setBottomNav(DreamBottomNav.COUPLES);
         LinearLayout root = scaffold.content();
+        root.addView(new DreamTopBar(this, "Tarot de Parejas", true, KawaiiSymbolView.HEART));
 
-        TextView header = DreamUi.text(this, "Tarot de Parejas", 29, DreamColors.INK, Typeface.BOLD);
-        header.setGravity(Gravity.CENTER);
-        root.addView(header);
-        TextView sub = DreamUi.text(this, "Tu energía y otra energía se encuentran en una conexión suave.", 15, DreamColors.DEEP, Typeface.NORMAL);
+        TextView sub = DreamUi.text(this, "Tu energia y otra energia se encuentran en una conexion suave.", 15, DreamColors.DEEP, Typeface.NORMAL);
         sub.setGravity(Gravity.CENTER);
-        add(root, sub, 4, 18);
+        add(root, sub, 0, 14);
 
         FrameLayout connection = new FrameLayout(this);
         connection.addView(new ConnectionView(this), new FrameLayout.LayoutParams(
@@ -55,24 +66,33 @@ public class tarotPareja extends AppCompatActivity {
         connection.addView(grid);
 
         TarotCardWidget first = new TarotCardWidget(this);
-        first.bind(numeroTu, tu == null ? "Tu carta" : tu.getTitulo(),
-                tu == null ? "" : tu.getDescripcionAmorosa(), 0);
+        first.bind(numeroTu, safeTitle(tu, numeroTu), safeLove(tu, numeroTu), 0);
         TarotCardWidget second = new TarotCardWidget(this);
-        second.bind(numeroPareja, pareja == null ? "Carta pareja" : pareja.getTitulo(),
-                pareja == null ? "" : pareja.getDescripcionAmorosa(), 0);
+        second.bind(numeroPareja, safeTitle(pareja, numeroPareja), safeLove(pareja, numeroPareja), 0);
         addGrid(grid, first);
         addGrid(grid, second);
-        add(root, connection, 0, 18);
+        add(root, connection, 0, 16);
 
         GlassPanel summary = new GlassPanel(this);
-        TextView title = DreamUi.text(this, "Conexión revelada", 23, DreamColors.INK, Typeface.BOLD);
+        TextView title = DreamUi.text(this, "Conexion revelada", 23, DreamColors.INK, Typeface.BOLD);
         title.setGravity(Gravity.CENTER);
         summary.addView(title);
-        TextView body = DreamUi.text(this, "Ambas energías se complementan con ternura y comprensión. La conexión puede crecer aún más con comunicación y paciencia.", 15, DreamColors.DEEP, Typeface.NORMAL);
+        add(summary, new DreamDividerView(this), 0, 8);
+        TextView body = DreamUi.text(this, "Ambas energias se complementan con ternura y comprension. La conexion puede crecer aun mas con comunicacion y paciencia.", 15, DreamColors.DEEP, Typeface.NORMAL);
         body.setGravity(Gravity.CENTER);
-        add(summary, body, 10, 0);
+        add(summary, body, 8, 0);
         add(root, summary, 0, 0);
         setContentView(scaffold);
+    }
+
+    private String safeTitle(Carta carta, int id) {
+        String title = carta == null ? null : carta.getTitulo();
+        return title == null || title.trim().isEmpty() ? CardMeta.cardTitle(id) : title;
+    }
+
+    private String safeLove(Carta carta, int id) {
+        String text = carta == null ? null : carta.getDescripcionAmorosa();
+        return text == null || text.trim().isEmpty() ? CardMeta.familyMeaning(id) : text;
     }
 
     private void addGrid(GridLayout grid, View child) {
@@ -83,6 +103,7 @@ public class tarotPareja extends AppCompatActivity {
         params.setMargins(DreamUi.dp(this, 4), 0, DreamUi.dp(this, 4), 0);
         grid.addView(child, params);
     }
+
     private void add(LinearLayout parent, View child, int top, int bottom) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -103,20 +124,16 @@ public class tarotPareja extends AppCompatActivity {
             super.onDraw(canvas);
             float w = getWidth();
             float h = getHeight();
-            paint.setColor(DreamColors.GOLD);
-            paint.setStrokeWidth(DreamUi.dp(getContext(), 3));
-            paint.setShadowLayer(DreamUi.dp(getContext(), 12), 0, 0, DreamColors.GOLD);
-            canvas.drawLine(w * .42f, h * .22f, w * .58f, h * .22f, paint);
             paint.setStyle(Paint.Style.FILL);
-            drawHeart(canvas, w * .5f, h * .26f, DreamUi.dp(getContext(), 17));
             paint.setColor(DreamColors.GOLD);
             paint.setShadowLayer(DreamUi.dp(getContext(), 12), 0, 0, DreamColors.GOLD);
-            for (int i = 0; i < 9; i++) {
-                float x = w * (.43f + i * .018f);
-                float y = h * (.18f + (i % 2) * .07f);
-                canvas.drawCircle(x, y, DreamUi.dp(getContext(), i % 3 + 2), paint);
+            for (int i = 0; i < 13; i++) {
+                float x = w * (.43f + i * .012f);
+                float y = h * (.22f + (i % 2) * .04f);
+                canvas.drawCircle(x, y, DreamUi.dp(getContext(), 2 + i % 3), paint);
             }
-            paint.setShadowLayer(0, 0, 0, 0);
+            drawHeart(canvas, w * .5f, h * .25f, DreamUi.dp(getContext(), 20));
+            paint.clearShadowLayer();
         }
 
         private void drawHeart(Canvas canvas, float cx, float cy, float size) {
@@ -125,7 +142,6 @@ public class tarotPareja extends AppCompatActivity {
             path.cubicTo(cx - size * 1.15f, cy, cx - size * .65f, cy - size * .85f, cx, cy - size * .32f);
             path.cubicTo(cx + size * .65f, cy - size * .85f, cx + size * 1.15f, cy, cx, cy + size * .65f);
             paint.setColor(DreamColors.ROSE);
-            paint.setShadowLayer(DreamUi.dp(getContext(), 10), 0, 0, DreamColors.ROSE);
             canvas.drawPath(path, paint);
             paint.setColor(DreamColors.GOLD_SOFT);
             canvas.drawCircle(cx, cy, size * .20f, paint);

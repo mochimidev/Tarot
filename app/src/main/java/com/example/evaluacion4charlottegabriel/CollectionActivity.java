@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
@@ -17,6 +16,7 @@ import com.example.evaluacion4charlottegabriel.ui.CardMeta;
 import com.example.evaluacion4charlottegabriel.ui.CollectionCard;
 import com.example.evaluacion4charlottegabriel.ui.DreamBottomNav;
 import com.example.evaluacion4charlottegabriel.ui.DreamColors;
+import com.example.evaluacion4charlottegabriel.ui.DreamTopBar;
 import com.example.evaluacion4charlottegabriel.ui.DreamUi;
 import com.example.evaluacion4charlottegabriel.ui.GlassPanel;
 import com.example.evaluacion4charlottegabriel.ui.KawaiiSymbolView;
@@ -29,35 +29,31 @@ public class CollectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefs = getSharedPreferences("collection", MODE_PRIVATE);
-        int unlocked = 0;
-        for (int i = 0; i < 78; i++) {
-            if (prefs.getBoolean("card_" + i, false)) {
-                unlocked++;
-            }
-        }
+        build();
+    }
 
+    private void build() {
+        int unlocked = countUnlocked(0, 77);
         TarotScaffold scaffold = new TarotScaffold(this);
         scaffold.setBottomNav(DreamBottomNav.COLLECTION);
         LinearLayout root = scaffold.content();
-        TextView header = DreamUi.text(this, "Colección", 30, DreamColors.INK, Typeface.BOLD);
-        header.setGravity(Gravity.CENTER);
-        root.addView(header);
+        root.addView(new DreamTopBar(this, "Coleccion", true, KawaiiSymbolView.STAR));
 
         GlassPanel progress = new GlassPanel(this);
         progress.setGravity(Gravity.CENTER_HORIZONTAL);
         TextView pct = DreamUi.text(this, unlocked + "/78 cartas", 25, DreamColors.INK, Typeface.BOLD);
         pct.setGravity(Gravity.CENTER);
         progress.addView(pct);
-        TextView sub = DreamUi.text(this, Math.round(unlocked * 100f / 78f) + "% del álbum iluminado", 14, DreamColors.DEEP, Typeface.NORMAL);
+        TextView sub = DreamUi.text(this, Math.round(unlocked * 100f / 78f) + "% del album iluminado", 14, DreamColors.DEEP, Typeface.NORMAL);
         sub.setGravity(Gravity.CENTER);
         add(progress, sub, 2, 8);
         addProgressBar(progress, unlocked);
-        add(root, progress, 12, 16);
+        add(root, progress, 8, 14);
 
         addFamily(root, "Arcanos Mayores", "El cuento principal del destino", 0, 21, KawaiiSymbolView.STAR);
-        addFamily(root, "Chispas", "Valentía, juego y comienzos", 22, 35, KawaiiSymbolView.FLAME);
-        addFamily(root, "Gotitas", "Emociones, ternura e intuición", 36, 49, KawaiiSymbolView.DROP);
-        addFamily(root, "Estrellas", "Deseos, guía y confianza", 50, 63, KawaiiSymbolView.STAR);
+        addFamily(root, "Chispas", "Valentia, juego y comienzos", 22, 35, KawaiiSymbolView.FLAME);
+        addFamily(root, "Gotitas", "Emociones, ternura e intuicion", 36, 49, KawaiiSymbolView.DROP);
+        addFamily(root, "Estrellas", "Deseos, guia y confianza", 50, 63, KawaiiSymbolView.STAR);
         addFamily(root, "Brotes", "Crecimiento, cuidado y abundancia", 64, 77, KawaiiSymbolView.SPROUT);
         setContentView(scaffold);
     }
@@ -69,14 +65,14 @@ public class CollectionActivity extends AppCompatActivity {
         LinearLayout head = new LinearLayout(this);
         head.setGravity(Gravity.CENTER_VERTICAL);
         KawaiiSymbolView icon = new KawaiiSymbolView(this, symbol);
-        head.addView(icon, new LinearLayout.LayoutParams(DreamUi.dp(this, 64), DreamUi.dp(this, 64)));
+        head.addView(icon, new LinearLayout.LayoutParams(DreamUi.dp(this, 58), DreamUi.dp(this, 58)));
 
         LinearLayout copy = new LinearLayout(this);
         copy.setOrientation(LinearLayout.VERTICAL);
-        TextView name = DreamUi.text(this, title, 21, DreamColors.INK, Typeface.BOLD);
+        TextView name = DreamUi.text(this, title, 20, DreamColors.INK, Typeface.BOLD);
         copy.addView(name);
         int openedCount = countUnlocked(start, end);
-        TextView progress = DreamUi.text(this, subtitle + " · " + openedCount + "/" + (end - start + 1), 13, DreamColors.DEEP, Typeface.NORMAL);
+        TextView progress = DreamUi.text(this, subtitle + " · " + openedCount + "/" + (end - start + 1) + " desbloqueadas", 12, DreamColors.DEEP, Typeface.NORMAL);
         copy.addView(progress);
         head.addView(copy, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         family.addView(head);
@@ -85,9 +81,9 @@ public class CollectionActivity extends AppCompatActivity {
         grid.setColumnCount(3);
         for (int i = start; i <= end; i++) {
             boolean open = prefs.getBoolean("card_" + i, false);
-            CollectionCard card = new CollectionCard(this, i, cardLabel(i), open, CardMeta.rarity(i));
+            CollectionCard card = new CollectionCard(this, i, CardMeta.cardTitle(i), open, CardMeta.rarity(i));
             final int cardId = i;
-            card.setOnClickListener(v -> openDetail(cardId, open));
+            card.setOnClickListener(v -> openDetail(cardId));
             card.setClickable(true);
             addCard(grid, card);
         }
@@ -125,16 +121,7 @@ public class CollectionActivity extends AppCompatActivity {
         return count;
     }
 
-    private String cardLabel(int index) {
-        String[] ranks = {"As", "Dos", "Tres", "Cuatro", "Cinco", "Seis", "Siete", "Ocho", "Nueve", "Diez", "Aprendiz", "Explorador", "Reina", "Guardian"};
-        if (index < 22) return "Arcano " + index;
-        return ranks[(index - 22) % 14];
-    }
-
-    private void openDetail(int cardId, boolean unlocked) {
-        if (!unlocked) {
-            prefs.edit().putBoolean("card_" + cardId, true).apply();
-        }
+    private void openDetail(int cardId) {
         Intent intent = new Intent(this, CardDetailActivity.class);
         intent.putExtra("numero", cardId);
         startActivity(intent);

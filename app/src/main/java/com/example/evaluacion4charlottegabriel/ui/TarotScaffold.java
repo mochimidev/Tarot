@@ -8,6 +8,7 @@ import android.widget.ScrollView;
 
 public class TarotScaffold extends FrameLayout {
     private final LinearLayout content;
+    private final ScrollView scrollView;
     private DreamBottomNav bottomNav;
 
     public TarotScaffold(Context context) {
@@ -15,14 +16,14 @@ public class TarotScaffold extends FrameLayout {
         addView(new DreamBackground(context), new LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
-        ScrollView scrollView = new ScrollView(context);
+        scrollView = new ScrollView(context);
         scrollView.setFillViewport(false);
         scrollView.setClipToPadding(false);
         scrollView.setScrollBarSize(0);
         content = new LinearLayout(context);
         content.setOrientation(LinearLayout.VERTICAL);
         int pad = DreamUi.dp(context, 20);
-        content.setPadding(pad, DreamUi.dp(context, 28), pad, DreamUi.dp(context, 104));
+        content.setPadding(pad, DreamUi.dp(context, 28), pad, DreamUi.dp(context, 28));
         scrollView.addView(content, new ScrollView.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -40,6 +41,11 @@ public class TarotScaffold extends FrameLayout {
             removeView(bottomNav);
         }
         bottomNav = new DreamBottomNav(getContext(), active);
+        ViewGroup.LayoutParams scrollParams = scrollView.getLayoutParams();
+        if (scrollParams instanceof MarginLayoutParams) {
+            ((MarginLayoutParams) scrollParams).bottomMargin = DreamUi.dp(getContext(), 92);
+            scrollView.setLayoutParams(scrollParams);
+        }
         LayoutParams params = new LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);

@@ -13,6 +13,7 @@ public class AnimatedRevealCard extends FrameLayout {
     private final ImageView front;
     private final CardBackView back;
     private boolean revealed;
+    private Runnable onReveal;
 
     public AnimatedRevealCard(Context context) {
         super(context);
@@ -40,6 +41,10 @@ public class AnimatedRevealCard extends FrameLayout {
         return front;
     }
 
+    public void setOnRevealListener(Runnable onReveal) {
+        this.onReveal = onReveal;
+    }
+
     public void reveal() {
         if (revealed) {
             return;
@@ -60,6 +65,9 @@ public class AnimatedRevealCard extends FrameLayout {
         set.playSequentially(first, second);
         set.setInterpolator(new AccelerateDecelerateInterpolator());
         set.start();
+        if (onReveal != null) {
+            postDelayed(onReveal, 520);
+        }
         animate().scaleX(1.03f).scaleY(1.03f).setDuration(420).withEndAction(() ->
                 animate().scaleX(1f).scaleY(1f).setDuration(260).start()).start();
     }

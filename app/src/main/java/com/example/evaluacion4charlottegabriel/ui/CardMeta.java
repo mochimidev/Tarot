@@ -12,6 +12,29 @@ public final class CardMeta {
         return "Brotes";
     }
 
+    public static String cardTitle(int id) {
+        String[] arcana = {
+                "El Loco", "El Mago", "La Sacerdotisa", "La Emperatriz", "El Emperador",
+                "Los Enamorados", "El Carro", "La Fuerza", "El Ermitano",
+                "La Rueda de la Fortuna", "La Justicia", "El Colgado", "La Muerte",
+                "La Templanza", "El Diablo", "La Torre", "La Estrella", "La Luna",
+                "El Sol", "El Juicio", "El Mundo", "Reverso de Carta"
+        };
+        if (id < 22) return arcana[Math.max(0, Math.min(id, arcana.length - 1))];
+        String[] ranks = {"As", "Dos", "Tres", "Cuatro", "Cinco", "Seis", "Siete", "Ocho",
+                "Nueve", "Diez", "Aprendiz", "Explorador", "Reina", "Guardian"};
+        return ranks[(id - 22) % 14] + " de " + familyName(id);
+    }
+
+    public static String familyTag(int id) {
+        String family = familyName(id);
+        if ("Chispas".equals(family)) return "Chispas · Comienzos";
+        if ("Gotitas".equals(family)) return "Gotitas · Emociones";
+        if ("Estrellas".equals(family)) return "Estrellas · Deseos";
+        if ("Brotes".equals(family)) return "Brotes · Crecimiento";
+        return "Arcanos · Destino";
+    }
+
     public static String familyCaption(int id) {
         String family = familyName(id);
         if ("Chispas".equals(family)) return "valor, juego y comienzos brillantes";
@@ -19,6 +42,23 @@ public final class CardMeta {
         if ("Estrellas".equals(family)) return "deseos, guia y confianza";
         if ("Brotes".equals(family)) return "crecimiento, cuidado y abundancia";
         return "destino, cuento y magia mayor";
+    }
+
+    public static String familyMeaning(int id) {
+        String family = familyName(id);
+        if ("Chispas".equals(family)) {
+            return "La chispa inicial, inspiracion, energia pura y nuevas oportunidades.";
+        }
+        if ("Gotitas".equals(family)) {
+            return "Nuevas emociones, intuicion, amor propio y sensibilidad.";
+        }
+        if ("Estrellas".equals(family)) {
+            return "Deseos que guian el camino, confianza y luz interior.";
+        }
+        if ("Brotes".equals(family)) {
+            return "Crecimiento suave, cuidado constante y abundancia paciente.";
+        }
+        return "Una pagina mayor del destino se abre con calma y magia.";
     }
 
     public static String rarity(int id) {

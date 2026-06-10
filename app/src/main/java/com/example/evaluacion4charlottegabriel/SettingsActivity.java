@@ -8,12 +8,15 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.evaluacion4charlottegabriel.ui.DreamBottomNav;
 import com.example.evaluacion4charlottegabriel.ui.DreamColors;
+import com.example.evaluacion4charlottegabriel.ui.DreamDividerView;
+import com.example.evaluacion4charlottegabriel.ui.DreamTopBar;
 import com.example.evaluacion4charlottegabriel.ui.DreamUi;
 import com.example.evaluacion4charlottegabriel.ui.GlassPanel;
+import com.example.evaluacion4charlottegabriel.ui.KawaiiSymbolView;
 import com.example.evaluacion4charlottegabriel.ui.TarotScaffold;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -22,17 +25,17 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
         TarotScaffold scaffold = new TarotScaffold(this);
+        scaffold.setBottomNav(DreamBottomNav.SETTINGS);
         LinearLayout root = scaffold.content();
-
-        TextView header = DreamUi.text(this, "Ajustes", 30, DreamColors.INK, Typeface.BOLD);
-        header.setGravity(Gravity.CENTER);
-        root.addView(header);
+        root.addView(new DreamTopBar(this, "Ajustes", true, KawaiiSymbolView.STAR));
 
         GlassPanel panel = new GlassPanel(this);
-        panel.addView(row("Sonido magico", "Activar campanitas al revelar cartas", prefs, "sound", true));
-        panel.addView(row("Particulas brillantes", "Mantener estrellas y brillos animados", prefs, "particles", true));
+        panel.addView(row("Sonido magico", "Campanitas suaves al revelar cartas", prefs, "sound", true));
+        panel.addView(new DreamDividerView(this), new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 20)));
+        panel.addView(row("Particulas brillantes", "Estrellas, corazones y brillos animados", prefs, "particles", true));
+        panel.addView(new DreamDividerView(this), new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 20)));
         panel.addView(row("Modo calma", "Lecturas con movimiento mas suave", prefs, "calm", false));
-        add(root, panel, 18, 0);
+        add(root, panel, 12, 0);
         setContentView(scaffold);
     }
 
@@ -40,13 +43,32 @@ public class SettingsActivity extends AppCompatActivity {
         LinearLayout row = new LinearLayout(this);
         row.setGravity(Gravity.CENTER_VERTICAL);
         row.setPadding(0, DreamUi.dp(this, 8), 0, DreamUi.dp(this, 8));
-        TextView text = DreamUi.text(this, title + "\n" + subtitle, 15, DreamColors.INK, Typeface.BOLD);
-        Switch sw = new Switch(this);
-        sw.setChecked(prefs.getBoolean(key, fallback));
-        sw.setOnCheckedChangeListener((buttonView, isChecked) -> prefs.edit().putBoolean(key, isChecked).apply());
-        row.addView(text, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
-        row.addView(sw);
+        LinearLayout copy = new LinearLayout(this);
+        copy.setOrientation(LinearLayout.VERTICAL);
+        TextView main = DreamUi.text(this, title, 16, DreamColors.INK, Typeface.BOLD);
+        TextView sub = DreamUi.text(this, subtitle, 12, DreamColors.DEEP, Typeface.NORMAL);
+        copy.addView(main);
+        copy.addView(sub);
+
+        TextView toggle = DreamUi.text(this, "", 12, 0xffffffff, Typeface.BOLD);
+        toggle.setGravity(Gravity.CENTER);
+        toggle.setMinWidth(DreamUi.dp(this, 70));
+        toggle.setMinHeight(DreamUi.dp(this, 38));
+        updateToggle(toggle, prefs.getBoolean(key, fallback));
+        toggle.setOnClickListener(v -> {
+            boolean next = !prefs.getBoolean(key, fallback);
+            prefs.edit().putBoolean(key, next).apply();
+            updateToggle(toggle, next);
+        });
+        row.addView(copy, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+        row.addView(toggle, new LinearLayout.LayoutParams(DreamUi.dp(this, 78), DreamUi.dp(this, 40)));
         return row;
+    }
+
+    private void updateToggle(TextView toggle, boolean enabled) {
+        toggle.setText(enabled ? "ON" : "OFF");
+        int fill = enabled ? DreamColors.LILAC : DreamColors.MUTED;
+        toggle.setBackground(DreamUi.stroked(fill, 0x99ffffff, DreamUi.dp(this, 20), DreamUi.dp(this, 1)));
     }
 
     private void add(LinearLayout parent, android.view.View child, int top, int bottom) {

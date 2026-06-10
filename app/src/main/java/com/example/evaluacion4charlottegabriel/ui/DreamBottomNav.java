@@ -1,7 +1,6 @@
 package com.example.evaluacion4charlottegabriel.ui;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.View;
@@ -9,9 +8,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.evaluacion4charlottegabriel.CollectionActivity;
-import com.example.evaluacion4charlottegabriel.MainActivity;
-import com.example.evaluacion4charlottegabriel.SettingsActivity;
+import com.example.evaluacion4charlottegabriel.TarotNavigator;
 
 public class DreamBottomNav extends GlassPanel {
     public static final int HOME = 0;
@@ -26,15 +23,19 @@ public class DreamBottomNav extends GlassPanel {
         setGravity(Gravity.CENTER);
         setPadding(DreamUi.dp(context, 8), DreamUi.dp(context, 7), DreamUi.dp(context, 8), DreamUi.dp(context, 7));
         addItem(context, "Inicio", KawaiiSymbolView.STAR, active == HOME, v -> {
-            if (active != HOME) context.startActivity(new Intent(context, MainActivity.class));
+            if (active != HOME) TarotNavigator.openHome(context);
         });
         addItem(context, "Coleccion", KawaiiSymbolView.SPROUT, active == COLLECTION, v -> {
-            if (active != COLLECTION) context.startActivity(new Intent(context, CollectionActivity.class));
+            if (active != COLLECTION) TarotNavigator.openCollection(context);
         });
-        addItem(context, "Lecturas", KawaiiSymbolView.DROP, active == READINGS, null);
-        addItem(context, "Parejas", KawaiiSymbolView.FLAME, active == COUPLES, null);
+        addItem(context, "Lecturas", KawaiiSymbolView.HEART, active == READINGS, v -> {
+            if (active != READINGS) TarotNavigator.openDailyCard(context);
+        });
+        addItem(context, "Parejas", KawaiiSymbolView.FLAME, active == COUPLES, v -> {
+            if (active != COUPLES) TarotNavigator.openCouples(context);
+        });
         addItem(context, "Ajustes", KawaiiSymbolView.STAR, active == SETTINGS, v -> {
-            if (active != SETTINGS) context.startActivity(new Intent(context, SettingsActivity.class));
+            if (active != SETTINGS) TarotNavigator.openSettings(context);
         });
     }
 

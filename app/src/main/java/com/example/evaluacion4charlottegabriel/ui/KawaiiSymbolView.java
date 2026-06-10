@@ -12,7 +12,7 @@ public class KawaiiSymbolView extends View {
     public static final int FLAME = 1;
     public static final int STAR = 2;
     public static final int SPROUT = 3;
-    public static final int UNICORN = 4;
+    public static final int HEART = 4;
 
     private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private int type;
@@ -52,7 +52,7 @@ public class KawaiiSymbolView extends View {
         } else if (type == SPROUT) {
             drawSprout(canvas, cx, cy, s);
         } else {
-            drawUnicorn(canvas, cx, cy, s);
+            drawHeartCharacter(canvas, cx, cy, s);
         }
         drawFace(canvas, cx, cy + s * .05f, s);
     }
@@ -104,20 +104,15 @@ public class KawaiiSymbolView extends View {
         paint.setStyle(Paint.Style.FILL);
     }
 
-    private void drawUnicorn(Canvas canvas, float cx, float cy, float s) {
-        paint.setColor(0xffffffff);
-        canvas.drawOval(new RectF(cx - s * .34f, cy - s * .24f, cx + s * .34f, cy + s * .34f), paint);
-        paint.setColor(DreamColors.GOLD);
-        Path horn = new Path();
-        horn.moveTo(cx, cy - s * .52f);
-        horn.lineTo(cx - s * .10f, cy - s * .18f);
-        horn.lineTo(cx + s * .10f, cy - s * .18f);
-        horn.close();
-        canvas.drawPath(horn, paint);
+    private void drawHeartCharacter(Canvas canvas, float cx, float cy, float s) {
+        Path path = new Path();
+        path.moveTo(cx, cy + s * .34f);
+        path.cubicTo(cx - s * .50f, cy - s * .06f, cx - s * .28f, cy - s * .42f, cx, cy - s * .20f);
+        path.cubicTo(cx + s * .28f, cy - s * .42f, cx + s * .50f, cy - s * .06f, cx, cy + s * .34f);
         paint.setColor(DreamColors.ROSE);
-        canvas.drawCircle(cx - s * .16f, cy - s * .23f, s * .12f, paint);
-        paint.setColor(DreamColors.LILAC);
-        canvas.drawCircle(cx + s * .07f, cy - s * .28f, s * .13f, paint);
+        canvas.drawPath(path, paint);
+        paint.setColor(DreamColors.GOLD_SOFT);
+        canvas.drawCircle(cx, cy - s * .02f, s * .09f, paint);
     }
 
     private void drawFace(Canvas canvas, float cx, float cy, float s) {
