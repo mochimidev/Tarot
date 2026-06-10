@@ -4,6 +4,8 @@ import android.graphics.Color;
 
 public final class DreamColors {
     public static final int LAVENDER = Color.rgb(218, 203, 255);
+    public static final int CREAM = Color.rgb(255, 247, 235);
+    public static final int PEACH = Color.rgb(255, 226, 205);
     public static final int LILAC = Color.rgb(193, 158, 241);
     public static final int LILAC_DARK = Color.rgb(99, 62, 151);
     public static final int GOLD = Color.rgb(247, 197, 87);
@@ -25,6 +27,7 @@ public final class DreamColors {
     public static final int GLASS_STROKE = Color.argb(210, 255, 255, 255);
     public static final int SHADOW = Color.argb(42, 92, 65, 139);
     public static final int CARD_SHADOW = Color.argb(58, 89, 63, 135);
+    public static final int GOLD_LINE = Color.rgb(228, 166, 65);
 
     private DreamColors() {
     }

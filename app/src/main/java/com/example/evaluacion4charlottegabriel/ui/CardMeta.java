@@ -44,7 +44,7 @@ public final class CardMeta {
         if ("Gotitas".equals(family)) return KawaiiSymbolView.DROP;
         if ("Estrellas".equals(family)) return KawaiiSymbolView.STAR;
         if ("Brotes".equals(family)) return KawaiiSymbolView.SPROUT;
-        return KawaiiSymbolView.UNICORN;
+        return KawaiiSymbolView.STAR;
     }
 
     public static String story(String title, int id) {

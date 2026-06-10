@@ -49,16 +49,17 @@ public class DreamBackground extends View {
         int w = getWidth();
         int h = getHeight();
         paint.setShader(new LinearGradient(0, 0, w, h,
-                new int[]{0xfff7dcff, 0xffd7eaff, 0xffffe2ef, 0xffe5f7d5},
-                new float[]{0f, .42f, .75f, 1f}, Shader.TileMode.CLAMP));
+                new int[]{0xfffff4fb, 0xfff1defd, 0xffdcefff, 0xffffecf3, 0xffedf8df},
+                new float[]{0f, .30f, .56f, .78f, 1f}, Shader.TileMode.CLAMP));
         canvas.drawRect(0, 0, w, h, paint);
         paint.setShader(null);
 
         drawGlow(canvas, w * .22f, h * .14f, DreamColors.GOLD, w * .36f);
         drawGlow(canvas, w * .82f, h * .34f, DreamColors.CLOUD, w * .32f);
-        drawCloud(canvas, w * .1f + phase * w * .05f, h * .13f, w * .48f);
-        drawCloud(canvas, w * .52f - phase * w * .04f, h * .25f, w * .36f);
-        drawCloud(canvas, w * .18f, h * .78f, w * .52f);
+        drawCloud(canvas, w * .07f + phase * w * .05f, h * .11f, w * .50f);
+        drawCloud(canvas, w * .54f - phase * w * .04f, h * .24f, w * .38f);
+        drawCloud(canvas, w * .14f, h * .79f, w * .58f);
+        drawCloud(canvas, w * .62f, h * .86f, w * .40f);
         drawStars(canvas, w, h);
     }
 
@@ -79,13 +80,18 @@ public class DreamBackground extends View {
 
     private void drawStars(Canvas canvas, int w, int h) {
         paint.setStyle(Paint.Style.FILL);
-        int count = 34;
+        int count = 52;
         for (int i = 0; i < count; i++) {
             float x = ((i * 73) % 100) / 100f * w;
             float y = ((i * 47) % 100) / 100f * h;
             float pulse = .55f + .45f * (float) Math.sin((phase * Math.PI * 2) + i);
             paint.setColor(adjustAlpha(i % 3 == 0 ? DreamColors.GOLD : 0xffffffff, .35f + pulse * .55f));
             drawSpark(canvas, x, y, DreamUi.dp(getContext(), 2 + (i % 4)));
+            if (i % 9 == 0) {
+                paint.setColor(adjustAlpha(DreamColors.ROSE, .45f));
+                canvas.drawCircle(x + DreamUi.dp(getContext(), 9), y + DreamUi.dp(getContext(), 5),
+                        DreamUi.dp(getContext(), 2.2f), paint);
+            }
         }
         paint.setStyle(Paint.Style.FILL);
     }

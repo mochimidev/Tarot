@@ -44,11 +44,11 @@ public class CartaDelDia extends AppCompatActivity {
         TarotScaffold scaffold = new TarotScaffold(this);
         LinearLayout root = scaffold.content();
 
-        TextView header = DreamUi.text(this, "Carta del Dia", 29, DreamColors.INK, Typeface.BOLD);
+        TextView header = DreamUi.text(this, "Carta del Día", 29, DreamColors.INK, Typeface.BOLD);
         header.setGravity(Gravity.CENTER);
         root.addView(header);
 
-        TextView hint = DreamUi.text(this, "Toca la carta flotante y deja que abra una pagina nueva de tu cuento.", 15, DreamColors.DEEP, Typeface.NORMAL);
+        TextView hint = DreamUi.text(this, "Toca la carta para\nrevelar tu mensaje", 16, DreamColors.DEEP, Typeface.NORMAL);
         hint.setGravity(Gravity.CENTER);
         add(root, hint, 4, 18);
 
@@ -62,7 +62,7 @@ public class CartaDelDia extends AppCompatActivity {
         frame.setPadding(DreamUi.dp(this, 28), DreamUi.dp(this, 12), DreamUi.dp(this, 28), DreamUi.dp(this, 12));
         frame.addView(reveal, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                DreamUi.dp(this, 500)));
+                DreamUi.dp(this, 470)));
         add(root, frame, 2, 18);
 
         GlassPanel info = new GlassPanel(this);
@@ -89,19 +89,18 @@ public class CartaDelDia extends AppCompatActivity {
         TextView meaning = DreamUi.text(this, descripcion, 15, DreamColors.DEEP, Typeface.NORMAL);
         meaning.setGravity(Gravity.CENTER);
         add(info, meaning, 8, 14);
-        DreamButton save = new DreamButton(this, "Guardar en mi album");
+        DreamButton save = new DreamButton(this, "Guardar en mi álbum");
         save.setOnClickListener(v -> saveCard());
         add(info, save, 18, 0);
         add(root, info, 0, 12);
 
         setContentView(scaffold);
-        reveal.postDelayed(reveal::reveal, 500);
     }
 
     private void saveCard() {
         SharedPreferences prefs = getSharedPreferences("collection", MODE_PRIVATE);
         prefs.edit().putBoolean("card_" + numero, true).apply();
-        Toast.makeText(this, "Carta guardada en tu album", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Carta guardada en tu álbum", Toast.LENGTH_SHORT).show();
     }
     private void add(LinearLayout parent, android.view.View child, int top, int bottom) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(

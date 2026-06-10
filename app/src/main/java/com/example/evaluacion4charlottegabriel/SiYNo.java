@@ -17,7 +17,6 @@ import com.example.evaluacion4charlottegabriel.ui.DreamColors;
 import com.example.evaluacion4charlottegabriel.ui.DreamUi;
 import com.example.evaluacion4charlottegabriel.ui.GlassPanel;
 import com.example.evaluacion4charlottegabriel.ui.KawaiiSymbolView;
-import com.example.evaluacion4charlottegabriel.ui.TarotCardWidget;
 import com.example.evaluacion4charlottegabriel.ui.TarotScaffold;
 
 import java.util.Arrays;
@@ -46,35 +45,41 @@ public class SiYNo extends AppCompatActivity {
     private void build(int numero, int rotacion, Carta carta) {
         TarotScaffold scaffold = new TarotScaffold(this);
         LinearLayout root = scaffold.content();
-        TextView header = DreamUi.text(this, "Si o No", 29, DreamColors.INK, Typeface.BOLD);
+        TextView header = DreamUi.text(this, "Sí o No", 29, DreamColors.INK, Typeface.BOLD);
         header.setGravity(Gravity.CENTER);
         root.addView(header);
-        TextView prompt = DreamUi.text(this, "Piensa tu pregunta con el corazon tranquilo.", 15, DreamColors.DEEP, Typeface.NORMAL);
+        TextView prompt = DreamUi.text(this, "Piensa en tu pregunta\ncon el corazón", 15, DreamColors.DEEP, Typeface.NORMAL);
         prompt.setGravity(Gravity.CENTER);
         add(root, prompt, 4, 14);
 
-        String title = carta == null ? "Carta no disponible" : rotacion == 0 ? carta.getTitulo() : carta.getTitulo() + " (Invertida)";
         String desc = carta == null ? "" : rotacion == 0 ? carta.getDescripcion() : carta.getDescripcionInvertida();
-        TarotCardWidget card = new TarotCardWidget(this);
-        card.bind(numero, title, desc, rotacion);
-        add(root, card, 0, 18);
+        FrameLayout dropFrame = new FrameLayout(this);
+        KawaiiSymbolView drop = new KawaiiSymbolView(this, KawaiiSymbolView.DROP);
+        dropFrame.addView(drop, new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                DreamUi.dp(this, 190)));
+        add(root, dropFrame, 2, 8);
+
+        DreamButton consult = new DreamButton(this, "Consultar");
+        add(root, consult, 0, 20);
 
         GlassPanel result = new GlassPanel(this);
         result.setGravity(Gravity.CENTER_HORIZONTAL);
         String answer = obtenerResultado(numero);
-        FrameLayout mascotFrame = new FrameLayout(this);
-        KawaiiSymbolView reaction = new KawaiiSymbolView(this, CardMeta.familySymbol(numero));
-        mascotFrame.addView(reaction, new FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                DreamUi.dp(this, 116)));
-        result.addView(mascotFrame);
 
         TextView label = DreamUi.text(this, answer, 34, answerColor(answer), Typeface.BOLD);
         label.setGravity(Gravity.CENTER);
         result.addView(label);
+        KawaiiSymbolView reaction = new KawaiiSymbolView(this, CardMeta.familySymbol(numero));
+        result.addView(reaction, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                DreamUi.dp(this, 116)));
         TextView sub = DreamUi.text(this, responseCopy(answer), 15, DreamColors.DEEP, Typeface.NORMAL);
         sub.setGravity(Gravity.CENTER);
-        add(result, sub, 8, 16);
+        add(result, sub, 8, 8);
+        TextView explanation = DreamUi.text(this, desc, 13, DreamColors.MUTED, Typeface.NORMAL);
+        explanation.setGravity(Gravity.CENTER);
+        add(result, explanation, 2, 16);
         DreamButton again = new DreamButton(this, "Hacer otra pregunta");
         again.setOnClickListener(v -> finish());
         add(result, again, 0, 0);
@@ -98,9 +103,9 @@ public class SiYNo extends AppCompatActivity {
     }
 
     private String responseCopy(String answer) {
-        if ("SI".equals(answer)) return "La energia favorece tu camino. Avanza con dulzura y confianza.";
+        if ("SI".equals(answer)) return "La energía favorece tu camino ✨";
         if ("NO".equals(answer)) return "La carta sugiere esperar. Protege tu paz antes de moverte.";
-        return "Todavia hay nubes suaves en la respuesta. Observa un poco mas.";
+        return "Todavía hay nubes suaves en la respuesta. Observa un poco más.";
     }
     private void add(LinearLayout parent, android.view.View child, int top, int bottom) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(

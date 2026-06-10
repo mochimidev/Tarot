@@ -19,9 +19,6 @@
             android:name=".SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".SpiritPetActivity"
-            android:exported="false" />
-        <activity
             android:name=".CollectionActivity"
             android:exported="false" />
         <activity

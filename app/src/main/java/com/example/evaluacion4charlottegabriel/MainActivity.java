@@ -21,9 +21,10 @@ import com.example.evaluacion4charlottegabriel.Dao.FirebaseTarotDatabase;
 import com.example.evaluacion4charlottegabriel.ui.DreamButton;
 import com.example.evaluacion4charlottegabriel.ui.DreamColors;
 import com.example.evaluacion4charlottegabriel.ui.DreamUi;
+import com.example.evaluacion4charlottegabriel.ui.DreamBottomNav;
 import com.example.evaluacion4charlottegabriel.ui.GlassPanel;
 import com.example.evaluacion4charlottegabriel.ui.KawaiiSymbolView;
-import com.example.evaluacion4charlottegabriel.ui.SpiritPetWidget;
+import com.example.evaluacion4charlottegabriel.ui.MagicSceneView;
 import com.example.evaluacion4charlottegabriel.ui.TarotScaffold;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void buildHome() {
         TarotScaffold scaffold = new TarotScaffold(this);
+        scaffold.setBottomNav(DreamBottomNav.HOME);
         LinearLayout root = scaffold.content();
 
         GlassPanel hero = new GlassPanel(this);
@@ -55,21 +57,20 @@ public class MainActivity extends AppCompatActivity {
         logo.setAdjustViewBounds(true);
         logo.setScaleType(ImageView.ScaleType.FIT_CENTER);
         hero.addView(logo, new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 230)));
+                ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 188)));
 
-        TextView greeting = DreamUi.text(this, "Hola, Charlotte", 28, DreamColors.INK, Typeface.BOLD);
+        TextView greeting = DreamUi.text(this, "¡Hola, Charlotte! ✨", 26, DreamColors.INK, Typeface.BOLD);
         greeting.setGravity(Gravity.CENTER);
         hero.addView(greeting);
 
-        TextView subtitle = DreamUi.text(this, "Tu album magico desperto con cartas, nubes y pequenos deseos brillando para ti.", 15, DreamColors.DEEP, Typeface.NORMAL);
+        TextView subtitle = DreamUi.text(this, "¿Qué mensaje mágico te espera hoy?", 15, DreamColors.DEEP, Typeface.NORMAL);
         subtitle.setGravity(Gravity.CENTER);
         add(hero, subtitle, 4, 12);
 
-        SpiritPetWidget pet = new SpiritPetWidget(this);
-        pet.setLevel(getSharedPreferences("collection", MODE_PRIVATE).getAll().size() / 4 + 1);
-        hero.addView(pet, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 150)));
+        MagicSceneView scene = new MagicSceneView(this, MagicSceneView.FLOATING_CARD);
+        hero.addView(scene, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 150)));
 
-        DreamButton daily = new DreamButton(this, "Revelar mi carta del dia");
+        DreamButton daily = new DreamButton(this, "Carta del Día");
         daily.setOnClickListener(v -> inciarActividadCartaDelDia(v));
         add(hero, daily, 10, 0);
         add(root, hero, 0, 0, 18);
@@ -82,11 +83,10 @@ public class MainActivity extends AppCompatActivity {
         menu.setColumnCount(2);
         add(root, menu, 0, 0, 0);
 
-        addMenu(menu, "Carta del Dia", "Un mensaje ilustrado del universo.", KawaiiSymbolView.STAR, DreamColors.GOLD_SOFT, v -> inciarActividadCartaDelDia(v));
-        addMenu(menu, "Si o No", "Respuesta clara con magia suave.", KawaiiSymbolView.DROP, DreamColors.CLOUD, v -> iniciarActividadSiyno(v));
-        addMenu(menu, "Tarot de Parejas", "Dos energias conectadas por luz.", KawaiiSymbolView.FLAME, DreamColors.ROSE_SOFT, v -> iniciarActividadTarotPareja(v));
-        addMenu(menu, "Coleccion", "Album premium por familias.", KawaiiSymbolView.SPROUT, DreamColors.SPROUT_SOFT, v -> startActivity(new Intent(this, CollectionActivity.class)));
-        addMenu(menu, "Mi Mascota", "Tu guia unicornio y su nivel.", KawaiiSymbolView.UNICORN, 0xffffeef8, v -> startActivity(new Intent(this, SpiritPetActivity.class)));
+        addMenu(menu, "Carta del Día", "Descubre el mensaje que el universo tiene para ti.", KawaiiSymbolView.STAR, DreamColors.GOLD_SOFT, v -> inciarActividadCartaDelDia(v));
+        addMenu(menu, "Sí o No", "Obtén una respuesta clara y sencilla.", KawaiiSymbolView.DROP, DreamColors.CLOUD, v -> iniciarActividadSiyno(v));
+        addMenu(menu, "Tarot de Parejas", "Explora la conexión en su vínculo.", KawaiiSymbolView.FLAME, DreamColors.ROSE_SOFT, v -> iniciarActividadTarotPareja(v));
+        addMenu(menu, "Colección", "Reúne y descubre todas las cartas.", KawaiiSymbolView.SPROUT, DreamColors.SPROUT_SOFT, v -> startActivity(new Intent(this, CollectionActivity.class)));
         addMenu(menu, "Ajustes", "Sonido, brillo y preferencias.", KawaiiSymbolView.STAR, 0xffedf5ff, v -> startActivity(new Intent(this, SettingsActivity.class)));
 
         setContentView(scaffold);
@@ -96,17 +96,17 @@ public class MainActivity extends AppCompatActivity {
         GlassPanel panel = new GlassPanel(this);
         panel.setClickable(true);
         panel.setOnClickListener(click);
-        panel.setMinimumHeight(DreamUi.dp(this, 176));
+        panel.setMinimumHeight(DreamUi.dp(this, 148));
         panel.setPadding(DreamUi.dp(this, 12), DreamUi.dp(this, 12), DreamUi.dp(this, 12), DreamUi.dp(this, 14));
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
                 new int[]{DreamUi.blend(tint, 0xffffffff, .25f), 0xfafffbf4});
-        bg.setCornerRadius(DreamUi.dp(this, 28));
+        bg.setCornerRadius(DreamUi.dp(this, 18));
         bg.setStroke(DreamUi.dp(this, 1), DreamColors.GLASS_STROKE);
         panel.setBackground(bg);
 
         KawaiiSymbolView icon = new KawaiiSymbolView(this, symbol);
         panel.addView(icon, new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 74)));
+                ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 58)));
 
         TextView titleView = DreamUi.text(this, title, 17, DreamColors.INK, Typeface.BOLD);
         titleView.setGravity(Gravity.CENTER);

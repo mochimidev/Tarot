@@ -73,7 +73,7 @@ public class CardDetailActivity extends AppCompatActivity {
 
     private void addStoryPanel(String title, Carta carta) {
         GlassPanel panel = new GlassPanel(this);
-        TextView storyTitle = DreamUi.text(this, "Historia", 22, DreamColors.INK, Typeface.BOLD);
+        TextView storyTitle = DreamUi.text(this, "Significado", 22, DreamColors.INK, Typeface.BOLD);
         storyTitle.setGravity(Gravity.CENTER);
         panel.addView(storyTitle);
 
@@ -81,9 +81,9 @@ public class CardDetailActivity extends AppCompatActivity {
         story.setGravity(Gravity.CENTER);
         add(panel, story, 8, 16);
 
-        TextView meaningLabel = DreamUi.label(this, "Significado", DreamColors.GOLD);
+        TextView meaningLabel = DreamUi.label(this, "Mensaje", DreamColors.GOLD);
         panel.addView(meaningLabel);
-        TextView meaning = DreamUi.text(this, carta == null ? "Una energia suave espera ser descubierta en tu album." : carta.getDescripcion(), 14, DreamColors.INK, Typeface.NORMAL);
+        TextView meaning = DreamUi.text(this, carta == null ? "Una energía suave espera ser descubierta en tu álbum." : carta.getDescripcion(), 14, DreamColors.INK, Typeface.NORMAL);
         add(panel, meaning, 6, 12);
 
         TextView reversedLabel = DreamUi.label(this, "Invertida", DreamColors.ROSE);
@@ -109,10 +109,10 @@ public class CardDetailActivity extends AppCompatActivity {
         });
         row.addView(favorite, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        DreamButton collection = new DreamButton(this, "En mi coleccion");
+        DreamButton collection = new DreamButton(this, "En colección");
         collection.setOnClickListener(v -> {
             prefs.edit().putBoolean("card_" + numero, true).apply();
-            Toast.makeText(this, "Guardada en tu album", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Guardada en tu álbum", Toast.LENGTH_SHORT).show();
         });
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.topMargin = DreamUi.dp(this, 10);

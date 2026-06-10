@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
-import com.example.evaluacion4charlottegabriel.R;
-
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +30,7 @@ public final class TarotAssetLoader {
         if (drawable != null) {
             imageView.setImageDrawable(drawable);
         } else {
-            imageView.setImageResource(R.drawable.ic_launcher_background);
+            imageView.setImageDrawable(new TarotBackDrawable(imageView.getContext()));
         }
         imageView.setRotation(rotation);
     }

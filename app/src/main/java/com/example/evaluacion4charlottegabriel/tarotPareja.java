@@ -42,7 +42,7 @@ public class tarotPareja extends AppCompatActivity {
         TextView header = DreamUi.text(this, "Tarot de Parejas", 29, DreamColors.INK, Typeface.BOLD);
         header.setGravity(Gravity.CENTER);
         root.addView(header);
-        TextView sub = DreamUi.text(this, "Dos cartas grandes, una corriente brillante y un pequeno lazo de corazones.", 15, DreamColors.DEEP, Typeface.NORMAL);
+        TextView sub = DreamUi.text(this, "Tu energía y otra energía se encuentran en una conexión suave.", 15, DreamColors.DEEP, Typeface.NORMAL);
         sub.setGravity(Gravity.CENTER);
         add(root, sub, 4, 18);
 
@@ -65,10 +65,10 @@ public class tarotPareja extends AppCompatActivity {
         add(root, connection, 0, 18);
 
         GlassPanel summary = new GlassPanel(this);
-        TextView title = DreamUi.text(this, "Conexion revelada", 23, DreamColors.INK, Typeface.BOLD);
+        TextView title = DreamUi.text(this, "Conexión revelada", 23, DreamColors.INK, Typeface.BOLD);
         title.setGravity(Gravity.CENTER);
         summary.addView(title);
-        TextView body = DreamUi.text(this, "Cuando las cartas se miran, muestran como cuidar el vinculo: escuchar, jugar, agradecer y dejar espacio para que cada persona brille a su ritmo.", 15, DreamColors.DEEP, Typeface.NORMAL);
+        TextView body = DreamUi.text(this, "Ambas energías se complementan con ternura y comprensión. La conexión puede crecer aún más con comunicación y paciencia.", 15, DreamColors.DEEP, Typeface.NORMAL);
         body.setGravity(Gravity.CENTER);
         add(summary, body, 10, 0);
         add(root, summary, 0, 0);

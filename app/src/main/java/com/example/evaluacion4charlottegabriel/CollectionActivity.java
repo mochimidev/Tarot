@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.evaluacion4charlottegabriel.ui.CardMeta;
 import com.example.evaluacion4charlottegabriel.ui.CollectionCard;
+import com.example.evaluacion4charlottegabriel.ui.DreamBottomNav;
 import com.example.evaluacion4charlottegabriel.ui.DreamColors;
 import com.example.evaluacion4charlottegabriel.ui.DreamUi;
 import com.example.evaluacion4charlottegabriel.ui.GlassPanel;
@@ -36,8 +37,9 @@ public class CollectionActivity extends AppCompatActivity {
         }
 
         TarotScaffold scaffold = new TarotScaffold(this);
+        scaffold.setBottomNav(DreamBottomNav.COLLECTION);
         LinearLayout root = scaffold.content();
-        TextView header = DreamUi.text(this, "Coleccion", 30, DreamColors.INK, Typeface.BOLD);
+        TextView header = DreamUi.text(this, "Colección", 30, DreamColors.INK, Typeface.BOLD);
         header.setGravity(Gravity.CENTER);
         root.addView(header);
 
@@ -46,16 +48,16 @@ public class CollectionActivity extends AppCompatActivity {
         TextView pct = DreamUi.text(this, unlocked + "/78 cartas", 25, DreamColors.INK, Typeface.BOLD);
         pct.setGravity(Gravity.CENTER);
         progress.addView(pct);
-        TextView sub = DreamUi.text(this, Math.round(unlocked * 100f / 78f) + "% del album iluminado", 14, DreamColors.DEEP, Typeface.NORMAL);
+        TextView sub = DreamUi.text(this, Math.round(unlocked * 100f / 78f) + "% del álbum iluminado", 14, DreamColors.DEEP, Typeface.NORMAL);
         sub.setGravity(Gravity.CENTER);
         add(progress, sub, 2, 8);
         addProgressBar(progress, unlocked);
         add(root, progress, 12, 16);
 
-        addFamily(root, "Arcanos Mayores", "El cuento principal del destino", 0, 21, KawaiiSymbolView.UNICORN);
-        addFamily(root, "Chispas", "Valentia, juego y comienzos", 22, 35, KawaiiSymbolView.FLAME);
-        addFamily(root, "Gotitas", "Emociones, ternura e intuicion", 36, 49, KawaiiSymbolView.DROP);
-        addFamily(root, "Estrellas", "Deseos, guia y confianza", 50, 63, KawaiiSymbolView.STAR);
+        addFamily(root, "Arcanos Mayores", "El cuento principal del destino", 0, 21, KawaiiSymbolView.STAR);
+        addFamily(root, "Chispas", "Valentía, juego y comienzos", 22, 35, KawaiiSymbolView.FLAME);
+        addFamily(root, "Gotitas", "Emociones, ternura e intuición", 36, 49, KawaiiSymbolView.DROP);
+        addFamily(root, "Estrellas", "Deseos, guía y confianza", 50, 63, KawaiiSymbolView.STAR);
         addFamily(root, "Brotes", "Crecimiento, cuidado y abundancia", 64, 77, KawaiiSymbolView.SPROUT);
         setContentView(scaffold);
     }
@@ -97,6 +99,19 @@ public class CollectionActivity extends AppCompatActivity {
         android.widget.ProgressBar bar = new android.widget.ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
         bar.setMax(78);
         bar.setProgress(unlocked);
+        android.graphics.drawable.GradientDrawable track = DreamUi.stroked(0x77ffffff, DreamColors.GLASS_STROKE,
+                DreamUi.dp(this, 8), DreamUi.dp(this, 1));
+        android.graphics.drawable.GradientDrawable fill = new android.graphics.drawable.GradientDrawable(
+                android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{DreamColors.LILAC, DreamColors.ROSE, DreamColors.GOLD_SOFT});
+        fill.setCornerRadius(DreamUi.dp(this, 8));
+        android.graphics.drawable.ClipDrawable clip = new android.graphics.drawable.ClipDrawable(fill,
+                Gravity.LEFT, android.graphics.drawable.ClipDrawable.HORIZONTAL);
+        android.graphics.drawable.LayerDrawable layers = new android.graphics.drawable.LayerDrawable(
+                new android.graphics.drawable.Drawable[]{track, clip});
+        layers.setId(0, android.R.id.background);
+        layers.setId(1, android.R.id.progress);
+        bar.setProgressDrawable(layers);
         parent.addView(bar, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 DreamUi.dp(this, 12)));
