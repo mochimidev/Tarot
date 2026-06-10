@@ -1,41 +1,55 @@
-# Dream Sprouts Tarot
+# Tarot Kawaii Dreams
 
-Dream Sprouts Tarot es una aplicacion Android nativa de tarot con una estetica premium, magica y kawaii. La experiencia actual esta inspirada en colecciones de cartas digitales, con una interfaz pastel, ilustrada y pensada para lectura emocional.
+Tarot Kawaii Dreams es una aplicación Android nativa de tarot ilustrado con estética de cuento mágico, papelería japonesa y acuarela pastel. La experiencia gira alrededor de cartas coleccionables, lecturas suaves y una interfaz visualmente cercana a un álbum mágico.
 
-El proyecto esta hecho en Java con layouts y vistas custom, y toma la informacion de las cartas desde Firebase Realtime Database.
+La app está construida en Java con vistas personalizadas. Usa las cartas reales del proyecto desde `assets/tarot_cards` y carga la información de cada carta desde Firebase Realtime Database.
 
-## Capturas actuales
+## Capturas Actuales
 
-Estas son las capturas reales del estado actual de la app:
-
-| Inicio | Carta del dia |
+| Inicio | Carta del Día |
 | --- | --- |
-| ![Inicio](docs/screenshots/home.png) | ![Carta del dia](docs/screenshots/carta-del-dia.png) |
+| ![Inicio](docs/screenshots/home-redesign.png) | ![Carta del Día](docs/screenshots/carta-del-dia.png) |
 
-| Si o No | Tarot de parejas |
+| Sí o No | Tarot de Parejas |
 | --- | --- |
-| ![Si o No](docs/screenshots/si-o-no.png) | ![Tarot de parejas](docs/screenshots/tarot-parejas.png) |
+| ![Sí o No](docs/screenshots/si-o-no.png) | ![Tarot de Parejas](docs/screenshots/tarot-parejas.png) |
 
-## Que incluye esta version
+| Colección | Ajustes |
+| --- | --- |
+| ![Colección](docs/screenshots/coleccion.png) | ![Ajustes](docs/screenshots/ajustes.png) |
 
-- Home con hero animado, estrellas, nubes y accesos ilustrados.
-- Carta del dia con revelacion visual y boton para guardar en coleccion.
-- Consulta Si o No con carta grande y resultado claro.
-- Tarot de parejas con dos cartas y conexion visual entre ambas.
-- Coleccion con album de cartas, rarezas y progreso.
-- Mi Mascota con un espiritu evolutivo que sube de nivel.
-- Ajustes con controles simples para sonido y animaciones.
+## Experiencia
 
-## Tecnologias
+- Home con fondo pastel, logo, saludo, escena mágica decorativa, accesos principales y navegación inferior.
+- Carta del Día con carta cerrada, revelación al tocar, resultado e interpretación.
+- Sí o No con gotita kawaii, consulta, respuesta y explicación.
+- Tarot de Parejas con dos cartas grandes, conexión visual e interpretación conjunta.
+- Colección con categorías, progreso, cartas desbloqueadas y cartas bloqueadas con estilo de álbum.
+- Detalle de carta con carta grande, familia, significado, lectura invertida y acciones.
+
+## Dirección Visual
+
+La interfaz busca sentirse como un libro ilustrado premium:
+
+- lavanda pastel
+- rosa suave
+- azul acuarela
+- verde brote
+- dorado cálido
+- crema luminoso
+
+Los elementos decorativos se dibujan con vistas custom para evitar placeholders o iconos Android genéricos: nubes, estrellas, reversos de carta, partículas, cartas bloqueadas y navegación inferior.
+
+## Tecnologías
 
 - Android nativo
 - Java
-- XML y vistas custom
 - Gradle
 - Firebase Realtime Database
-- AndroidX AppCompat, ConstraintLayout y Material Components
+- AndroidX AppCompat
+- Vistas custom en Canvas
 
-## Estructura principal
+## Estructura Principal
 
 ```text
 app/
@@ -45,56 +59,32 @@ app/
     SiYNo.java
     tarotPareja.java
     CollectionActivity.java
-    SpiritPetActivity.java
+    CardDetailActivity.java
     SettingsActivity.java
     Dao/
       Carta.java
       DaoCarta.java
+      FirebaseTarotDatabase.java
     ui/
       DreamBackground.java
+      DreamBottomNav.java
       DreamButton.java
       TarotScaffold.java
       AnimatedRevealCard.java
       TarotCardWidget.java
       CollectionCard.java
-      SpiritPetWidget.java
-  src/main/res/
-    layout/
-    drawable/
-    values/
+      CardBackView.java
+      MagicSceneView.java
+      TarotBackDrawable.java
+assets/
+  tarot_cards/
 docs/
   screenshots/
 ```
 
-## Pantallas
+## Compilación
 
-### Inicio
-
-La pantalla principal presenta las experiencias disponibles en formato de carta ilustrada, con acceso directo a cada modo.
-
-### Carta del dia
-
-Muestra una carta gigante, su revelacion y el significado correspondiente. La carta se puede guardar en la coleccion.
-
-### Si o No
-
-Interpreta una carta como respuesta afirmativa, negativa o intermedia segun listas internas de cartas favorables y desfavorables.
-
-### Tarot de parejas
-
-Muestra dos cartas grandes para analizar la energia entre dos personas.
-
-### Coleccion
-
-Permite ver el album completo, el progreso y el estado de cada carta.
-
-### Mi Mascota
-
-Presenta la mascota guia de la app y su nivel, ligado a la coleccion del usuario.
-
-## Compilacion
-
-Desde la raiz del proyecto:
+Desde la raíz del proyecto:
 
 ```powershell
 .\gradlew.bat assembleDebug
@@ -106,10 +96,6 @@ La APK debug se genera en:
 app/build/outputs/apk/debug/app-debug.apk
 ```
 
-## Nota tecnica
-
-El proyecto fue actualizado a Gradle 8.7 y Android Gradle Plugin 8.2 para poder compilar con el entorno local actual.
-
 ## Autores
 
-Charlotte Rodriguez y Gabriel Barrientos.
+Charlotte Rodríguez y Gabriel Barrientos.
