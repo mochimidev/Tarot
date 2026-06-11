@@ -1,53 +1,44 @@
 # Tarot Kawaii Dreams
 
-Tarot Kawaii Dreams es una aplicación Android nativa de tarot ilustrado con estética de cuento mágico, papelería japonesa y acuarela pastel. La experiencia gira alrededor de cartas coleccionables, lecturas suaves y una interfaz visualmente cercana a un álbum mágico.
+Tarot Kawaii Dreams es una app Android nativa de tarot ilustrado con estetica kawaii, acuarela pastel y contenedores tipo album magico. La experiencia combina lectura diaria, consultas rapidas, coleccion de familias y una mascota guia.
 
-La app está construida en Java con vistas personalizadas. Usa las cartas reales del proyecto desde `assets/tarot_cards` y carga la información de cada carta desde Firebase Realtime Database.
+La app esta construida en Java con vistas personalizadas. Usa las cartas reales del proyecto desde `assets/tarot_cards` y mantiene la navegacion principal con bottom nav.
 
 ## Capturas Actuales
 
-| Inicio | Carta del Día |
+| Inicio | Coleccion |
 | --- | --- |
-| ![Inicio](docs/screenshots/home-redesign.png) | ![Carta del Día](docs/screenshots/carta-del-dia.png) |
+| ![Inicio](docs/screenshots/home.png) | ![Coleccion](docs/screenshots/coleccion.png) |
 
-| Sí o No | Tarot de Parejas |
+| Gotitas | Mascota |
 | --- | --- |
-| ![Sí o No](docs/screenshots/si-o-no.png) | ![Tarot de Parejas](docs/screenshots/tarot-parejas.png) |
+| ![Gotitas](docs/screenshots/coleccion-gotitas.png) | ![Mascota](docs/screenshots/mascota.png) |
 
-| Colección | Ajustes |
+| Ajustes | Carta del Dia |
 | --- | --- |
-| ![Colección](docs/screenshots/coleccion.png) | ![Ajustes](docs/screenshots/ajustes.png) |
+| ![Ajustes](docs/screenshots/ajustes.png) | ![Carta del Dia](docs/screenshots/carta-dia.png) |
 
-## Experiencia
+## Flujo Principal
 
-- Home con fondo pastel, logo, saludo, escena mágica decorativa, accesos principales y navegación inferior.
-- Carta del Día con carta cerrada, revelación al tocar, resultado e interpretación.
-- Sí o No con gotita kawaii, consulta, respuesta y explicación.
-- Tarot de Parejas con dos cartas grandes, conexión visual e interpretación conjunta.
-- Colección con categorías, progreso, cartas desbloqueadas y cartas bloqueadas con estilo de álbum.
-- Detalle de carta con carta grande, familia, significado, lectura invertida y acciones.
+- Inicio muestra saludo, unicornio hero, Carta del Dia y accesos a Si o No, Tarot de Parejas, Coleccion y Mascota.
+- Coleccion abre primero un indice de familias: Gotitas, Chispas, Estrellas, Brotes y Unicornios.
+- Al tocar una familia, se abre su album con grid de cartas desbloqueadas y cartas dormidas.
+- Carta del Dia presenta una carta cerrada que se revela al tocar.
+- Si o No abre una lectura rapida desde la card del Home.
+- Mascota y Ajustes usan el mismo sistema visual de paneles pastel.
 
-## Dirección Visual
+## Sistema Visual
 
-La interfaz busca sentirse como un libro ilustrado premium:
+Los contenedores comparten un lenguaje visual comun:
 
-- lavanda pastel
-- rosa suave
-- azul acuarela
-- verde brote
-- dorado cálido
-- crema luminoso
-
-Los elementos decorativos se dibujan con vistas custom para evitar placeholders o iconos Android genéricos: nubes, estrellas, reversos de carta, partículas, cartas bloqueadas y navegación inferior.
-
-## Tecnologías
-
-- Android nativo
-- Java
-- Gradle
-- Firebase Realtime Database
-- AndroidX AppCompat
-- Vistas custom en Canvas
+- fondos crema, blanco rosado o pastel suave
+- borde dorado fino
+- esquinas redondeadas
+- sombra suave
+- texto morado elegante
+- subtitulos lila
+- iconos kawaii acuarela
+- bottom nav tipo pildora, legible y con item activo
 
 ## Estructura Principal
 
@@ -60,31 +51,26 @@ app/
     tarotPareja.java
     CollectionActivity.java
     CardDetailActivity.java
+    MascotaActivity.java
     SettingsActivity.java
+    TarotNavigator.java
     Dao/
-      Carta.java
-      DaoCarta.java
-      FirebaseTarotDatabase.java
     ui/
       DreamBackground.java
       DreamBottomNav.java
-      DreamButton.java
+      DreamPanelDrawable.java
       TarotScaffold.java
-      AnimatedRevealCard.java
-      TarotCardWidget.java
       CollectionCard.java
-      CardBackView.java
-      MagicSceneView.java
-      TarotBackDrawable.java
+      TarotCardWidget.java
 assets/
   tarot_cards/
 docs/
   screenshots/
 ```
 
-## Compilación
+## Compilacion
 
-Desde la raíz del proyecto:
+Desde la raiz del proyecto:
 
 ```powershell
 .\gradlew.bat assembleDebug
@@ -96,6 +82,12 @@ La APK debug se genera en:
 app/build/outputs/apk/debug/app-debug.apk
 ```
 
+## Notas
+
+- No se generan assets por codigo: las ilustraciones vienen de los recursos existentes.
+- La pantalla Coleccion siempre inicia en el indice de familias.
+- Las pantallas de familia conservan el fondo acuarela y el bottom nav consistente.
+
 ## Autores
 
-Charlotte Rodríguez y Gabriel Barrientos.
+Charlotte Rodriguez y Gabriel Barrientos.
