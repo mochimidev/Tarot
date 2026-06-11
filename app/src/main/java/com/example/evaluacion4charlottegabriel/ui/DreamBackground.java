@@ -40,6 +40,7 @@ public class DreamBackground extends View {
     private int gradientWidth;
     private int gradientHeight;
     private float phase;
+    private boolean quietHome;
 
     public DreamBackground(Context context) {
         super(context);
@@ -64,6 +65,11 @@ public class DreamBackground extends View {
         animator.start();
     }
 
+    public void setQuietHome(boolean quietHome) {
+        this.quietHome = quietHome;
+        invalidate();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -83,11 +89,13 @@ public class DreamBackground extends View {
                     Shader.TileMode.CLAMP));
         }
         canvas.drawRect(0, 0, w, h, backgroundPaint);
-        paint.setAlpha(255);
+        paint.setAlpha(quietHome ? 92 : 255);
         DreamAssets.drawFill(canvas, getContext(), R.drawable.bg_watercolor, new RectF(0, 0, w, h), paint);
-        drawCloud(canvas, CLOUDS[0], w * (.02f + phase * .018f), h * .17f, w * .44f, 58);
-        drawCloud(canvas, CLOUDS[1], w * (.62f - phase * .018f), h * .36f, w * .34f, 48);
-        drawCloud(canvas, CLOUDS[2], w * .04f, h * .82f, w * .50f, 52);
+        if (!quietHome) {
+            drawCloud(canvas, CLOUDS[0], w * (.02f + phase * .018f), h * .17f, w * .44f, 58);
+            drawCloud(canvas, CLOUDS[1], w * (.62f - phase * .018f), h * .36f, w * .34f, 48);
+            drawCloud(canvas, CLOUDS[2], w * .04f, h * .82f, w * .50f, 52);
+        }
         drawSparkles(canvas, w, h);
     }
 
@@ -99,12 +107,13 @@ public class DreamBackground extends View {
     }
 
     private void drawSparkles(Canvas canvas, int w, int h) {
-        for (int i = 0; i < 18; i++) {
+        int count = quietHome ? 12 : 18;
+        for (int i = 0; i < count; i++) {
             float x = ((i * 73) % 100) / 100f * w;
             float y = ((i * 47) % 100) / 100f * h;
-            float size = DreamUi.dp(getContext(), 10 + (i % 4) * 3);
+            float size = DreamUi.dp(getContext(), quietHome ? 7 + (i % 3) * 2 : 10 + (i % 4) * 3);
             float pulse = .68f + .32f * (float) Math.sin((phase * Math.PI * 2) + i);
-            paint.setAlpha((int) (46 + pulse * 58));
+            paint.setAlpha((int) ((quietHome ? 28 : 46) + pulse * (quietHome ? 34 : 58)));
             DreamAssets.drawFitCenter(canvas, getContext(), SPARKLES[i % SPARKLES.length],
                     new RectF(x - size, y - size, x + size, y + size), paint);
         }

@@ -11,6 +11,7 @@ import android.widget.ScrollView;
 public class TarotScaffold extends FrameLayout {
     private final LinearLayout content;
     private final ScrollView scrollView;
+    private final DreamBackground background;
     private DreamBottomNav bottomNav;
 
     public TarotScaffold(Context context) {
@@ -19,7 +20,8 @@ public class TarotScaffold extends FrameLayout {
             ((Activity) context).getWindow().setStatusBarColor(Color.rgb(11, 13, 39));
             ((Activity) context).getWindow().setNavigationBarColor(Color.BLACK);
         }
-        addView(new DreamBackground(context), new LayoutParams(
+        background = new DreamBackground(context);
+        addView(background, new LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
         scrollView = new ScrollView(context);
@@ -43,21 +45,29 @@ public class TarotScaffold extends FrameLayout {
     }
 
     public void setBottomNav(int active) {
+        setBottomNav(active, false);
+    }
+
+    public void setBottomNav(int active, boolean compact) {
         if (bottomNav != null) {
             removeView(bottomNav);
         }
-        bottomNav = new DreamBottomNav(getContext(), active);
+        bottomNav = new DreamBottomNav(getContext(), active, compact);
         ViewGroup.LayoutParams scrollParams = scrollView.getLayoutParams();
         if (scrollParams instanceof MarginLayoutParams) {
-            ((MarginLayoutParams) scrollParams).bottomMargin = DreamUi.dp(getContext(), 118);
+            ((MarginLayoutParams) scrollParams).bottomMargin = DreamUi.dp(getContext(), compact ? 86 : 118);
             scrollView.setLayoutParams(scrollParams);
         }
         LayoutParams params = new LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
-        int margin = DreamUi.dp(getContext(), 12);
+        int margin = DreamUi.dp(getContext(), compact ? 4 : 12);
         params.setMargins(margin, 0, margin, margin);
         params.gravity = android.view.Gravity.BOTTOM;
         addView(bottomNav, params);
+    }
+
+    public void setQuietHomeBackground(boolean quietHome) {
+        background.setQuietHome(quietHome);
     }
 }

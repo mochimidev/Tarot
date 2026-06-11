@@ -10,7 +10,7 @@ public class GlassPanel extends LinearLayout {
         int pad = DreamUi.dp(context, 20);
         setPadding(pad, pad, pad, pad);
         DreamUi.softLayer(this);
-        setElevation(DreamUi.dp(context, 5));
+        setElevation(DreamUi.dp(context, 3));
         setBackground(new DreamPanelDrawable(context));
     }
 }

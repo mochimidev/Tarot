@@ -30,38 +30,38 @@ public class DreamPanelDrawable extends Drawable {
     public void draw(Canvas canvas) {
         RectF bounds = new RectF(getBounds());
         RectF shadow = new RectF(bounds);
-        shadow.inset(DreamUi.dp(context, 4), DreamUi.dp(context, 3));
-        shadow.offset(0, DreamUi.dp(context, 4));
+        shadow.inset(DreamUi.dp(context, 5), DreamUi.dp(context, 4));
+        shadow.offset(0, DreamUi.dp(context, 5));
         paint.setShader(null);
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(0x18d39a48);
-        paint.setShadowLayer(DreamUi.dp(context, 18), 0, DreamUi.dp(context, 6), 0x3bd3a15a);
-        canvas.drawRoundRect(shadow, DreamUi.dp(context, 26), DreamUi.dp(context, 26), paint);
+        paint.setColor(0x12d39a48);
+        paint.setShadowLayer(DreamUi.dp(context, 16), 0, DreamUi.dp(context, 5), 0x28b88440);
+        canvas.drawRoundRect(shadow, DreamUi.dp(context, 24), DreamUi.dp(context, 24), paint);
         paint.clearShadowLayer();
 
         paint.setShader(new LinearGradient(
                 bounds.left, bounds.top, bounds.right, bounds.bottom,
-                new int[]{0xfcfffaf0, 0xf9fffdf8, 0xfbfff1f7, 0xfafff8e6},
-                new float[]{0f, .40f, .72f, 1f},
+                new int[]{0xfffffbf2, 0xfffffdf9, 0xfffff3f8, 0xfffff8e9},
+                new float[]{0f, .44f, .76f, 1f},
                 Shader.TileMode.CLAMP));
-        canvas.drawRoundRect(bounds, DreamUi.dp(context, 26), DreamUi.dp(context, 26), paint);
+        canvas.drawRoundRect(bounds, DreamUi.dp(context, 24), DreamUi.dp(context, 24), paint);
         paint.setShader(null);
 
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(DreamUi.dp(context, 1.1f));
-        paint.setColor(0xd8e4ad55);
+        paint.setStrokeWidth(DreamUi.dp(context, 1f));
+        paint.setColor(0xb8dca657);
         RectF stroke = new RectF(bounds);
         stroke.inset(DreamUi.dp(context, 1), DreamUi.dp(context, 1));
-        canvas.drawRoundRect(stroke, DreamUi.dp(context, 25), DreamUi.dp(context, 25), paint);
+        canvas.drawRoundRect(stroke, DreamUi.dp(context, 23), DreamUi.dp(context, 23), paint);
 
         paint.setStrokeWidth(DreamUi.dp(context, .7f));
-        paint.setColor(0x7afff6d6);
+        paint.setColor(0x70fff4d1);
         RectF innerStroke = new RectF(bounds);
         innerStroke.inset(DreamUi.dp(context, 4), DreamUi.dp(context, 4));
-        canvas.drawRoundRect(innerStroke, DreamUi.dp(context, 22), DreamUi.dp(context, 22), paint);
+        canvas.drawRoundRect(innerStroke, DreamUi.dp(context, 20), DreamUi.dp(context, 20), paint);
 
         paint.setStyle(Paint.Style.FILL);
-        paint.setAlpha(42);
+        paint.setAlpha(26);
         DreamAssets.drawFill(canvas, context, frameRes, bounds, paint);
         paint.setAlpha(255);
     }
