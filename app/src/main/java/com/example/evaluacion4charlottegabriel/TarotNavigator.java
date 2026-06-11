@@ -33,6 +33,10 @@ public final class TarotNavigator {
         start(context, new Intent(context, SettingsActivity.class));
     }
 
+    public static void openPet(Context context) {
+        start(context, new Intent(context, MascotaActivity.class));
+    }
+
     public static void openDailyCard(Context context) {
         int numero = dailyCardId();
         int rotation = (numero % 2) * 180;

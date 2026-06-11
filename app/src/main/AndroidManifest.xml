@@ -19,6 +19,9 @@
             android:name=".SettingsActivity"
             android:exported="false" />
         <activity
+            android:name=".MascotaActivity"
+            android:exported="false" />
+        <activity
             android:name=".CollectionActivity"
             android:exported="false" />
         <activity

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private void buildHome() {
         TarotScaffold scaffold = new TarotScaffold(this);
         scaffold.setBottomNav(DreamBottomNav.HOME);
-        addHomeWash(scaffold);
         LinearLayout root = scaffold.content();
 
         addHeader(root);
@@ -58,19 +56,9 @@ public class MainActivity extends AppCompatActivity {
         addMenu(menu, "Si o No", "Obt\u00e9n una respuesta\nclara y sencilla.", R.drawable.icon_si_o_no, DreamColors.CLOUD, v -> TarotNavigator.openYesNo(this));
         addMenu(menu, "Tarot de Parejas", "Explora la conexi\u00f3n\nen su v\u00ednculo.", R.drawable.icon_tarot_parejas, DreamColors.ROSE_SOFT, v -> TarotNavigator.openCouples(this));
         addMenu(menu, "Colecci\u00f3n", "Re\u00fane y descubre\ntodas las cartas.", R.drawable.icon_coleccion, DreamColors.SPROUT_SOFT, v -> TarotNavigator.openCollection(this));
-        addMenu(menu, "Mi Mascota", "Cuida a tu gu\u00eda\nm\u00e1gica.", R.drawable.home_unicorn_hero, 0xffffeff7, v -> TarotNavigator.openSettings(this));
+        addMenu(menu, "Mi Mascota", "Ajustes de tu\ncompa\u00f1era m\u00e1gica.", R.drawable.home_unicorn_hero, 0xffffeff7, v -> TarotNavigator.openPet(this));
 
         setContentView(scaffold);
-    }
-
-    private void addHomeWash(TarotScaffold scaffold) {
-        View wash = new View(this);
-        GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                new int[]{0xdffff7f2, 0xcffffbf2, 0xdffff1f6});
-        wash.setBackground(bg);
-        scaffold.addView(wash, 1, new FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
     }
 
     private void addHeader(LinearLayout root) {

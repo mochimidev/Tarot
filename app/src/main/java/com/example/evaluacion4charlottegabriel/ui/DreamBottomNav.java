@@ -17,8 +17,9 @@ public class DreamBottomNav extends GlassPanel {
     public static final int HOME = 0;
     public static final int COLLECTION = 1;
     public static final int READINGS = 2;
-    public static final int COUPLES = 3;
+    public static final int PET = 3;
     public static final int SETTINGS = 4;
+    public static final int COUPLES = 5;
 
     public DreamBottomNav(Context context, int active) {
         super(context);
@@ -36,8 +37,8 @@ public class DreamBottomNav extends GlassPanel {
         addItem(context, "Lecturas", R.drawable.icon_carta_dia, active == READINGS, v -> {
             if (active != READINGS) TarotNavigator.openDailyCard(context);
         });
-        addItem(context, "Mascota", R.drawable.home_unicorn_hero, false, v -> {
-            TarotNavigator.openSettings(context);
+        addItem(context, "Mascota", R.drawable.home_unicorn_hero, active == PET, v -> {
+            if (active != PET) TarotNavigator.openPet(context);
         });
         addItem(context, "Ajustes", R.drawable.icon_ajustes, active == SETTINGS, v -> {
             if (active != SETTINGS) TarotNavigator.openSettings(context);
