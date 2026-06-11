@@ -29,13 +29,31 @@ public class SettingsActivity extends AppCompatActivity {
         LinearLayout root = scaffold.content();
         root.addView(new DreamTopBar(this, "Ajustes", true, KawaiiSymbolView.STAR));
 
+        GlassPanel intro = new GlassPanel(this);
+        intro.setGravity(Gravity.CENTER_HORIZONTAL);
+        KawaiiSymbolView star = new KawaiiSymbolView(this, KawaiiSymbolView.STAR);
+        intro.addView(star, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                DreamUi.dp(this, 92)));
+        TextView introTitle = DreamUi.text(this, "Ajustes mágicos", 24, DreamColors.INK, Typeface.BOLD);
+        introTitle.setGravity(Gravity.CENTER);
+        intro.addView(introTitle);
+        TextView introCopy = DreamUi.text(this, "Personaliza el brillo, el sonido y la calma de tus lecturas.", 14, DreamColors.DEEP, Typeface.NORMAL);
+        introCopy.setGravity(Gravity.CENTER);
+        intro.addView(introCopy);
+        add(root, intro, 6, 10);
+
         GlassPanel panel = new GlassPanel(this);
-        panel.addView(row("Sonido magico", "Campanitas suaves al revelar cartas", prefs, "sound", true));
+        TextView title = DreamUi.text(this, "Preferencias", 22, DreamColors.INK, Typeface.BOLD);
+        title.setGravity(Gravity.CENTER);
+        panel.addView(title);
+        panel.addView(new DreamDividerView(this), new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 22)));
+        panel.addView(row("Sonido mágico", "Campanitas suaves al revelar cartas", prefs, "sound", true));
         panel.addView(new DreamDividerView(this), new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 20)));
-        panel.addView(row("Particulas brillantes", "Estrellas, corazones y brillos animados", prefs, "particles", true));
+        panel.addView(row("Partículas brillantes", "Estrellas, corazones y brillos animados", prefs, "particles", true));
         panel.addView(new DreamDividerView(this), new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 20)));
-        panel.addView(row("Modo calma", "Lecturas con movimiento mas suave", prefs, "calm", false));
-        add(root, panel, 12, 0);
+        panel.addView(row("Modo calma", "Lecturas con movimiento más suave", prefs, "calm", false));
+        add(root, panel, 0, 0);
         setContentView(scaffold);
     }
 
@@ -66,10 +84,10 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void updateToggle(TextView toggle, boolean enabled) {
-        toggle.setText(enabled ? "Activo" : "Calma");
-        int fill = enabled ? 0xffc99cff : 0xffc9b8df;
-        int stroke = enabled ? 0xdffff0b8 : 0xbfffffff;
-        toggle.setBackground(DreamUi.stroked(fill, stroke, DreamUi.dp(this, 22), DreamUi.dp(this, 1.5f)));
+        toggle.setText(enabled ? "Activo" : "Pausa");
+        int fill = enabled ? 0xffb98cff : 0xffd7c7e8;
+        int stroke = enabled ? 0xe7fff0b8 : 0xdffff8ef;
+        toggle.setBackground(DreamUi.stroked(fill, stroke, DreamUi.dp(this, 22), DreamUi.dp(this, 1.2f)));
     }
 
     private void add(LinearLayout parent, android.view.View child, int top, int bottom) {
