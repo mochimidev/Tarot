@@ -5,13 +5,13 @@ import android.graphics.Color;
 public final class DreamColors {
     public static final int LAVENDER = Color.rgb(224, 209, 255);
     public static final int CREAM = Color.rgb(255, 248, 228);
-    public static final int PEACH = Color.rgb(255, 224, 205);
-    public static final int LILAC = Color.rgb(190, 150, 241);
-    public static final int LILAC_DARK = Color.rgb(96, 58, 146);
-    public static final int GOLD = Color.rgb(239, 178, 61);
+    public static final int PEACH = Color.rgb(255, 200, 138);
+    public static final int LILAC = Color.rgb(183, 138, 242);
+    public static final int LILAC_DARK = Color.rgb(110, 76, 163);
+    public static final int GOLD = Color.rgb(232, 184, 92);
     public static final int GOLD_SOFT = Color.rgb(255, 232, 160);
-    public static final int CLOUD = Color.rgb(207, 242, 255);
-    public static final int ROSE = Color.rgb(255, 157, 200);
+    public static final int CLOUD = Color.rgb(189, 238, 255);
+    public static final int ROSE = Color.rgb(247, 167, 200);
     public static final int ROSE_SOFT = Color.rgb(255, 233, 243);
     public static final int SPROUT = Color.rgb(132, 205, 143);
     public static final int SPROUT_SOFT = Color.rgb(234, 249, 219);
@@ -27,7 +27,7 @@ public final class DreamColors {
     public static final int GLASS_STROKE = Color.argb(220, 255, 255, 255);
     public static final int SHADOW = Color.argb(34, 91, 58, 139);
     public static final int CARD_SHADOW = Color.argb(50, 95, 62, 139);
-    public static final int GOLD_LINE = Color.rgb(220, 156, 56);
+    public static final int GOLD_LINE = Color.rgb(232, 184, 92);
 
     private DreamColors() {
     }

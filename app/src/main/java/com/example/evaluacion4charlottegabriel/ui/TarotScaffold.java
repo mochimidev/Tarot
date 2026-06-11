@@ -3,15 +3,19 @@ package com.example.evaluacion4charlottegabriel.ui;
 import android.content.Context;
 import android.app.Activity;
 import android.graphics.Color;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.example.evaluacion4charlottegabriel.MagicSettingsManager;
+
 public class TarotScaffold extends FrameLayout {
     private final LinearLayout content;
     private final ScrollView scrollView;
     private final DreamBackground background;
+    private final View calmOverlay;
     private DreamBottomNav bottomNav;
 
     public TarotScaffold(Context context) {
@@ -38,6 +42,14 @@ public class TarotScaffold extends FrameLayout {
         addView(scrollView, new LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
+        calmOverlay = new View(context);
+        calmOverlay.setBackgroundColor(0x26fff0d8);
+        calmOverlay.setClickable(false);
+        calmOverlay.setFocusable(false);
+        addView(calmOverlay, new LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+        applySettingsState();
     }
 
     public LinearLayout content() {
@@ -69,5 +81,29 @@ public class TarotScaffold extends FrameLayout {
 
     public void setQuietHomeBackground(boolean quietHome) {
         background.setQuietHome(quietHome);
+    }
+
+    public void applySettingsState() {
+        boolean calmMode = MagicSettingsManager.isCalmModeEnabled(getContext());
+        background.setParticlesEnabled(MagicSettingsManager.areParticlesEnabled(getContext()));
+        background.setCalmMode(calmMode);
+        calmOverlay.setVisibility(calmMode ? VISIBLE : GONE);
+        if (getContext() instanceof Activity) {
+            MagicSettingsManager.applyToActivity((Activity) getContext());
+        }
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        applySettingsState();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        super.onWindowFocusChanged(hasWindowFocus);
+        if (hasWindowFocus) {
+            applySettingsState();
+        }
     }
 }

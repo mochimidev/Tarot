@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,8 +40,8 @@ public class DreamBottomNav extends GlassPanel {
         addItem(context, "Colecci\u00f3n", R.drawable.icon_coleccion, active == COLLECTION, v -> {
             if (active != COLLECTION) TarotNavigator.openCollection(context);
         }, compact);
-        addItem(context, "Lecturas", R.drawable.icon_carta_dia, active == READINGS, v -> {
-            if (active != READINGS) TarotNavigator.openDailyCard(context);
+        addItem(context, "Lecturas", R.drawable.icon_carta_dia, active == READINGS || active == COUPLES, v -> {
+            if (active != READINGS && active != COUPLES) TarotNavigator.openDailyCard(context);
         }, compact);
         addItem(context, "Mascota", R.drawable.home_unicorn_hero, active == PET, v -> {
             if (active != PET) TarotNavigator.openPet(context);
@@ -61,17 +62,36 @@ public class DreamBottomNav extends GlassPanel {
         ImageView icon = new ImageView(context);
         icon.setImageResource(iconRes);
         icon.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        icon.setAlpha(active ? 1f : .84f);
+        icon.setAlpha(active ? 1f : .74f);
         int iconSize = DreamUi.dp(context, compact ? (active ? 29 : 26) : (active ? 31 : 28));
-        item.addView(icon, new LinearLayout.LayoutParams(iconSize, iconSize));
+        FrameLayout iconShell = new FrameLayout(context);
+        iconShell.setPadding(DreamUi.dp(context, active ? 3 : 2), DreamUi.dp(context, active ? 2 : 3),
+                DreamUi.dp(context, active ? 3 : 2), DreamUi.dp(context, active ? 2 : 3));
+        if (active) {
+            iconShell.setBackground(makeActiveIconBg(context));
+            iconShell.setElevation(DreamUi.dp(context, 2));
+            DreamUi.softLayer(iconShell);
+        }
+        iconShell.addView(icon, new FrameLayout.LayoutParams(iconSize, iconSize, Gravity.CENTER));
+        item.addView(iconShell, new LinearLayout.LayoutParams(
+                DreamUi.dp(context, compact ? 39 : 43),
+                DreamUi.dp(context, compact ? 34 : 37)));
 
-        TextView text = DreamUi.text(context, label, compact ? 8.8f : 9.4f, active ? DreamColors.LILAC_DARK : DreamColors.MUTED, active ? Typeface.BOLD : Typeface.NORMAL);
+        TextView text = DreamUi.text(context, label, compact ? 8.8f : 9.4f, active ? DreamColors.INK : DreamColors.MUTED, active ? Typeface.BOLD : Typeface.NORMAL);
         text.setGravity(Gravity.CENTER);
         text.setShadowLayer(DreamUi.dp(context, 3), 0, DreamUi.dp(context, 1), 0x66ffffff);
         item.addView(text);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
         addView(item, params);
+    }
+
+    private GradientDrawable makeActiveIconBg(Context context) {
+        GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xeafff6ea, 0xeef7d6ec, 0xe8fff1d3});
+        bg.setCornerRadius(DreamUi.dp(context, 22));
+        bg.setStroke(DreamUi.dp(context, 1), 0xaee8b85c);
+        return bg;
     }
 
     private GradientDrawable makeNavBg(Context context, boolean compact) {

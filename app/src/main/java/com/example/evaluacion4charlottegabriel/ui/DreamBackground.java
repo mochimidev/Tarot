@@ -41,6 +41,8 @@ public class DreamBackground extends View {
     private int gradientHeight;
     private float phase;
     private boolean quietHome;
+    private boolean particlesEnabled = true;
+    private boolean calmMode;
 
     public DreamBackground(Context context) {
         super(context);
@@ -70,6 +72,16 @@ public class DreamBackground extends View {
         invalidate();
     }
 
+    public void setParticlesEnabled(boolean particlesEnabled) {
+        this.particlesEnabled = particlesEnabled;
+        invalidate();
+    }
+
+    public void setCalmMode(boolean calmMode) {
+        this.calmMode = calmMode;
+        invalidate();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -89,12 +101,13 @@ public class DreamBackground extends View {
                     Shader.TileMode.CLAMP));
         }
         canvas.drawRect(0, 0, w, h, backgroundPaint);
-        paint.setAlpha(quietHome ? 92 : 255);
+        paint.setAlpha(quietHome || calmMode ? 118 : 230);
         DreamAssets.drawFill(canvas, getContext(), R.drawable.bg_watercolor, new RectF(0, 0, w, h), paint);
-        if (!quietHome) {
-            drawCloud(canvas, CLOUDS[0], w * (.02f + phase * .018f), h * .17f, w * .44f, 58);
-            drawCloud(canvas, CLOUDS[1], w * (.62f - phase * .018f), h * .36f, w * .34f, 48);
-            drawCloud(canvas, CLOUDS[2], w * .04f, h * .82f, w * .50f, 52);
+        if (!quietHome && particlesEnabled) {
+            float drift = calmMode ? phase * .006f : phase * .018f;
+            drawCloud(canvas, CLOUDS[0], w * (.02f + drift), h * .17f, w * .44f, calmMode ? 34 : 58);
+            drawCloud(canvas, CLOUDS[1], w * (.62f - drift), h * .36f, w * .34f, calmMode ? 30 : 48);
+            drawCloud(canvas, CLOUDS[2], w * .04f, h * .82f, w * .50f, calmMode ? 30 : 52);
         }
         drawSparkles(canvas, w, h);
     }
@@ -107,13 +120,14 @@ public class DreamBackground extends View {
     }
 
     private void drawSparkles(Canvas canvas, int w, int h) {
-        int count = quietHome ? 12 : 18;
+        if (!particlesEnabled) return;
+        int count = calmMode ? 8 : quietHome ? 12 : 18;
         for (int i = 0; i < count; i++) {
             float x = ((i * 73) % 100) / 100f * w;
             float y = ((i * 47) % 100) / 100f * h;
-            float size = DreamUi.dp(getContext(), quietHome ? 7 + (i % 3) * 2 : 10 + (i % 4) * 3);
+            float size = DreamUi.dp(getContext(), calmMode ? 7 + (i % 3) * 2 : quietHome ? 7 + (i % 3) * 2 : 10 + (i % 4) * 3);
             float pulse = .68f + .32f * (float) Math.sin((phase * Math.PI * 2) + i);
-            paint.setAlpha((int) ((quietHome ? 28 : 46) + pulse * (quietHome ? 34 : 58)));
+            paint.setAlpha((int) ((calmMode ? 22 : quietHome ? 28 : 46) + pulse * (calmMode ? 22 : quietHome ? 34 : 58)));
             DreamAssets.drawFitCenter(canvas, getContext(), SPARKLES[i % SPARKLES.length],
                     new RectF(x - size, y - size, x + size, y + size), paint);
         }
