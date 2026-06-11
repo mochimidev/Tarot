@@ -174,7 +174,7 @@ public class CollectionActivity extends AppCompatActivity {
             card.setClickable(true);
             addCard(grid, card);
         }
-        add(root, grid, 0, 0);
+        add(root, grid, 0, 18);
         setContentView(scaffold);
     }
 
@@ -219,7 +219,7 @@ public class CollectionActivity extends AppCompatActivity {
         params.width = 0;
         params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-        params.setMargins(DreamUi.dp(this, 4), DreamUi.dp(this, 4), DreamUi.dp(this, 4), DreamUi.dp(this, 8));
+        params.setMargins(DreamUi.dp(this, 5), DreamUi.dp(this, 5), DreamUi.dp(this, 5), DreamUi.dp(this, 10));
         grid.addView(card, params);
     }
 

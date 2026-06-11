@@ -16,7 +16,7 @@ public class CollectionCard extends GlassPanel {
     public CollectionCard(Context context, int firebaseId, String label, boolean unlocked, String rarity) {
         super(context);
         setGravity(Gravity.CENTER);
-        setPadding(DreamUi.dp(context, 8), DreamUi.dp(context, 8), DreamUi.dp(context, 8), DreamUi.dp(context, 10));
+        setPadding(DreamUi.dp(context, 7), DreamUi.dp(context, 7), DreamUi.dp(context, 7), DreamUi.dp(context, 9));
         FrameLayout art = new FrameLayout(context);
         ImageView image = new ImageView(context);
         image.setScaleType(ImageView.ScaleType.FIT_CENTER);
@@ -40,21 +40,21 @@ public class CollectionCard extends GlassPanel {
             lock.setAlpha(.92f);
             lock.setScaleType(ImageView.ScaleType.FIT_CENTER);
             art.addView(lock, new FrameLayout.LayoutParams(
-                    DreamUi.dp(context, 58),
-                    DreamUi.dp(context, 58),
+                    DreamUi.dp(context, 52),
+                    DreamUi.dp(context, 52),
                     Gravity.CENTER));
         }
         addView(art, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                DreamUi.dp(context, 154)));
+                DreamUi.dp(context, 136)));
 
-        TextView title = DreamUi.text(context, unlocked ? label : "Carta dormida", 11, DreamColors.INK, Typeface.BOLD);
+        TextView title = DreamUi.text(context, unlocked ? label : "Carta dormida", 10.2f, DreamColors.INK, Typeface.BOLD);
         title.setGravity(Gravity.CENTER);
         addView(title, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        TextView rare = DreamUi.text(context, rarity, 10, unlocked ? DreamColors.GOLD : DreamColors.MUTED, Typeface.BOLD);
+        TextView rare = DreamUi.text(context, rarity, 9.4f, unlocked ? DreamColors.GOLD : DreamColors.MUTED, Typeface.BOLD);
         rare.setGravity(Gravity.CENTER);
         addView(rare, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,

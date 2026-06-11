@@ -35,17 +35,17 @@ public class MainActivity extends AppCompatActivity {
         scaffold.setQuietHomeBackground(true);
         scaffold.setBottomNav(DreamBottomNav.HOME, true);
         LinearLayout root = scaffold.content();
-        root.setPadding(DreamUi.dp(this, 6), DreamUi.dp(this, 34),
-                DreamUi.dp(this, 6), DreamUi.dp(this, 12));
+        root.setPadding(DreamUi.dp(this, 6), DreamUi.dp(this, 32),
+                DreamUi.dp(this, 6), DreamUi.dp(this, 10));
 
         addHeader(root);
 
-        TextView greeting = DreamUi.text(this, "\u00a1Hola, Charlotte! \u2728", 18, DreamColors.INK, Typeface.BOLD);
+        TextView greeting = DreamUi.text(this, "\u00a1Hola, Charlotte! \u2728", 20, DreamColors.INK, Typeface.BOLD);
         greeting.setGravity(Gravity.CENTER);
         greeting.setIncludeFontPadding(false);
         add(root, greeting, 7, 5);
 
-        TextView subtitle = DreamUi.text(this, "\u00bfQu\u00e9 mensaje m\u00e1gico\nte espera hoy?", 12, DreamColors.DEEP, Typeface.BOLD);
+        TextView subtitle = DreamUi.text(this, "\u00bfQu\u00e9 mensaje m\u00e1gico\nte espera hoy?", 13.2f, DreamColors.DEEP, Typeface.BOLD);
         subtitle.setGravity(Gravity.CENTER);
         subtitle.setIncludeFontPadding(false);
         subtitle.setLineSpacing(DreamUi.dp(this, 2), 1f);
@@ -88,18 +88,18 @@ public class MainActivity extends AppCompatActivity {
         header.setGravity(Gravity.CENTER_VERTICAL);
         header.setPadding(0, 0, 0, 0);
 
-        TextView menu = DreamUi.text(this, "\u2630", 18, 0xd65f3b98, Typeface.NORMAL);
+        TextView menu = DreamUi.text(this, "\u2630", 19.5f, 0xd65f3b98, Typeface.NORMAL);
         menu.setGravity(Gravity.CENTER);
         menu.setIncludeFontPadding(false);
-        header.addView(menu, new LinearLayout.LayoutParams(DreamUi.dp(this, 30), DreamUi.dp(this, 30)));
+        header.addView(menu, new LinearLayout.LayoutParams(DreamUi.dp(this, 34), DreamUi.dp(this, 34)));
 
         View spacer = new View(this);
         header.addView(spacer, new LinearLayout.LayoutParams(0, 1, 1f));
 
-        TextView bell = DreamUi.text(this, "\ud83d\udd14", 14, 0xd65f3b98, Typeface.NORMAL);
+        TextView bell = DreamUi.text(this, "\ud83d\udd14", 15.5f, 0xd65f3b98, Typeface.NORMAL);
         bell.setGravity(Gravity.CENTER);
         bell.setIncludeFontPadding(false);
-        header.addView(bell, new LinearLayout.LayoutParams(DreamUi.dp(this, 30), DreamUi.dp(this, 30)));
+        header.addView(bell, new LinearLayout.LayoutParams(DreamUi.dp(this, 34), DreamUi.dp(this, 34)));
         add(root, header, 0, 0);
     }
 
@@ -126,19 +126,19 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout row = new LinearLayout(this);
         row.setOrientation(LinearLayout.HORIZONTAL);
         row.setGravity(Gravity.CENTER_VERTICAL);
-        row.setPadding(DreamUi.dp(this, 10), DreamUi.dp(this, 7), DreamUi.dp(this, 10), DreamUi.dp(this, 7));
+        row.setPadding(DreamUi.dp(this, 11), DreamUi.dp(this, 8), DreamUi.dp(this, 11), DreamUi.dp(this, 8));
 
         ImageView star = cardImage(R.drawable.home_star_icon);
-        row.addView(star, new LinearLayout.LayoutParams(DreamUi.dp(this, 55), DreamUi.dp(this, 55)));
+        row.addView(star, new LinearLayout.LayoutParams(DreamUi.dp(this, 61), DreamUi.dp(this, 61)));
 
         LinearLayout copy = new LinearLayout(this);
         copy.setOrientation(LinearLayout.VERTICAL);
         copy.setGravity(Gravity.CENTER);
-        TextView title = DreamUi.text(this, "Carta del D\u00eda", 15, DreamColors.INK, Typeface.BOLD);
+        TextView title = DreamUi.text(this, "Carta del D\u00eda", 16.5f, DreamColors.INK, Typeface.BOLD);
         title.setGravity(Gravity.CENTER);
         title.setIncludeFontPadding(false);
         copy.addView(title);
-        TextView body = DreamUi.text(this, "Descubre el mensaje\nque el universo tiene para ti.", 9.5f, DreamColors.DEEP, Typeface.BOLD);
+        TextView body = DreamUi.text(this, "Descubre el mensaje\nque el universo tiene para ti.", 10.4f, DreamColors.DEEP, Typeface.BOLD);
         body.setGravity(Gravity.CENTER);
         body.setIncludeFontPadding(false);
         body.setLineSpacing(DreamUi.dp(this, 1), 1f);
@@ -148,14 +148,14 @@ public class MainActivity extends AppCompatActivity {
         row.addView(copy, copyParams);
 
         ImageView flame = cardImage(R.drawable.icon_carta_dia);
-        row.addView(flame, new LinearLayout.LayoutParams(DreamUi.dp(this, 58), DreamUi.dp(this, 58)));
+        row.addView(flame, new LinearLayout.LayoutParams(DreamUi.dp(this, 64), DreamUi.dp(this, 64)));
         panel.addView(row, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 72));
-        params.setMargins(0, DreamUi.dp(this, 1), 0, DreamUi.dp(this, 8));
+                ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 80));
+        params.setMargins(0, 0, 0, DreamUi.dp(this, 7));
         root.addView(panel, params);
     }
 
@@ -165,8 +165,8 @@ public class MainActivity extends AppCompatActivity {
         panel.setGravity(Gravity.CENTER_VERTICAL);
         panel.setClickable(true);
         panel.setOnClickListener(click);
-        panel.setMinimumHeight(DreamUi.dp(this, 86));
-        panel.setPadding(DreamUi.dp(this, 10), DreamUi.dp(this, 8), DreamUi.dp(this, 8), DreamUi.dp(this, 8));
+        panel.setMinimumHeight(DreamUi.dp(this, 96));
+        panel.setPadding(DreamUi.dp(this, 12), DreamUi.dp(this, 9), DreamUi.dp(this, 9), DreamUi.dp(this, 9));
         panel.setElevation(DreamUi.dp(this, 2));
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
                 new int[]{DreamUi.blend(tint, 0xffffffff, .34f), 0xfffffbf7});
@@ -178,11 +178,11 @@ public class MainActivity extends AppCompatActivity {
         copy.setOrientation(LinearLayout.VERTICAL);
         copy.setGravity(Gravity.CENTER_VERTICAL);
 
-        TextView titleView = DreamUi.text(this, title, 12.5f, DreamColors.INK, Typeface.BOLD);
+        TextView titleView = DreamUi.text(this, title, 13.8f, DreamColors.INK, Typeface.BOLD);
         titleView.setGravity(Gravity.START);
         titleView.setIncludeFontPadding(false);
         copy.addView(titleView);
-        TextView sub = DreamUi.text(this, subtitle, 7.8f, DreamColors.DEEP, Typeface.BOLD);
+        TextView sub = DreamUi.text(this, subtitle, 8.7f, DreamColors.DEEP, Typeface.BOLD);
         sub.setGravity(Gravity.START);
         sub.setIncludeFontPadding(false);
         sub.setLineSpacing(DreamUi.dp(this, 1), 1f);
@@ -190,13 +190,13 @@ public class MainActivity extends AppCompatActivity {
         panel.addView(copy, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
 
         ImageView icon = cardImage(iconRes);
-        LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(DreamUi.dp(this, 50), DreamUi.dp(this, 50));
+        LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(DreamUi.dp(this, 57), DreamUi.dp(this, 57));
         iconParams.leftMargin = DreamUi.dp(this, 3);
         panel.addView(icon, iconParams);
 
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();
         params.width = 0;
-        params.height = DreamUi.dp(this, 90);
+        params.height = DreamUi.dp(this, 101);
         params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
         params.setMargins(DreamUi.dp(this, 3), DreamUi.dp(this, 3), DreamUi.dp(this, 3), DreamUi.dp(this, 3));
         grid.addView(panel, params);
@@ -212,8 +212,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void addHero(LinearLayout parent, ImageView child) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 188));
-        params.setMargins(0, DreamUi.dp(this, 42), 0, DreamUi.dp(this, 2));
+                ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 205));
+        params.setMargins(0, DreamUi.dp(this, 36), 0, DreamUi.dp(this, 1));
         parent.addView(child, params);
     }
 

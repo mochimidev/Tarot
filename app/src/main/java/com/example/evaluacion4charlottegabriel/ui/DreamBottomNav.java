@@ -29,9 +29,9 @@ public class DreamBottomNav extends GlassPanel {
         super(context);
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER);
-        setPadding(DreamUi.dp(context, compact ? 8 : 9), DreamUi.dp(context, compact ? 4 : 5),
-                DreamUi.dp(context, compact ? 8 : 9), DreamUi.dp(context, compact ? 4 : 5));
-        setElevation(DreamUi.dp(context, compact ? 2 : 3));
+        setPadding(DreamUi.dp(context, compact ? 10 : 11), DreamUi.dp(context, compact ? 6 : 7),
+                DreamUi.dp(context, compact ? 10 : 11), DreamUi.dp(context, compact ? 6 : 7));
+        setElevation(DreamUi.dp(context, 4));
         setBackground(makeNavBg(context, compact));
         addItem(context, "Inicio", R.drawable.icon_inicio, active == HOME, v -> {
             if (active != HOME) TarotNavigator.openHome(context);
@@ -62,10 +62,10 @@ public class DreamBottomNav extends GlassPanel {
         icon.setImageResource(iconRes);
         icon.setScaleType(ImageView.ScaleType.FIT_CENTER);
         icon.setAlpha(active ? 1f : .88f);
-        int iconSize = DreamUi.dp(context, compact ? (active ? 23 : 21) : (active ? 27 : 24));
+        int iconSize = DreamUi.dp(context, compact ? (active ? 29 : 26) : (active ? 31 : 28));
         item.addView(icon, new LinearLayout.LayoutParams(iconSize, iconSize));
 
-        TextView text = DreamUi.text(context, label, compact ? 7.5f : 8.2f, active ? DreamColors.LILAC_DARK : DreamColors.MUTED, active ? Typeface.BOLD : Typeface.NORMAL);
+        TextView text = DreamUi.text(context, label, compact ? 8.6f : 9.2f, active ? DreamColors.LILAC_DARK : DreamColors.MUTED, active ? Typeface.BOLD : Typeface.NORMAL);
         text.setGravity(Gravity.CENTER);
         text.setShadowLayer(DreamUi.dp(context, 3), 0, DreamUi.dp(context, 1), 0x66ffffff);
         item.addView(text);
@@ -76,9 +76,9 @@ public class DreamBottomNav extends GlassPanel {
 
     private GradientDrawable makeNavBg(Context context, boolean compact) {
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                compact ? new int[]{0xdffff9f6, 0xd9fff0f8} : new int[]{0xeafffbf3, 0xe8fff1f8});
-        bg.setCornerRadius(DreamUi.dp(context, compact ? 18 : 24));
-        bg.setStroke(DreamUi.dp(context, 1), compact ? 0x80ddb066 : 0x8fddb066);
+                compact ? new int[]{0xeffffbf4, 0xeafff1f8} : new int[]{0xf0fffbf3, 0xecfff1f8});
+        bg.setCornerRadius(DreamUi.dp(context, 28));
+        bg.setStroke(DreamUi.dp(context, 1), compact ? 0xa0ddb066 : 0xaeddb066);
         return bg;
     }
 }

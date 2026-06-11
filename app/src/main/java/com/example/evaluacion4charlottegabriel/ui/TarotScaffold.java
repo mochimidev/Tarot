@@ -55,13 +55,13 @@ public class TarotScaffold extends FrameLayout {
         bottomNav = new DreamBottomNav(getContext(), active, compact);
         ViewGroup.LayoutParams scrollParams = scrollView.getLayoutParams();
         if (scrollParams instanceof MarginLayoutParams) {
-            ((MarginLayoutParams) scrollParams).bottomMargin = DreamUi.dp(getContext(), compact ? 86 : 118);
+            ((MarginLayoutParams) scrollParams).bottomMargin = DreamUi.dp(getContext(), compact ? 104 : 112);
             scrollView.setLayoutParams(scrollParams);
         }
         LayoutParams params = new LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
-        int margin = DreamUi.dp(getContext(), compact ? 4 : 12);
+        int margin = DreamUi.dp(getContext(), compact ? 8 : 12);
         params.setMargins(margin, 0, margin, margin);
         params.gravity = android.view.Gravity.BOTTOM;
         addView(bottomNav, params);
