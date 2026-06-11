@@ -36,7 +36,7 @@ public class DreamBottomNav extends GlassPanel {
         addItem(context, "Inicio", R.drawable.icon_inicio, active == HOME, v -> {
             if (active != HOME) TarotNavigator.openHome(context);
         }, compact);
-        addItem(context, "Coleccion", R.drawable.icon_coleccion, active == COLLECTION, v -> {
+        addItem(context, "Colecci\u00f3n", R.drawable.icon_coleccion, active == COLLECTION, v -> {
             if (active != COLLECTION) TarotNavigator.openCollection(context);
         }, compact);
         addItem(context, "Lecturas", R.drawable.icon_carta_dia, active == READINGS, v -> {
@@ -61,11 +61,11 @@ public class DreamBottomNav extends GlassPanel {
         ImageView icon = new ImageView(context);
         icon.setImageResource(iconRes);
         icon.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        icon.setAlpha(active ? 1f : .88f);
+        icon.setAlpha(active ? 1f : .84f);
         int iconSize = DreamUi.dp(context, compact ? (active ? 29 : 26) : (active ? 31 : 28));
         item.addView(icon, new LinearLayout.LayoutParams(iconSize, iconSize));
 
-        TextView text = DreamUi.text(context, label, compact ? 8.6f : 9.2f, active ? DreamColors.LILAC_DARK : DreamColors.MUTED, active ? Typeface.BOLD : Typeface.NORMAL);
+        TextView text = DreamUi.text(context, label, compact ? 8.8f : 9.4f, active ? DreamColors.LILAC_DARK : DreamColors.MUTED, active ? Typeface.BOLD : Typeface.NORMAL);
         text.setGravity(Gravity.CENTER);
         text.setShadowLayer(DreamUi.dp(context, 3), 0, DreamUi.dp(context, 1), 0x66ffffff);
         item.addView(text);
@@ -76,9 +76,9 @@ public class DreamBottomNav extends GlassPanel {
 
     private GradientDrawable makeNavBg(Context context, boolean compact) {
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                compact ? new int[]{0xeffffbf4, 0xeafff1f8} : new int[]{0xf0fffbf3, 0xecfff1f8});
+                compact ? new int[]{0xf4fffbf4, 0xeefff1f8} : new int[]{0xf6fffbf3, 0xf0fff1f8});
         bg.setCornerRadius(DreamUi.dp(context, 28));
-        bg.setStroke(DreamUi.dp(context, 1), compact ? 0xa0ddb066 : 0xaeddb066);
+        bg.setStroke(DreamUi.dp(context, 1), compact ? 0xb0ddb066 : 0xbbddb066);
         return bg;
     }
 }

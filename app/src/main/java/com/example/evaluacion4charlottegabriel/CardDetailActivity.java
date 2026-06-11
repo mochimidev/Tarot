@@ -105,6 +105,8 @@ public class CardDetailActivity extends AppCompatActivity {
     private void addActions() {
         GlassPanel actions = new GlassPanel(this);
         actions.setGravity(Gravity.CENTER_HORIZONTAL);
+        actions.setPadding(DreamUi.dp(this, 16), DreamUi.dp(this, 16),
+                DreamUi.dp(this, 16), DreamUi.dp(this, 18));
         LinearLayout row = new LinearLayout(this);
         row.setGravity(Gravity.CENTER);
         row.setOrientation(LinearLayout.VERTICAL);
@@ -123,13 +125,13 @@ public class CardDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "Guardada en tu album", Toast.LENGTH_SHORT).show();
         });
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.topMargin = DreamUi.dp(this, 10);
+        params.topMargin = DreamUi.dp(this, 12);
         row.addView(collection, params);
 
         DreamButton listen = new DreamButton(this, "Escuchar");
         listen.setOnClickListener(v -> Toast.makeText(this, "Susurro magico preparado", Toast.LENGTH_SHORT).show());
         LinearLayout.LayoutParams listenParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        listenParams.topMargin = DreamUi.dp(this, 10);
+        listenParams.topMargin = DreamUi.dp(this, 12);
         row.addView(listen, listenParams);
 
         actions.addView(row);

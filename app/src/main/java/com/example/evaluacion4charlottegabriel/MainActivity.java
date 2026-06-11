@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private void buildHome() {
         TarotScaffold scaffold = new TarotScaffold(this);
         applyHomeSystemBars();
-        scaffold.setQuietHomeBackground(true);
+        scaffold.setQuietHomeBackground(false);
         scaffold.setBottomNav(DreamBottomNav.HOME, true);
         LinearLayout root = scaffold.content();
         root.setPadding(DreamUi.dp(this, 6), DreamUi.dp(this, 32),
@@ -111,14 +111,14 @@ public class MainActivity extends AppCompatActivity {
         panel.setOnClickListener(v -> TarotNavigator.openDailyCard(this));
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
                 new int[]{0xfffff7e8, 0xfffffbf8, 0xfffff2e2});
-        bg.setCornerRadius(DreamUi.dp(this, 14));
-        bg.setStroke(DreamUi.dp(this, 1), 0xaee1a94f);
+        bg.setCornerRadius(DreamUi.dp(this, 18));
+        bg.setStroke(DreamUi.dp(this, 1), 0x96d9a856);
         panel.setBackground(bg);
 
         ImageView frame = new ImageView(this);
         frame.setImageResource(R.drawable.panel_frame_01);
         frame.setScaleType(ImageView.ScaleType.FIT_XY);
-        frame.setAlpha(.38f);
+        frame.setAlpha(.22f);
         panel.addView(frame, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
@@ -170,8 +170,8 @@ public class MainActivity extends AppCompatActivity {
         panel.setElevation(DreamUi.dp(this, 2));
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
                 new int[]{DreamUi.blend(tint, 0xffffffff, .34f), 0xfffffbf7});
-        bg.setCornerRadius(DreamUi.dp(this, 12));
-        bg.setStroke(DreamUi.dp(this, 1), 0x8fd4a65a);
+        bg.setCornerRadius(DreamUi.dp(this, 18));
+        bg.setStroke(DreamUi.dp(this, 1), 0x95d4a65a);
         panel.setBackground(bg);
 
         LinearLayout copy = new LinearLayout(this);

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -85,9 +86,14 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void updateToggle(TextView toggle, boolean enabled) {
         toggle.setText(enabled ? "Activo" : "Pausa");
-        int fill = enabled ? 0xffb98cff : 0xffd7c7e8;
-        int stroke = enabled ? 0xe7fff0b8 : 0xdffff8ef;
-        toggle.setBackground(DreamUi.stroked(fill, stroke, DreamUi.dp(this, 22), DreamUi.dp(this, 1.2f)));
+        GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                enabled
+                        ? new int[]{0xffa982f4, 0xffff96c8, 0xffffd884}
+                        : new int[]{0xffd9c9ec, 0xffffeef7});
+        bg.setCornerRadius(DreamUi.dp(this, 24));
+        bg.setStroke(DreamUi.dp(this, 1.2f), enabled ? 0xf2fff8df : 0xdffff8ef);
+        toggle.setBackground(bg);
+        toggle.setElevation(DreamUi.dp(this, 2));
     }
 
     private void add(LinearLayout parent, android.view.View child, int top, int bottom) {
