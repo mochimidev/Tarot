@@ -67,8 +67,10 @@ public class tarotPareja extends AppCompatActivity {
 
         TarotCardWidget first = new TarotCardWidget(this);
         first.bind(numeroTu, safeTitle(tu, numeroTu), safeLove(tu, numeroTu), 0);
+        first.setCompact(true);
         TarotCardWidget second = new TarotCardWidget(this);
         second.bind(numeroPareja, safeTitle(pareja, numeroPareja), safeLove(pareja, numeroPareja), 0);
+        second.setCompact(true);
         addGrid(grid, first);
         addGrid(grid, second);
         add(root, connection, 0, 16);

@@ -64,7 +64,8 @@ def finalIllustrationAssets = [
         'panel_frame_01.png',
         'panel_frame_02.png',
         'panel_frame_03.png',
-        'card_back_official.png'
+        'card_back_official.png',
+        'home_unicorn_hero.png'
 ]
 
 tasks.register('syncFinalIllustrationAssets', Copy) {

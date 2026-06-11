@@ -10,17 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.evaluacion4charlottegabriel.ui.DreamBottomNav;
 import com.example.evaluacion4charlottegabriel.ui.DreamColors;
-import com.example.evaluacion4charlottegabriel.ui.DreamDividerView;
-import com.example.evaluacion4charlottegabriel.ui.DreamTopBar;
 import com.example.evaluacion4charlottegabriel.ui.DreamUi;
 import com.example.evaluacion4charlottegabriel.ui.GlassPanel;
-import com.example.evaluacion4charlottegabriel.ui.KawaiiSymbolView;
-import com.example.evaluacion4charlottegabriel.ui.MagicSceneView;
 import com.example.evaluacion4charlottegabriel.ui.TarotScaffold;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,39 +30,66 @@ public class MainActivity extends AppCompatActivity {
     private void buildHome() {
         TarotScaffold scaffold = new TarotScaffold(this);
         scaffold.setBottomNav(DreamBottomNav.HOME);
+        addHomeWash(scaffold);
         LinearLayout root = scaffold.content();
 
-        root.addView(new DreamTopBar(this, "Tarot Kawaii Dreams", false, KawaiiSymbolView.HEART));
+        addHeader(root);
 
-        ImageView logo = new ImageView(this);
-        logo.setImageResource(R.drawable.tarot_kawaii_dreams_logo);
-        logo.setAdjustViewBounds(true);
-        logo.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        add(root, logo, 0, 2, 4);
-
-        TextView greeting = DreamUi.text(this, "\u00a1Hola, Charlotte! \u2728", 25, DreamColors.INK, Typeface.BOLD);
+        TextView greeting = DreamUi.text(this, "\u00a1Hola, Charlotte! \u2728", 22, DreamColors.INK, Typeface.BOLD);
         greeting.setGravity(Gravity.CENTER);
-        root.addView(greeting);
+        add(root, greeting, 8, 2);
 
-        TextView subtitle = DreamUi.text(this, "\u00bfQue mensaje magico te espera hoy?", 15, DreamColors.DEEP, Typeface.NORMAL);
+        TextView subtitle = DreamUi.text(this, "\u00bfQu\u00e9 mensaje m\u00e1gico\nte espera hoy?", 14, DreamColors.DEEP, Typeface.BOLD);
         subtitle.setGravity(Gravity.CENTER);
-        add(root, subtitle, 2, 4);
+        add(root, subtitle, 0, 2);
 
-        MagicSceneView scene = new MagicSceneView(this, MagicSceneView.FLOATING_CARD);
-        root.addView(scene, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 210)));
-        add(root, new DreamDividerView(this), 0, 4);
+        ImageView hero = new ImageView(this);
+        hero.setImageResource(R.drawable.home_unicorn_hero);
+        hero.setAdjustViewBounds(true);
+        hero.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        addHero(root, hero);
+
         addDailyFeature(root);
 
         GridLayout menu = new GridLayout(this);
         menu.setColumnCount(2);
-        add(root, menu, 0, 0, 0);
+        add(root, menu, 0, 0);
 
-        addMenu(menu, "Si o No", "Obten una respuesta clara y sencilla.", KawaiiSymbolView.DROP, DreamColors.CLOUD, v -> TarotNavigator.openYesNo(this));
-        addMenu(menu, "Tarot de Parejas", "Explora la conexion en su vinculo.", KawaiiSymbolView.HEART, DreamColors.ROSE_SOFT, v -> TarotNavigator.openCouples(this));
-        addMenu(menu, "Coleccion", "Reune y descubre todas las cartas.", KawaiiSymbolView.SPROUT, DreamColors.SPROUT_SOFT, v -> TarotNavigator.openCollection(this));
-        addMenu(menu, "Ajustes", "Sonido, brillos y preferencias.", KawaiiSymbolView.STAR, 0xffedf5ff, v -> TarotNavigator.openSettings(this));
+        addMenu(menu, "Si o No", "Obt\u00e9n una respuesta\nclara y sencilla.", R.drawable.icon_si_o_no, DreamColors.CLOUD, v -> TarotNavigator.openYesNo(this));
+        addMenu(menu, "Tarot de Parejas", "Explora la conexi\u00f3n\nen su v\u00ednculo.", R.drawable.icon_tarot_parejas, DreamColors.ROSE_SOFT, v -> TarotNavigator.openCouples(this));
+        addMenu(menu, "Colecci\u00f3n", "Re\u00fane y descubre\ntodas las cartas.", R.drawable.icon_coleccion, DreamColors.SPROUT_SOFT, v -> TarotNavigator.openCollection(this));
+        addMenu(menu, "Mi Mascota", "Cuida a tu gu\u00eda\nm\u00e1gica.", R.drawable.home_unicorn_hero, 0xffffeff7, v -> TarotNavigator.openSettings(this));
 
         setContentView(scaffold);
+    }
+
+    private void addHomeWash(TarotScaffold scaffold) {
+        View wash = new View(this);
+        GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
+                new int[]{0xdffff7f2, 0xcffffbf2, 0xdffff1f6});
+        wash.setBackground(bg);
+        scaffold.addView(wash, 1, new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+    }
+
+    private void addHeader(LinearLayout root) {
+        LinearLayout header = new LinearLayout(this);
+        header.setOrientation(LinearLayout.HORIZONTAL);
+        header.setGravity(Gravity.CENTER_VERTICAL);
+        header.setPadding(0, 0, 0, DreamUi.dp(this, 3));
+
+        TextView menu = DreamUi.text(this, "\u2630", 24, DreamColors.LILAC_DARK, Typeface.NORMAL);
+        menu.setGravity(Gravity.CENTER_VERTICAL);
+        header.addView(menu, new LinearLayout.LayoutParams(DreamUi.dp(this, 42), DreamUi.dp(this, 42)));
+
+        View spacer = new View(this);
+        header.addView(spacer, new LinearLayout.LayoutParams(0, 1, 1f));
+
+        TextView bell = DreamUi.text(this, "\ud83d\udd14", 19, DreamColors.LILAC_DARK, Typeface.NORMAL);
+        bell.setGravity(Gravity.CENTER);
+        header.addView(bell, new LinearLayout.LayoutParams(DreamUi.dp(this, 42), DreamUi.dp(this, 42)));
+        add(root, header, 0, 0);
     }
 
     private void addDailyFeature(LinearLayout root) {
@@ -74,19 +98,20 @@ public class MainActivity extends AppCompatActivity {
         panel.setGravity(Gravity.CENTER_VERTICAL);
         panel.setClickable(true);
         panel.setOnClickListener(v -> TarotNavigator.openDailyCard(this));
-        panel.setPadding(DreamUi.dp(this, 12), DreamUi.dp(this, 10), DreamUi.dp(this, 12), DreamUi.dp(this, 10));
+        panel.setPadding(DreamUi.dp(this, 9), DreamUi.dp(this, 7), DreamUi.dp(this, 9), DreamUi.dp(this, 7));
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xf8fff8ef, 0xf8fff2fb, 0xf8fff7df});
-        bg.setCornerRadius(DreamUi.dp(this, 24));
-        bg.setStroke(DreamUi.dp(this, 2), 0xaee4a641);
+                new int[]{0xfffff7e9, 0xfffffbf5, 0xfffff2e0});
+        bg.setCornerRadius(DreamUi.dp(this, 16));
+        bg.setStroke(DreamUi.dp(this, 1), 0xc8e5b35a);
         panel.setBackground(bg);
 
-        KawaiiSymbolView star = new KawaiiSymbolView(this, KawaiiSymbolView.STAR);
-        panel.addView(star, new LinearLayout.LayoutParams(DreamUi.dp(this, 72), DreamUi.dp(this, 72)));
+        ImageView star = cardImage(R.drawable.home_star_icon);
+        panel.addView(star, new LinearLayout.LayoutParams(DreamUi.dp(this, 60), DreamUi.dp(this, 60)));
 
         LinearLayout copy = new LinearLayout(this);
         copy.setOrientation(LinearLayout.VERTICAL);
-        TextView title = DreamUi.text(this, "Carta del Dia", 18, DreamColors.INK, Typeface.BOLD);
+        copy.setGravity(Gravity.CENTER);
+        TextView title = DreamUi.text(this, "Carta del D\u00eda", 17, DreamColors.INK, Typeface.BOLD);
         title.setGravity(Gravity.CENTER);
         copy.addView(title);
         TextView body = DreamUi.text(this, "Descubre el mensaje que el universo tiene para ti.", 12, DreamColors.DEEP, Typeface.NORMAL);
@@ -94,49 +119,60 @@ public class MainActivity extends AppCompatActivity {
         copy.addView(body);
         panel.addView(copy, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
 
-        KawaiiSymbolView flame = new KawaiiSymbolView(this, KawaiiSymbolView.FLAME);
-        panel.addView(flame, new LinearLayout.LayoutParams(DreamUi.dp(this, 66), DreamUi.dp(this, 66)));
-        add(root, panel, 4, 12);
+        ImageView flame = cardImage(R.drawable.icon_carta_dia);
+        panel.addView(flame, new LinearLayout.LayoutParams(DreamUi.dp(this, 62), DreamUi.dp(this, 62)));
+        add(root, panel, 0, 8);
     }
 
-    private void addMenu(GridLayout grid, String title, String subtitle, int symbol, int tint, View.OnClickListener click) {
+    private void addMenu(GridLayout grid, String title, String subtitle, int iconRes, int tint, View.OnClickListener click) {
         GlassPanel panel = new GlassPanel(this);
+        panel.setOrientation(LinearLayout.HORIZONTAL);
+        panel.setGravity(Gravity.CENTER_VERTICAL);
         panel.setClickable(true);
         panel.setOnClickListener(click);
-        panel.setMinimumHeight(DreamUi.dp(this, 146));
-        panel.setPadding(DreamUi.dp(this, 12), DreamUi.dp(this, 13), DreamUi.dp(this, 12), DreamUi.dp(this, 15));
+        panel.setMinimumHeight(DreamUi.dp(this, 84));
+        panel.setPadding(DreamUi.dp(this, 11), DreamUi.dp(this, 8), DreamUi.dp(this, 8), DreamUi.dp(this, 8));
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                new int[]{DreamUi.blend(tint, 0xffffffff, .18f), 0xfafffbf6});
-        bg.setCornerRadius(DreamUi.dp(this, 24));
-        bg.setStroke(DreamUi.dp(this, 1.5f), 0xb7e4a641);
+                new int[]{DreamUi.blend(tint, 0xffffffff, .24f), 0xfffffbf5});
+        bg.setCornerRadius(DreamUi.dp(this, 13));
+        bg.setStroke(DreamUi.dp(this, 1), 0x9fd9ad63);
         panel.setBackground(bg);
 
-        KawaiiSymbolView icon = new KawaiiSymbolView(this, symbol);
-        panel.addView(icon, new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 66)));
+        LinearLayout copy = new LinearLayout(this);
+        copy.setOrientation(LinearLayout.VERTICAL);
+        copy.setGravity(Gravity.CENTER_VERTICAL);
 
-        TextView titleView = DreamUi.text(this, title, 16, DreamColors.INK, Typeface.BOLD);
-        titleView.setGravity(Gravity.CENTER);
-        panel.addView(titleView);
-        TextView sub = DreamUi.text(this, subtitle, 11, DreamColors.DEEP, Typeface.NORMAL);
-        sub.setGravity(Gravity.CENTER);
-        panel.addView(sub);
+        TextView titleView = DreamUi.text(this, title, 14, DreamColors.INK, Typeface.BOLD);
+        titleView.setGravity(Gravity.START);
+        copy.addView(titleView);
+        TextView sub = DreamUi.text(this, subtitle, 9, DreamColors.DEEP, Typeface.NORMAL);
+        sub.setGravity(Gravity.START);
+        copy.addView(sub);
+        panel.addView(copy, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+
+        ImageView icon = cardImage(iconRes);
+        panel.addView(icon, new LinearLayout.LayoutParams(DreamUi.dp(this, 55), DreamUi.dp(this, 55)));
 
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();
         params.width = 0;
-        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        params.height = DreamUi.dp(this, 88);
         params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-        params.setMargins(DreamUi.dp(this, 5), DreamUi.dp(this, 6), DreamUi.dp(this, 5), DreamUi.dp(this, 6));
+        params.setMargins(DreamUi.dp(this, 4), DreamUi.dp(this, 4), DreamUi.dp(this, 4), DreamUi.dp(this, 4));
         grid.addView(panel, params);
     }
 
-    private void add(LinearLayout parent, View child, int left, int top, int bottom) {
+    private ImageView cardImage(int iconRes) {
+        ImageView image = new ImageView(this);
+        image.setImageResource(iconRes);
+        image.setAdjustViewBounds(true);
+        image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        return image;
+    }
+
+    private void addHero(LinearLayout parent, ImageView child) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMargins(DreamUi.dp(this, left), DreamUi.dp(this, top), DreamUi.dp(this, left), DreamUi.dp(this, bottom));
-        if (child instanceof ImageView) {
-            params.height = DreamUi.dp(this, 74);
-        }
+                ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 184));
+        params.setMargins(0, DreamUi.dp(this, 3), 0, DreamUi.dp(this, 3));
         parent.addView(child, params);
     }
 

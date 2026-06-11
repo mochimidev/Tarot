@@ -14,11 +14,12 @@ public class TarotCardWidget extends GlassPanel {
     private final ImageView image;
     private final TextView title;
     private final TextView body;
+    private final LinearLayout.LayoutParams haloParams;
 
     public TarotCardWidget(Context context) {
         super(context);
         setGravity(Gravity.CENTER_HORIZONTAL);
-        setPadding(DreamUi.dp(context, 14), DreamUi.dp(context, 14), DreamUi.dp(context, 14), DreamUi.dp(context, 18));
+        setPadding(DreamUi.dp(context, 16), DreamUi.dp(context, 16), DreamUi.dp(context, 16), DreamUi.dp(context, 18));
 
         FrameLayout halo = new FrameLayout(context);
         GradientDrawable haloBg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
@@ -34,9 +35,10 @@ public class TarotCardWidget extends GlassPanel {
         halo.addView(image, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
-        addView(halo, new LinearLayout.LayoutParams(
+        haloParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                DreamUi.dp(context, 350)));
+                DreamUi.dp(context, 350));
+        addView(halo, haloParams);
 
         title = DreamUi.text(context, "", 23, DreamColors.INK, Typeface.BOLD);
         title.setGravity(Gravity.CENTER);
@@ -59,5 +61,10 @@ public class TarotCardWidget extends GlassPanel {
         TarotAssetLoader.loadCard(image, firebaseId, rotation);
         title.setText(titleText);
         body.setText(bodyText);
+    }
+
+    public void setCompact(boolean compact) {
+        haloParams.height = DreamUi.dp(getContext(), compact ? 238 : 350);
+        requestLayout();
     }
 }

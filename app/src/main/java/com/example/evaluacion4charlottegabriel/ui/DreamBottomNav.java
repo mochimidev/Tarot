@@ -2,6 +2,7 @@ package com.example.evaluacion4charlottegabriel.ui;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,9 @@ public class DreamBottomNav extends GlassPanel {
         super(context);
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER);
-        setPadding(DreamUi.dp(context, 9), DreamUi.dp(context, 10), DreamUi.dp(context, 9), DreamUi.dp(context, 9));
+        setPadding(DreamUi.dp(context, 9), DreamUi.dp(context, 7), DreamUi.dp(context, 9), DreamUi.dp(context, 7));
+        setElevation(DreamUi.dp(context, 3));
+        setBackground(makeNavBg(context));
         addItem(context, "Inicio", R.drawable.icon_inicio, active == HOME, v -> {
             if (active != HOME) TarotNavigator.openHome(context);
         });
@@ -33,8 +36,8 @@ public class DreamBottomNav extends GlassPanel {
         addItem(context, "Lecturas", R.drawable.icon_carta_dia, active == READINGS, v -> {
             if (active != READINGS) TarotNavigator.openDailyCard(context);
         });
-        addItem(context, "Parejas", R.drawable.icon_tarot_parejas, active == COUPLES, v -> {
-            if (active != COUPLES) TarotNavigator.openCouples(context);
+        addItem(context, "Mascota", R.drawable.home_unicorn_hero, false, v -> {
+            TarotNavigator.openSettings(context);
         });
         addItem(context, "Ajustes", R.drawable.icon_ajustes, active == SETTINGS, v -> {
             if (active != SETTINGS) TarotNavigator.openSettings(context);
@@ -53,7 +56,7 @@ public class DreamBottomNav extends GlassPanel {
         icon.setImageResource(iconRes);
         icon.setScaleType(ImageView.ScaleType.FIT_CENTER);
         icon.setAlpha(active ? 1f : .88f);
-        int iconSize = DreamUi.dp(context, active ? 48 : 43);
+        int iconSize = DreamUi.dp(context, active ? 32 : 29);
         item.addView(icon, new LinearLayout.LayoutParams(iconSize, iconSize));
 
         TextView text = DreamUi.text(context, label, 9, active ? DreamColors.LILAC_DARK : DreamColors.MUTED, active ? Typeface.BOLD : Typeface.NORMAL);
@@ -63,5 +66,13 @@ public class DreamBottomNav extends GlassPanel {
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
         addView(item, params);
+    }
+
+    private GradientDrawable makeNavBg(Context context) {
+        GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
+                new int[]{0xeffff9ef, 0xeafff1f8});
+        bg.setCornerRadius(DreamUi.dp(context, 26));
+        bg.setStroke(DreamUi.dp(context, 1), 0xb9ddb066);
+        return bg;
     }
 }

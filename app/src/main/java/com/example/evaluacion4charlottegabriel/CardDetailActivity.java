@@ -86,13 +86,17 @@ public class CardDetailActivity extends AppCompatActivity {
         add(panel, story, 8, 14);
 
         TextView meaningLabel = DreamUi.label(this, "Mensaje", DreamColors.GOLD);
+        meaningLabel.setGravity(Gravity.CENTER);
         panel.addView(meaningLabel);
-        TextView meaning = DreamUi.text(this, textOrFallback(carta.getDescripcion(), CardMeta.familyMeaning(numero)), 14, DreamColors.INK, Typeface.NORMAL);
+        TextView meaning = DreamUi.text(this, textOrFallback(carta.getDescripcion(), CardMeta.familyMeaning(numero)), 14, DreamColors.DEEP, Typeface.NORMAL);
+        meaning.setGravity(Gravity.CENTER);
         add(panel, meaning, 6, 12);
 
         TextView reversedLabel = DreamUi.label(this, "Invertida", DreamColors.ROSE);
+        reversedLabel.setGravity(Gravity.CENTER);
         panel.addView(reversedLabel);
-        TextView reversed = DreamUi.text(this, textOrFallback(carta.getDescripcionInvertida(), "Observa con calma lo que todavia esta tomando forma."), 14, DreamColors.INK, Typeface.NORMAL);
+        TextView reversed = DreamUi.text(this, textOrFallback(carta.getDescripcionInvertida(), "Observa con calma lo que todavia esta tomando forma."), 14, DreamColors.DEEP, Typeface.NORMAL);
+        reversed.setGravity(Gravity.CENTER);
         add(panel, reversed, 6, 0);
 
         add(root, panel, 0, 14);
