@@ -3,7 +3,6 @@ package com.example.evaluacion4charlottegabriel.ui;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
@@ -93,9 +92,9 @@ public class DreamBackground extends View {
             backgroundPaint.setShader(new LinearGradient(
                     0, 0, 0, h,
                     new int[]{
-                            Color.rgb(252, 243, 255),
-                            Color.rgb(245, 247, 255),
-                            Color.rgb(238, 252, 255)
+                            DreamColors.SOFT_WHITE,
+                            DreamColors.CREAM,
+                            DreamUi.blend(DreamColors.SKY, DreamColors.SOFT_WHITE, .65f)
                     },
                     new float[]{0f, .54f, 1f},
                     Shader.TileMode.CLAMP));

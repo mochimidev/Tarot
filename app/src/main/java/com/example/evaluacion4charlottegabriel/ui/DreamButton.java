@@ -12,26 +12,27 @@ public class DreamButton extends AppCompatTextView {
     public DreamButton(Context context, String label) {
         super(context);
         setText(label);
-        setTextColor(0xffffffff);
-        setTextSize(16);
+        setTextColor(DreamColors.INK);
+        setTextSize(15.5f);
         setTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD));
         setGravity(Gravity.CENTER);
-        setMinHeight(DreamUi.dp(context, 56));
-        setPadding(DreamUi.dp(context, 24), DreamUi.dp(context, 14), DreamUi.dp(context, 24), DreamUi.dp(context, 14));
+        setMinHeight(DreamUi.dp(context, 52));
+        setPadding(DreamUi.dp(context, 22), DreamUi.dp(context, 13), DreamUi.dp(context, 22), DreamUi.dp(context, 13));
         setClickable(true);
         setFocusable(true);
         DreamUi.softLayer(this);
-        setElevation(DreamUi.dp(context, 3));
-        setShadowLayer(DreamUi.dp(context, 4), 0, DreamUi.dp(context, 1), 0x66ffffff);
+        setElevation(DreamUi.dp(context, 2));
+        setShadowLayer(DreamUi.dp(context, 3), 0, DreamUi.dp(context, 1),
+                DreamColors.alpha(DreamColors.SOFT_WHITE, 150));
         setBackground(makeBg());
     }
 
     private GradientDrawable makeBg() {
         GradientDrawable drawable = new GradientDrawable(
                 GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xffa982f4, 0xffff96c8, 0xffffd884});
-        drawable.setCornerRadius(DreamUi.dp(getContext(), 28));
-        drawable.setStroke(DreamUi.dp(getContext(), 1.4f), 0xf4fff8df);
+                new int[]{DreamColors.LAVENDER, DreamColors.SOFT_PINK, DreamColors.PEACH});
+        drawable.setCornerRadius(DreamUi.dp(getContext(), 26));
+        drawable.setStroke(DreamUi.dp(getContext(), 1.2f), DreamColors.GOLD);
         return drawable;
     }
 

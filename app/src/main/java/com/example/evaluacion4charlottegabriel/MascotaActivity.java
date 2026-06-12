@@ -105,9 +105,9 @@ public class MascotaActivity extends AppCompatActivity {
         chip.setGravity(Gravity.CENTER);
         chip.setPadding(DreamUi.dp(this, 8), DreamUi.dp(this, 6), DreamUi.dp(this, 8), DreamUi.dp(this, 6));
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xfffff7e7, 0xffffedf7});
+                new int[]{DreamColors.CREAM, DreamColors.SOFT_WHITE});
         bg.setCornerRadius(DreamUi.dp(this, 18));
-        bg.setStroke(DreamUi.dp(this, 1), 0xb9ddb066);
+        bg.setStroke(DreamUi.dp(this, 1), DreamColors.alpha(DreamColors.GOLD, 174));
         chip.setBackground(bg);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -129,7 +129,7 @@ public class MascotaActivity extends AppCompatActivity {
         copy.addView(main);
         copy.addView(sub);
 
-        TextView toggle = DreamUi.text(this, "", 12, 0xffffffff, Typeface.BOLD);
+        TextView toggle = DreamUi.text(this, "", 12, DreamColors.INK, Typeface.BOLD);
         toggle.setGravity(Gravity.CENTER);
         toggle.setMinWidth(DreamUi.dp(this, 82));
         toggle.setMinHeight(DreamUi.dp(this, 40));
@@ -147,14 +147,19 @@ public class MascotaActivity extends AppCompatActivity {
 
     private void updateToggle(TextView toggle, boolean enabled) {
         toggle.setText(enabled ? "Activo" : "Pausa");
+        toggle.setTextColor(enabled ? DreamColors.INK : DreamColors.MUTED);
+        toggle.setShadowLayer(DreamUi.dp(this, 2), 0, DreamUi.dp(this, 1),
+                DreamColors.alpha(DreamColors.SOFT_WHITE, 150));
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
                 enabled
-                        ? new int[]{0xffa982f4, 0xffff96c8, 0xffffd884}
-                        : new int[]{0xffd9c9ec, 0xffffeef7});
+                        ? new int[]{DreamColors.CREAM, DreamColors.SOFT_PINK, DreamColors.LAVENDER}
+                        : new int[]{DreamColors.SOFT_WHITE, DreamUi.blend(DreamColors.LAVENDER, DreamColors.SOFT_WHITE, .72f)});
         bg.setCornerRadius(DreamUi.dp(this, 24));
-        bg.setStroke(DreamUi.dp(this, 1.2f), enabled ? 0xf2fff8df : 0xdffff8ef);
+        bg.setStroke(DreamUi.dp(this, 1.2f),
+                enabled ? DreamColors.GOLD : DreamColors.alpha(DreamColors.LAVENDER, 150));
         toggle.setBackground(bg);
-        toggle.setElevation(DreamUi.dp(this, 2));
+        toggle.setElevation(DreamUi.dp(this, enabled ? 2 : 1));
+        toggle.setAlpha(enabled ? 1f : .9f);
     }
 
     private void add(LinearLayout parent, View child, int top, int bottom) {

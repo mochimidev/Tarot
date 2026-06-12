@@ -75,7 +75,7 @@ public class SettingsActivity extends AppCompatActivity {
         copy.addView(main);
         copy.addView(sub);
 
-        TextView toggle = DreamUi.text(this, "", 12, 0xffffffff, Typeface.BOLD);
+        TextView toggle = DreamUi.text(this, "", 12, DreamColors.INK, Typeface.BOLD);
         toggle.setGravity(Gravity.CENTER);
         toggle.setMinWidth(DreamUi.dp(this, 78));
         toggle.setMinHeight(DreamUi.dp(this, 40));
@@ -113,17 +113,19 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void updateToggle(TextView toggle, boolean enabled) {
         toggle.setText(enabled ? "Activo" : "Pausa");
-        toggle.setTextColor(enabled ? 0xffffffff : DreamColors.INK);
-        toggle.setShadowLayer(enabled ? DreamUi.dp(this, 2) : 0, 0, DreamUi.dp(this, 1), 0x55ffffff);
+        toggle.setTextColor(enabled ? DreamColors.INK : DreamColors.MUTED);
+        toggle.setShadowLayer(DreamUi.dp(this, 2), 0, DreamUi.dp(this, 1),
+                DreamColors.alpha(DreamColors.SOFT_WHITE, 150));
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
                 enabled
-                        ? new int[]{0xffb78af2, 0xfff7a7c8, 0xffffc88a}
-                        : new int[]{0xfffff6ea, 0xffffeef7});
+                        ? new int[]{DreamColors.CREAM, DreamColors.SOFT_PINK, DreamColors.LAVENDER}
+                        : new int[]{DreamColors.SOFT_WHITE, DreamUi.blend(DreamColors.LAVENDER, DreamColors.SOFT_WHITE, .72f)});
         bg.setCornerRadius(DreamUi.dp(this, 24));
-        bg.setStroke(DreamUi.dp(this, 1.2f), enabled ? 0xf2e8b85c : 0xb6b78af2);
+        bg.setStroke(DreamUi.dp(this, 1.2f),
+                enabled ? DreamColors.GOLD : DreamColors.alpha(DreamColors.LAVENDER, 150));
         toggle.setBackground(bg);
-        toggle.setElevation(DreamUi.dp(this, enabled ? 3 : 1));
-        toggle.setAlpha(enabled ? 1f : .86f);
+        toggle.setElevation(DreamUi.dp(this, enabled ? 2 : 1));
+        toggle.setAlpha(enabled ? 1f : .9f);
     }
 
     private void add(LinearLayout parent, android.view.View child, int top, int bottom) {

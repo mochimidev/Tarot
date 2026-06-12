@@ -33,14 +33,16 @@ public class DreamDividerView extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStrokeWidth(DreamUi.dp(getContext(), 1.3f));
-        paint.setColor(0x99e7ad47);
+        paint.setColor(DreamColors.alpha(DreamColors.GOLD, 150));
         canvas.drawLine(w * .18f, cy, center - gap, cy, paint);
         canvas.drawLine(center + gap, cy, w * .82f, cy, paint);
 
         paint.setStyle(Paint.Style.FILL);
-        drawSparkle(canvas, center - DreamUi.dp(getContext(), 42), cy, DreamUi.dp(getContext(), 5), 0xcff6c75d);
+        drawSparkle(canvas, center - DreamUi.dp(getContext(), 42), cy, DreamUi.dp(getContext(), 5),
+                DreamColors.alpha(DreamColors.SOFT_GOLD, 210));
         drawHeart(canvas, center, cy, DreamUi.dp(getContext(), 6));
-        drawSparkle(canvas, center + DreamUi.dp(getContext(), 42), cy, DreamUi.dp(getContext(), 5), 0xcff6c75d);
+        drawSparkle(canvas, center + DreamUi.dp(getContext(), 42), cy, DreamUi.dp(getContext(), 5),
+                DreamColors.alpha(DreamColors.SOFT_GOLD, 210));
     }
 
     private void drawHeart(Canvas canvas, float cx, float cy, float size) {
@@ -48,11 +50,11 @@ public class DreamDividerView extends View {
         path.moveTo(cx, cy + size * .72f);
         path.cubicTo(cx - size * 1.25f, cy - size * .08f, cx - size * .60f, cy - size, cx, cy - size * .36f);
         path.cubicTo(cx + size * .60f, cy - size, cx + size * 1.25f, cy - size * .08f, cx, cy + size * .72f);
-        paint.setColor(0xdfff9cc4);
+        paint.setColor(DreamColors.alpha(DreamColors.SOFT_PINK, 190));
         canvas.drawPath(path, paint);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(DreamUi.dp(getContext(), 1));
-        paint.setColor(0xbce3a24e);
+        paint.setColor(DreamColors.alpha(DreamColors.GOLD, 160));
         canvas.drawPath(path, paint);
         paint.setStyle(Paint.Style.FILL);
     }

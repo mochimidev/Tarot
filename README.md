@@ -22,6 +22,10 @@ La app esta construida en Java con vistas personalizadas. Usa los assets reales 
 | --- | --- |
 | ![Tarot de Parejas](docs/screenshots/tarot-parejas.png) | ![Ajustes](docs/screenshots/ajustes.png) |
 
+| Detalle de Carta |
+| --- |
+| ![Detalle de Carta](docs/screenshots/detalle-carta.png) |
+
 ## Flujo Principal
 
 - **Inicio:** saludo, unicornio hero, acceso a Carta del Dia y grid 2x2 para lecturas, coleccion y mascota.
@@ -47,14 +51,29 @@ La app esta construida en Java con vistas personalizadas. Usa los assets reales 
 El lenguaje visual busca una sensacion premium, suave y coleccionable:
 
 - fondo acuarela pastel compartido en toda la app
-- contenedores crema o blanco rosado
+- contenedores crema o blanco rosado muy suave
 - bordes dorados finos
 - sombras ligeras y difusas
 - esquinas redondeadas
-- botones con gradiente pastel
+- botones con gradiente pastel lila, rosa suave y durazno
 - texto morado elegante
 - iconos kawaii acuarela
 - bottom nav tipo pildora con item activo
+
+La paleta oficial esta centralizada en `DreamColors.java`:
+
+- crema calido: `#FFF6EA`
+- blanco suave: `#FFF9F5`
+- dorado suave: `#E8B85C`
+- dorado claro: `#F3D99A`
+- morado elegante: `#6E4CA3`
+- lila pastel: `#B78AF2`
+- rosa pastel: `#F7C6D8`
+- durazno pastel: `#FFC88A`
+- cielo pastel: `#BDEEFF`
+- menta pastel: `#DDF3C7`
+
+Los marcos, bordes, botones, paneles, titulos, subtitulos, navegacion inferior y estados activos usan esta identidad: crema, dorado suave, lila/morado y acuarela pastel. El rosa se reserva como acento delicado, no como borde principal.
 
 ## Pantallas Incluidas
 
@@ -122,6 +141,6 @@ app/build/outputs/apk/debug/app-debug.apk
 
 ## Autores
 
-El codigo fue escrito originalmente por Charlotte y Gabriel.
+El codigo original fue escrito por Charlotte Rodriguez y Gabriel Barrientos.
 
-Las nuevas funciones como Mascota, las mejoras de experiencia, la musica/sonido magico y la nueva interface fueron realizadas por Charlotte Rodriguez.
+Todas las funcionalidades nuevas y el rediseno de la interfaz fueron creados por Charlotte Rodriguez.

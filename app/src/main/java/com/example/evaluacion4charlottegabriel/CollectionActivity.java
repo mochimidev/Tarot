@@ -32,13 +32,13 @@ public class CollectionActivity extends AppCompatActivity {
             new Family("Gotitas", "Emociones, ternura e intuici\u00f3n", "gotitas", 36, 49,
                     R.drawable.icon_si_o_no, DreamColors.CLOUD),
             new Family("Chispas", "Valent\u00eda, juego y comienzos", "chispas", 22, 35,
-                    R.drawable.icon_carta_dia, 0xffffd9bd),
+                    R.drawable.icon_carta_dia, DreamColors.PEACH),
             new Family("Estrellas", "Deseos, gu\u00eda y confianza", "estrellas", 50, 63,
-                    R.drawable.home_star_icon, 0xfffff1ba),
+                    R.drawable.home_star_icon, DreamColors.SOFT_GOLD),
             new Family("Brotes", "Crecimiento, cuidado y abundancia", "brotes", 64, 77,
                     R.drawable.icon_coleccion, DreamColors.SPROUT_SOFT),
             new Family("Unicornios", "El cuento principal del destino", "unicornios", 0, 21,
-                    R.drawable.home_unicorn_hero, 0xffffeaf8)
+                    R.drawable.home_unicorn_hero, DreamColors.SOFT_PINK)
     };
 
     private SharedPreferences prefs;
@@ -74,7 +74,9 @@ public class CollectionActivity extends AppCompatActivity {
         LinearLayout chip = new LinearLayout(this);
         chip.setGravity(Gravity.CENTER);
         chip.setPadding(DreamUi.dp(this, 12), DreamUi.dp(this, 8), DreamUi.dp(this, 12), DreamUi.dp(this, 8));
-        chip.setBackground(DreamUi.stroked(0xccfffaf3, 0x88ddb066,
+        chip.setBackground(DreamUi.stroked(
+                DreamColors.alpha(DreamColors.SOFT_WHITE, 216),
+                DreamColors.alpha(DreamColors.GOLD, 150),
                 DreamUi.dp(this, 22), DreamUi.dp(this, 1)));
 
         TextView text = DreamUi.text(this, unlocked + " / 78 cartas desbloqueadas", 12,
@@ -92,9 +94,9 @@ public class CollectionActivity extends AppCompatActivity {
         card.setElevation(DreamUi.dp(this, 3));
 
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{DreamUi.blend(family.tint, 0xffffffff, .24f), 0xfffffbf7});
+                new int[]{DreamUi.blend(family.tint, DreamColors.SOFT_WHITE, .24f), DreamColors.SOFT_WHITE});
         bg.setCornerRadius(DreamUi.dp(this, 22));
-        bg.setStroke(DreamUi.dp(this, 1), 0xaed9a856);
+        bg.setStroke(DreamUi.dp(this, 1), DreamColors.alpha(DreamColors.GOLD, 174));
         card.setBackground(bg);
 
         LinearLayout row = new LinearLayout(this);
@@ -104,9 +106,11 @@ public class CollectionActivity extends AppCompatActivity {
 
         FrameLayout iconShell = new FrameLayout(this);
         GradientDrawable iconBg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                new int[]{0xeaffffff, DreamUi.blend(family.tint, 0xffffffff, .12f)});
+                new int[]{
+                        DreamColors.alpha(DreamColors.SOFT_WHITE, 236),
+                        DreamUi.blend(family.tint, DreamColors.SOFT_WHITE, .12f)});
         iconBg.setCornerRadius(DreamUi.dp(this, 20));
-        iconBg.setStroke(DreamUi.dp(this, 1), 0x65ddb066);
+        iconBg.setStroke(DreamUi.dp(this, 1), DreamColors.alpha(DreamColors.SOFT_GOLD, 150));
         iconShell.setBackground(iconBg);
 
         ImageView icon = new ImageView(this);
@@ -140,7 +144,7 @@ public class CollectionActivity extends AppCompatActivity {
 
         row.addView(copy, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
 
-        TextView arrow = DreamUi.text(this, "\u203a", 27, DreamColors.LILAC_DARK, Typeface.BOLD);
+        TextView arrow = DreamUi.text(this, "\u203a", 27, DreamColors.PURPLE, Typeface.BOLD);
         arrow.setGravity(Gravity.CENTER);
         arrow.setIncludeFontPadding(false);
         row.addView(arrow, new LinearLayout.LayoutParams(DreamUi.dp(this, 28), DreamUi.dp(this, 52)));

@@ -60,7 +60,9 @@ public class CartaDelDia extends AppCompatActivity {
         reveal.setCardImage(numero, rotation);
         FrameLayout frame = new FrameLayout(this);
         GradientDrawable aura = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                new int[]{0x66ffffff, 0x22fff0fa});
+                new int[]{
+                        DreamColors.alpha(DreamColors.SOFT_WHITE, 120),
+                        DreamColors.alpha(DreamColors.SOFT_GOLD, 44)});
         aura.setCornerRadius(DreamUi.dp(this, 34));
         frame.setBackground(aura);
         frame.setPadding(DreamUi.dp(this, 24), DreamUi.dp(this, 8), DreamUi.dp(this, 24), DreamUi.dp(this, 8));

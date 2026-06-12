@@ -37,7 +37,7 @@ public class KawaiiSymbolView extends View {
 
         paint.setStyle(Paint.Style.FILL);
         paint.setShadowLayer(DreamUi.dp(getContext(), 10), 0, DreamUi.dp(getContext(), 4), DreamColors.CARD_SHADOW);
-        paint.setColor(0x55ffffff);
+        paint.setColor(DreamColors.alpha(DreamColors.SOFT_WHITE, 90));
         canvas.drawOval(new RectF(cx - s * .34f, h * .74f, cx + s * .34f, h * .88f), paint);
         paint.clearShadowLayer();
         paint.setAlpha(255);

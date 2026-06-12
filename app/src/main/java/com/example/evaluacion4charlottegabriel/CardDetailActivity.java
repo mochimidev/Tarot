@@ -92,7 +92,7 @@ public class CardDetailActivity extends AppCompatActivity {
         meaning.setGravity(Gravity.CENTER);
         add(panel, meaning, 6, 12);
 
-        TextView reversedLabel = DreamUi.label(this, "Invertida", DreamColors.ROSE);
+        TextView reversedLabel = DreamUi.label(this, "Invertida", DreamColors.LAVENDER);
         reversedLabel.setGravity(Gravity.CENTER);
         panel.addView(reversedLabel);
         TextView reversed = DreamUi.text(this, textOrFallback(carta.getDescripcionInvertida(), "Observa con calma lo que todavia esta tomando forma."), 14, DreamColors.DEEP, Typeface.NORMAL);

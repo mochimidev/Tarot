@@ -17,7 +17,11 @@ public class DreamTopBar extends LinearLayout {
         TextView back = DreamUi.text(activity, showBack ? "\u2039" : "\u2630", 30, DreamColors.LILAC_DARK, Typeface.BOLD);
         back.setGravity(Gravity.CENTER);
         back.setMinWidth(DreamUi.dp(activity, 42));
-        back.setBackground(DreamUi.stroked(0x55ffffff, 0x7fe8b35b, DreamUi.dp(activity, 18), DreamUi.dp(activity, 1)));
+        back.setBackground(DreamUi.stroked(
+                DreamColors.alpha(DreamColors.SOFT_WHITE, 90),
+                DreamColors.alpha(DreamColors.GOLD, 150),
+                DreamUi.dp(activity, 18),
+                DreamUi.dp(activity, 1)));
         back.setClickable(showBack);
         if (showBack) {
             back.setOnClickListener(v -> activity.finish());
@@ -26,7 +30,8 @@ public class DreamTopBar extends LinearLayout {
 
         TextView heading = DreamUi.text(activity, title, 19, DreamColors.INK, Typeface.BOLD);
         heading.setGravity(Gravity.CENTER);
-        heading.setShadowLayer(DreamUi.dp(activity, 7), 0, DreamUi.dp(activity, 1), 0x55ffffff);
+        heading.setShadowLayer(DreamUi.dp(activity, 7), 0, DreamUi.dp(activity, 1),
+                DreamColors.alpha(DreamColors.SOFT_WHITE, 120));
         addView(heading, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
 
         KawaiiSymbolView symbol = new KawaiiSymbolView(activity, rightSymbol);

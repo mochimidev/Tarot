@@ -79,7 +79,8 @@ public class DreamBottomNav extends GlassPanel {
 
         TextView text = DreamUi.text(context, label, compact ? 8.8f : 9.4f, active ? DreamColors.INK : DreamColors.MUTED, active ? Typeface.BOLD : Typeface.NORMAL);
         text.setGravity(Gravity.CENTER);
-        text.setShadowLayer(DreamUi.dp(context, 3), 0, DreamUi.dp(context, 1), 0x66ffffff);
+        text.setShadowLayer(DreamUi.dp(context, 3), 0, DreamUi.dp(context, 1),
+                DreamColors.alpha(DreamColors.SOFT_WHITE, 140));
         item.addView(text);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
@@ -88,17 +89,27 @@ public class DreamBottomNav extends GlassPanel {
 
     private GradientDrawable makeActiveIconBg(Context context) {
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xeafff6ea, 0xeef7d6ec, 0xe8fff1d3});
+                new int[]{
+                        DreamColors.alpha(DreamColors.CREAM, 232),
+                        DreamColors.alpha(DreamColors.SOFT_GOLD, 194),
+                        DreamColors.alpha(DreamColors.LAVENDER, 70)});
         bg.setCornerRadius(DreamUi.dp(context, 22));
-        bg.setStroke(DreamUi.dp(context, 1), 0xaee8b85c);
+        bg.setStroke(DreamUi.dp(context, 1), DreamColors.alpha(DreamColors.GOLD, 190));
         return bg;
     }
 
     private GradientDrawable makeNavBg(Context context, boolean compact) {
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                compact ? new int[]{0xf4fffbf4, 0xeefff1f8} : new int[]{0xf6fffbf3, 0xf0fff1f8});
+                compact
+                        ? new int[]{
+                                DreamColors.alpha(DreamColors.SOFT_WHITE, 244),
+                                DreamColors.alpha(DreamColors.CREAM, 234)}
+                        : new int[]{
+                                DreamColors.alpha(DreamColors.SOFT_WHITE, 246),
+                                DreamColors.alpha(DreamColors.CREAM, 238)});
         bg.setCornerRadius(DreamUi.dp(context, 28));
-        bg.setStroke(DreamUi.dp(context, 1), compact ? 0xb0ddb066 : 0xbbddb066);
+        bg.setStroke(DreamUi.dp(context, 1),
+                DreamColors.alpha(DreamColors.GOLD, compact ? 176 : 190));
         return bg;
     }
 }

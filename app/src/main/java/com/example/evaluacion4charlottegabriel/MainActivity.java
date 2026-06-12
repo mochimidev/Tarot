@@ -2,7 +2,6 @@ package com.example.evaluacion4charlottegabriel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -66,14 +65,14 @@ public class MainActivity extends AppCompatActivity {
         addMenu(menu, "Si o No", "Obt\u00e9n una respuesta\nclara y sencilla", R.drawable.icon_si_o_no, DreamColors.CLOUD, v -> TarotNavigator.openYesNo(this));
         addMenu(menu, "Tarot de Parejas", "Explora la conexi\u00f3n\nen su v\u00ednculo", R.drawable.icon_tarot_parejas, DreamColors.ROSE_SOFT, v -> TarotNavigator.openCouples(this));
         addMenu(menu, "Colecci\u00f3n", "Re\u00fane y descubre\ntodas las cartas", R.drawable.icon_coleccion, DreamColors.SPROUT_SOFT, v -> TarotNavigator.openCollection(this));
-        addMenu(menu, "Mi Mascota", "Cuida a tu gu\u00eda\nm\u00e1gica", R.drawable.home_unicorn_hero, 0xffffeff7, v -> TarotNavigator.openPet(this));
+        addMenu(menu, "Mi Mascota", "Cuida a tu gu\u00eda\nm\u00e1gica", R.drawable.home_unicorn_hero, DreamColors.SOFT_PINK, v -> TarotNavigator.openPet(this));
 
         setContentView(scaffold);
     }
 
     private void applyHomeSystemBars() {
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
-        getWindow().setNavigationBarColor(Color.BLACK);
+        getWindow().setStatusBarColor(DreamColors.TRANSPARENT);
+        getWindow().setNavigationBarColor(DreamColors.PURPLE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         header.setGravity(Gravity.CENTER_VERTICAL);
         header.setPadding(0, 0, 0, 0);
 
-        TextView menu = DreamUi.text(this, "\u2630", 19.5f, 0xd65f3b98, Typeface.NORMAL);
+        TextView menu = DreamUi.text(this, "\u2630", 19.5f, DreamColors.PURPLE, Typeface.NORMAL);
         menu.setGravity(Gravity.CENTER);
         menu.setIncludeFontPadding(false);
         header.addView(menu, new LinearLayout.LayoutParams(DreamUi.dp(this, 34), DreamUi.dp(this, 34)));
@@ -96,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         View spacer = new View(this);
         header.addView(spacer, new LinearLayout.LayoutParams(0, 1, 1f));
 
-        TextView bell = DreamUi.text(this, "\ud83d\udd14", 15.5f, 0xd65f3b98, Typeface.NORMAL);
+        TextView bell = DreamUi.text(this, "\ud83d\udd14", 15.5f, DreamColors.PURPLE, Typeface.NORMAL);
         bell.setGravity(Gravity.CENTER);
         bell.setIncludeFontPadding(false);
         header.addView(bell, new LinearLayout.LayoutParams(DreamUi.dp(this, 34), DreamUi.dp(this, 34)));
@@ -106,30 +105,25 @@ public class MainActivity extends AppCompatActivity {
     private void addDailyFeature(LinearLayout root) {
         FrameLayout panel = new FrameLayout(this);
         DreamUi.softLayer(panel);
-        panel.setElevation(DreamUi.dp(this, 2));
+        panel.setElevation(DreamUi.dp(this, 1.5f));
         panel.setClickable(true);
         panel.setOnClickListener(v -> TarotNavigator.openDailyCard(this));
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xfffff7e8, 0xfffffbf8, 0xfffff2e2});
-        bg.setCornerRadius(DreamUi.dp(this, 18));
-        bg.setStroke(DreamUi.dp(this, 1), 0x96d9a856);
+                new int[]{
+                        DreamColors.alpha(DreamColors.CREAM, 248),
+                        DreamColors.alpha(DreamColors.SOFT_WHITE, 251),
+                        DreamColors.alpha(DreamColors.SOFT_GOLD, 96)});
+        bg.setCornerRadius(DreamUi.dp(this, 30));
+        bg.setStroke(DreamUi.dp(this, 1), DreamColors.alpha(DreamColors.GOLD, 160));
         panel.setBackground(bg);
-
-        ImageView frame = new ImageView(this);
-        frame.setImageResource(R.drawable.panel_frame_01);
-        frame.setScaleType(ImageView.ScaleType.FIT_XY);
-        frame.setAlpha(.22f);
-        panel.addView(frame, new FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
 
         LinearLayout row = new LinearLayout(this);
         row.setOrientation(LinearLayout.HORIZONTAL);
         row.setGravity(Gravity.CENTER_VERTICAL);
-        row.setPadding(DreamUi.dp(this, 11), DreamUi.dp(this, 8), DreamUi.dp(this, 11), DreamUi.dp(this, 8));
+        row.setPadding(DreamUi.dp(this, 14), DreamUi.dp(this, 7), DreamUi.dp(this, 14), DreamUi.dp(this, 7));
 
         ImageView star = cardImage(R.drawable.home_star_icon);
-        row.addView(star, new LinearLayout.LayoutParams(DreamUi.dp(this, 61), DreamUi.dp(this, 61)));
+        row.addView(star, new LinearLayout.LayoutParams(DreamUi.dp(this, 58), DreamUi.dp(this, 58)));
 
         LinearLayout copy = new LinearLayout(this);
         copy.setOrientation(LinearLayout.VERTICAL);
@@ -148,13 +142,13 @@ public class MainActivity extends AppCompatActivity {
         row.addView(copy, copyParams);
 
         ImageView flame = cardImage(R.drawable.icon_carta_dia);
-        row.addView(flame, new LinearLayout.LayoutParams(DreamUi.dp(this, 64), DreamUi.dp(this, 64)));
+        row.addView(flame, new LinearLayout.LayoutParams(DreamUi.dp(this, 58), DreamUi.dp(this, 58)));
         panel.addView(row, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 80));
+                ViewGroup.LayoutParams.MATCH_PARENT, DreamUi.dp(this, 82));
         params.setMargins(0, 0, 0, DreamUi.dp(this, 7));
         root.addView(panel, params);
     }
@@ -169,9 +163,9 @@ public class MainActivity extends AppCompatActivity {
         panel.setPadding(DreamUi.dp(this, 12), DreamUi.dp(this, 9), DreamUi.dp(this, 9), DreamUi.dp(this, 9));
         panel.setElevation(DreamUi.dp(this, 2));
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                new int[]{DreamUi.blend(tint, 0xffffffff, .34f), 0xfffffbf7});
+                new int[]{DreamUi.blend(tint, DreamColors.SOFT_WHITE, .34f), DreamColors.SOFT_WHITE});
         bg.setCornerRadius(DreamUi.dp(this, 18));
-        bg.setStroke(DreamUi.dp(this, 1), 0x95d4a65a);
+        bg.setStroke(DreamUi.dp(this, 1), DreamColors.alpha(DreamColors.GOLD, 150));
         panel.setBackground(bg);
 
         LinearLayout copy = new LinearLayout(this);

@@ -2,7 +2,6 @@ package com.example.evaluacion4charlottegabriel.ui;
 
 import android.content.Context;
 import android.app.Activity;
-import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -21,8 +20,8 @@ public class TarotScaffold extends FrameLayout {
     public TarotScaffold(Context context) {
         super(context);
         if (context instanceof Activity) {
-            ((Activity) context).getWindow().setStatusBarColor(Color.rgb(11, 13, 39));
-            ((Activity) context).getWindow().setNavigationBarColor(Color.BLACK);
+            ((Activity) context).getWindow().setStatusBarColor(DreamColors.PURPLE);
+            ((Activity) context).getWindow().setNavigationBarColor(DreamColors.PURPLE);
         }
         background = new DreamBackground(context);
         addView(background, new LayoutParams(
@@ -43,7 +42,7 @@ public class TarotScaffold extends FrameLayout {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
         calmOverlay = new View(context);
-        calmOverlay.setBackgroundColor(0x26fff0d8);
+        calmOverlay.setBackgroundColor(DreamColors.alpha(DreamColors.CREAM, 38));
         calmOverlay.setClickable(false);
         calmOverlay.setFocusable(false);
         addView(calmOverlay, new LayoutParams(
