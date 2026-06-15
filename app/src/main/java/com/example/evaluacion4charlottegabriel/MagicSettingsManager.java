@@ -77,11 +77,7 @@ public final class MagicSettingsManager {
     }
 
     public static void applySound(Context context) {
-        if (isSoundEnabled(context)) {
-            startAmbientSound(context);
-        } else {
-            pauseSound();
-        }
+        pauseSound();
     }
 
     public static void pauseSound() {
