@@ -83,6 +83,9 @@ public class SettingsActivity extends AppCompatActivity {
         toggle.setOnClickListener(v -> {
             boolean next = !valueForKey(key);
             saveValue(key, next);
+            if (next && MagicSettingsManager.KEY_SOUND_ENABLED.equals(key)) {
+                MagicSettingsManager.playMagicChime(this);
+            }
             updateToggle(toggle, next);
             scaffold.applySettingsState();
         });

@@ -3,11 +3,15 @@ package com.example.evaluacion4charlottegabriel;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
 public final class MagicSettingsManager {
+    private static final String TAG = "MagicSettings";
+
     public static final String PREFS_NAME = "settings";
     public static final String KEY_SOUND_ENABLED = "pref_sound_enabled";
     public static final String KEY_PARTICLES_ENABLED = "pref_particles_enabled";
@@ -17,7 +21,7 @@ public final class MagicSettingsManager {
     private static final boolean DEFAULT_PARTICLES = true;
     private static final boolean DEFAULT_CALM_MODE = false;
     private static final float CALM_BRIGHTNESS = 0.55f;
-    private static final float AMBIENT_VOLUME = 0.20f;
+    private static final float AMBIENT_VOLUME = 0.28f;
 
     private static MediaPlayer ambientPlayer;
 
@@ -31,6 +35,23 @@ public final class MagicSettingsManager {
     public static void setSoundEnabled(Context context, boolean enabled) {
         writeBoolean(context, KEY_SOUND_ENABLED, enabled);
         applySound(context);
+    }
+
+    public static void playMagicChime(Context context) {
+        int resId = context.getResources().getIdentifier("magic_chime", "raw", context.getPackageName());
+        if (resId == 0) return;
+
+        MediaPlayer chime = MediaPlayer.create(context.getApplicationContext(), resId);
+        if (chime == null) return;
+
+        chime.setVolume(1f, 1f);
+        chime.setOnCompletionListener(MediaPlayer::release);
+        chime.setOnErrorListener((player, what, extra) -> {
+            Log.w(TAG, "Magic chime failed: " + what + "/" + extra);
+            player.release();
+            return true;
+        });
+        chime.start();
     }
 
     public static boolean areParticlesEnabled(Context context) {
@@ -104,10 +125,19 @@ public final class MagicSettingsManager {
             // TODO: Agregar magic_ambient.mp3 en res/raw para activar música real.
             return false;
         }
-        ambientPlayer = MediaPlayer.create(context, resId);
+        AudioAttributes attributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .build();
+        ambientPlayer = MediaPlayer.create(context, resId, attributes, 0);
         if (ambientPlayer == null) return false;
         ambientPlayer.setLooping(true);
         ambientPlayer.setVolume(AMBIENT_VOLUME, AMBIENT_VOLUME);
+        ambientPlayer.setOnErrorListener((player, what, extra) -> {
+            Log.w(TAG, "Magic ambient failed: " + what + "/" + extra);
+            releaseSound();
+            return true;
+        });
         return true;
     }
 

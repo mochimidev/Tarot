@@ -80,6 +80,9 @@ public class CartaDelDia extends AppCompatActivity {
         info.setVisibility(View.GONE);
         add(root, info, 0, 12);
         reveal.setOnRevealListener(() -> {
+            if (MagicSettingsManager.isSoundEnabled(this)) {
+                MagicSettingsManager.playMagicChime(this);
+            }
             hint.setVisibility(View.GONE);
             info.setVisibility(View.VISIBLE);
         });
