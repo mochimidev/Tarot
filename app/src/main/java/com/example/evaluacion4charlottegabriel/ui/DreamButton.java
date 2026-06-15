@@ -13,26 +13,30 @@ public class DreamButton extends AppCompatTextView {
         super(context);
         setText(label);
         setTextColor(DreamColors.INK);
-        setTextSize(15.5f);
+        setTextSize(14.5f);
         setTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD));
         setGravity(Gravity.CENTER);
-        setMinHeight(DreamUi.dp(context, 52));
-        setPadding(DreamUi.dp(context, 22), DreamUi.dp(context, 13), DreamUi.dp(context, 22), DreamUi.dp(context, 13));
+        setMinHeight(DreamUi.dp(context, 46));
+        setPadding(DreamUi.dp(context, 18), DreamUi.dp(context, 11), DreamUi.dp(context, 18), DreamUi.dp(context, 11));
         setClickable(true);
         setFocusable(true);
         DreamUi.softLayer(this);
-        setElevation(DreamUi.dp(context, 2));
-        setShadowLayer(DreamUi.dp(context, 3), 0, DreamUi.dp(context, 1),
-                DreamColors.alpha(DreamColors.SOFT_WHITE, 150));
+        setElevation(DreamUi.dp(context, 1));
+        setShadowLayer(DreamUi.dp(context, 2), 0, DreamUi.dp(context, 1),
+                DreamColors.alpha(DreamColors.SOFT_WHITE, 190));
         setBackground(makeBg());
     }
 
     private GradientDrawable makeBg() {
         GradientDrawable drawable = new GradientDrawable(
-                GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{DreamColors.LAVENDER, DreamColors.SOFT_PINK, DreamColors.PEACH});
-        drawable.setCornerRadius(DreamUi.dp(getContext(), 26));
-        drawable.setStroke(DreamUi.dp(getContext(), 1.2f), DreamColors.GOLD);
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                new int[]{
+                        DreamColors.alpha(DreamColors.SOFT_WHITE, 246),
+                        DreamColors.alpha(DreamColors.CREAM, 236),
+                        DreamColors.alpha(DreamColors.SOFT_PINK, 90)});
+        drawable.setCornerRadius(DreamUi.dp(getContext(), 24));
+        drawable.setStroke(DreamUi.dp(getContext(), 1),
+                DreamColors.alpha(DreamColors.GOLD, 190));
         return drawable;
     }
 
